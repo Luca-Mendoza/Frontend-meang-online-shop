@@ -15,7 +15,7 @@ const routes: Routes = [
         loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)
       },
       {
-        path: 'admin/users',
+        path: 'users',
         loadChildren: () => import('./users/users.module').then(m => m.UsersModule)
       },
     ]
