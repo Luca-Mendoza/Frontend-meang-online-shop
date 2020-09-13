@@ -10,6 +10,11 @@ const routes: Routes = [
     path: 'contact',
     loadChildren: () => import('./@public/pages/contact/contact.module').then(m => m.ContactModule)
   },
+  {
+    path: '**',
+    redirectTo: ' home',
+    pathMatch: 'full'
+  }
 ];
 
 @NgModule({
