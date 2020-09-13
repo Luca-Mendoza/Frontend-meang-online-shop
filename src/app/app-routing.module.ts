@@ -15,14 +15,6 @@ const routes: Routes = [
   },
   // @Rutas vacias y rutas comodín
   {
-    path: 'admin',
-    loadChildren: () => import('./@admin/pages/dashboard/dashboard.module').then(m => m.DashboardModule)
-  },
-  {
-    path: 'admin/users',
-    loadChildren: () => import('./@admin/pages/users/users.module').then(m => m.UsersModule)
-  },
-  {
     path: '',
     redirectTo: 'home',
     pathMatch: 'full'
