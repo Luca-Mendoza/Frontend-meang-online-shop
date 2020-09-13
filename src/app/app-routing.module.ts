@@ -1,3 +1,4 @@
+
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
@@ -13,6 +14,14 @@ const routes: Routes = [
     loadChildren: () => import('./@public/pages/contact/contact.module').then(m => m.ContactModule)
   },
   // @Rutas vacias y rutas comodín
+  {
+    path: 'admin',
+    loadChildren: () => import('./@admin/pages/dashboard/dashboard.module').then(m => m.DashboardModule)
+  },
+  {
+    path: 'users',
+    loadChildren: () => import('./@admin/pages/users/users.module').then(m => m.UsersModule)
+  },
   {
     path: '',
     redirectTo: 'home',
