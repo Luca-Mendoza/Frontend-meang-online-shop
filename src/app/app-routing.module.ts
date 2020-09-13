@@ -11,6 +11,11 @@ const routes: Routes = [
     loadChildren: () => import('./@public/pages/contact/contact.module').then(m => m.ContactModule)
   },
   {
+    path: '',
+    redirectTo: 'home',
+    pathMatch: 'full'
+  },
+  {
     path: '**',
     redirectTo: ' home',
     pathMatch: 'full'
