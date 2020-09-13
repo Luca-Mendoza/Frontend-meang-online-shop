@@ -4,6 +4,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 import { AdminModule } from './@admin/pages/admin.module';
+import { PublicModule } from './@public/pages/public.module';
+
 import { AppRoutingModule } from './app-routing.module';
 
 
@@ -19,6 +21,7 @@ import { MaterialModule } from './material.modules';
   imports: [
     BrowserModule,
     AdminModule,
+    PublicModule,
     MaterialModule,
     BrowserAnimationsModule,
     AppRoutingModule,
