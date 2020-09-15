@@ -28,16 +28,9 @@
               "src/assets"
             ],
             "styles": [
-              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
-              "./node_modules/materialize-css/sass/materialize.scss",
               "src/styles.scss"
             ],
-            "scripts": [
-              "./node_modules/jquery/dist/jquery.min.js",
-              "./node_modules/materialize-css/dist/js/materialize.min.js",
-              "./src/assets/scripts/materialize-init.js",
-              "./src/assets/scripts/general-funtions.js"
-            ]
+            "scripts": []
           },
           "configurations": {
             "production": {
