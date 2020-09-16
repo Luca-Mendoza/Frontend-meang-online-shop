@@ -10,7 +10,7 @@ export class HeaderComponent {
   // evaluando que la informacion empieze en true por defecto
   toggledValue = true;
   // enviando informacion al padre para ocultar la barra lateral del menu Admin
-  @Output() newItemEvent = new EventEmitter<boolean>();
+  @Output() toggleChange = new EventEmitter<boolean>();
 
   // la funcion toggles haces las evaluaciones de que estado esta el Buttom (True / False)
   toggled() {
@@ -18,7 +18,7 @@ export class HeaderComponent {
       this.toggledValue = true;
     }
     this.toggledValue = !this.toggledValue;
-    this.newItemEvent.emit(this.toggledValue);
+    this.toggleChange.emit(this.toggledValue);
   }
 
 }
