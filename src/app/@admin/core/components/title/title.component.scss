@@ -1,1 +1,7 @@
 @import "./../../../pages/admin.component.scss";
+
+.title__admin {
+    padding-left: 1rem;
+    color: $admin-primary-color;
+    font-size: larger !important;
+}

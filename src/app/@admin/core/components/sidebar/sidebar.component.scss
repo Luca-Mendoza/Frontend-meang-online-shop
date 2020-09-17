@@ -1,1 +1,16 @@
 @import "./../../../pages/admin.component.scss";
+
+.sidebar__wrapper {
+  background-color: $admin-primary-color;
+
+  -webkit-box-shadow: 0px 4px 12px 4px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 0px 4px 12px 4px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 4px 12px 4px rgba(0, 0, 0, 0.75);
+}
+.sidebar__title {
+  color: white;
+  text-decoration: none;
+}
+.sidebar__title:hover {
+  opacity: 0.3;
+}
