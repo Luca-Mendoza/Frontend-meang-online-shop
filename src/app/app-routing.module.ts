@@ -7,12 +7,12 @@ const routes: Routes = [
   // @Rutas vacias y rutas comodín
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: '',
     pathMatch: 'full'
   },
   {
     path: '**',
-    redirectTo: ' home',
+    redirectTo: '',
     pathMatch: 'full'
   }
 ];
