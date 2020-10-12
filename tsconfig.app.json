@@ -8,7 +8,9 @@
       "@shop/*": ["src/app/@public/*"],
       "@shop-core/*": ["src/app/@public/core/*"],
       "@admin/*": ["src/app/@admin/*"],
-      "@admin-core/*": ["src/app/@admin/core/*"]
+      "@admin-core/*": ["src/app/@admin/core/*"],
+      "@graphql/*": ["src/app/@graphql/*"],
+
     }
   },
   "files": ["src/main.ts", "src/polyfills.ts"],
