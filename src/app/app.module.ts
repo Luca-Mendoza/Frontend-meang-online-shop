@@ -7,7 +7,7 @@ import { PublicModule } from './@public/pages/public.module';
 
 import { AppRoutingModule } from './app-routing.module';
 
-import { GraphqlModule } from './@graphql/modules/graphql.module';
+import { GraphqlModule } from '@graphql/modules/graphql.module';
 
 import { AppComponent } from './app.component';
 

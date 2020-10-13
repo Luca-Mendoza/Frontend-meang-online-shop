@@ -1,3 +1,4 @@
+import { ApiService } from '@graphql/services/api.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  constructor( private api: ApiService) { }
 
   ngOnInit(): void {
+    this.api.login('mendozaluca5@outlook.com', '12345678910').subscribe(result => {
+      console.log(result);
+    });
   }
 
 }
