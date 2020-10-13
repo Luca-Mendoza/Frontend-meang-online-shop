@@ -1,3 +1,4 @@
+import { USER_FRAGMENT } from '@graphql/operations/fragment/user';
 import gql from 'graphql-tag';
 
 export const LOGIN_QUERY = gql`
@@ -9,3 +10,19 @@ export const LOGIN_QUERY = gql`
         }
     }
 `;
+
+export const USERS_LIST_QUERY = gql `
+    query {
+        users {
+            status
+            message
+            users {
+                ...UserObject
+            }
+        }
+    }
+   
+    ${ USER_FRAGMENT }
+
+`;
+
