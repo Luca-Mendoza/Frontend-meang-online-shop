@@ -1,3 +1,4 @@
+import { USERS_LIST_QUERY } from './../operations/query/user';
 import { LOGIN_QUERY } from '@graphql/operations/query/user';
 import { Apollo } from 'apollo-angular';
 import { Injectable } from '@angular/core';
@@ -18,13 +19,23 @@ export class ApiService {
       variables: {
         email,
         password
-      }
+      },
+      fetchPolicy: 'network-only'
     }).valueChanges.pipe(map((result) => {
       return result.data;
     }));
   }
 
-  getUsers() { }
+  getUsers() {
+    return this.apollo.watchQuery(
+      {
+        query: USERS_LIST_QUERY,
+        fetchPolicy: 'network-only'
+      }
+    ).valueChanges.pipe(map((result) => {
+      console.log(result); // { "users": {status message users: []} }
+    }));
+  }
 
   getMe() { }
 

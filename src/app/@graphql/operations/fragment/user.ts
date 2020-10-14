@@ -11,7 +11,7 @@ export const USER_FRAGMENT = gql`
         password
         role
         registerDate
-        birthday
+        brithday
 
     }
 `;

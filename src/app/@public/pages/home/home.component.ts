@@ -8,11 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor( private api: ApiService) { }
+  constructor(private api: ApiService) { }
 
   ngOnInit(): void {
     this.api.login('mendozaluca5@outlook.com', '12345678910').subscribe(result => {
       console.log(result);
+
+      this.api.getUsers().subscribe( result => {
+        console.log(result);
+      });
     });
   }
 
