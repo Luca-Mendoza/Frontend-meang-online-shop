@@ -15,7 +15,12 @@ export class HomeComponent implements OnInit {
       console.log(result);
 
       this.api.getUsers().subscribe( result => {
-        console.log(result);
+        console.log(result); // {"users": { status message users: []}}
+      });
+
+
+      this.api.getMe().subscribe( result => {
+        console.log(result); // {"me": { status message user: {}}}
       });
     });
   }
