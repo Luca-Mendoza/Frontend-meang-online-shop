@@ -1,5 +1,6 @@
-import { ApiService } from '@graphql/services/api.service';
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '@core/services/auth.service';
+import { UsersService } from '@core/services/users.service';
 
 @Component({
   selector: 'app-home',
@@ -8,19 +9,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private api: ApiService) { }
+  constructor(private usersApi: UsersService,
+              private auth: AuthService) { }
 
   ngOnInit(): void {
-    this.api.login('mendozaluca5@outlook.com', '12345678910').subscribe(result => {
+    this.auth.login('mendozaluca5@outlook.com', '12345678910').subscribe(result => {
       console.log(result);
 
-      this.api.getUsers().subscribe( result => {
-        console.log(result); // {"users": { status message users: []}}
+      this.usersApi.getUsers().subscribe(result => {
+        console.log(result); // { { status message users: []}
       });
 
 
-      this.api.getMe().subscribe( result => {
-        console.log(result); // {"me": { status message user: {}}}
+      this.auth.getMe().subscribe(result => {
+        console.log(result); // {  status message user: {}}
       });
     });
   }
