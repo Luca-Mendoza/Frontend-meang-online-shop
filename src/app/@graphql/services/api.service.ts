@@ -23,10 +23,6 @@ export class ApiService {
     }));
   }
 
-
-
-
-
   // tslint:disable-next-line:typedef
   register() { }
 
