@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ILoginForm } from '@core/interfaces/login.interface';
+import { ILoginForm, IResultLogin } from '@core/interfaces/login.interface';
 import { AuthService } from '@core/services/auth.service';
 
 @Component({
@@ -19,8 +19,19 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  // tslint:disable-next-line:typedef
   init() {
     console.log(this.login);
+    this.auth.login(this.login.email, this.login.password).subscribe(
+      (result: IResultLogin) => {
+        console.log(result);
+        if (result.status && result.token !== null){
+          console.log('Inicio de sesión correcto');
+          return;
+        }
+        console.log('Inicio de sesión no correcto');
+      }
+    );
 
   }
 }
