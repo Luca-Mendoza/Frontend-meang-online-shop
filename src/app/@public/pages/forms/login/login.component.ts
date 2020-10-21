@@ -1,6 +1,8 @@
+import { TYPE_ALERT } from '@shared/alerts/values.config';
 import { Component, OnInit } from '@angular/core';
 import { ILoginForm, IResultLogin } from '@core/interfaces/login.interface';
 import { AuthService } from '@core/services/auth.service';
+import { basicAlert } from '@shared/alerts/toasts';
 
 @Component({
   selector: 'app-login',
@@ -25,10 +27,17 @@ export class LoginComponent implements OnInit {
     this.auth.login(this.login.email, this.login.password).subscribe(
       (result: IResultLogin) => {
         console.log(result);
-        if (result.status && result.token !== null){
+        if (result.status && result.token !== null) {
           console.log('Inicio de sesión correcto');
+          basicAlert(TYPE_ALERT.SUCCESS, result.message);
           return;
         }
+
+        if (result.status) {
+          basicAlert(TYPE_ALERT.WARNING, result.message);
+          return;
+        }
+        basicAlert(TYPE_ALERT.INFO, result.message);
         console.log('Inicio de sesión no correcto');
       }
     );

@@ -10,7 +10,9 @@
       "@admin/*": ["src/app/@admin/*"],
       "@admin-core/*": ["src/app/@admin/core/*"],
       "@graphql/*": ["src/app/@graphql/*"],
-      "@core/*": ["src/app/@core/*"]
+      "@core/*": ["src/app/@core/*"],
+      "@shared/*": ["src/app/@shared/*"]
+
     }
   },
   "files": ["src/main.ts", "src/polyfills.ts"],
