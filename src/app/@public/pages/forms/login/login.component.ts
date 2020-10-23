@@ -27,13 +27,14 @@ export class LoginComponent implements OnInit {
     this.auth.login(this.login.email, this.login.password).subscribe(
       (result: IResultLogin) => {
         console.log(result);
-        if (result.status && result.token !== null) {
-          console.log('Inicio de sesión correcto');
-          basicAlert(TYPE_ALERT.SUCCESS, result.message);
-          return;
-        }
-
         if (result.status) {
+          if (result.token !== null) {
+            console.log('Inicio de sesión correcto');
+            // Guardamos la sesión
+            basicAlert(TYPE_ALERT.SUCCESS, result.message);
+            this.auth.setSession(result.message);
+            return;
+          }
           basicAlert(TYPE_ALERT.WARNING, result.message);
           return;
         }

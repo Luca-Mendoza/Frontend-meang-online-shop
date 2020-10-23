@@ -37,4 +37,18 @@ export class AuthService extends ApiService {
         return result.me;
       }));
   }
+
+  setSession(token: string, expiresTimeInHours = 24){
+    const date = new Date();
+
+    console.log('Fecha y hora', date.toISOString());
+    date.setHours(date.getHours() + expiresTimeInHours);
+
+    const session = {
+      expiresIn: new Date(date).toISOString(),
+      token,
+    };
+    console.log(session);
+    localStorage.setItem('session', JSON.stringify(session));
+  }
 }
