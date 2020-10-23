@@ -1,3 +1,4 @@
+import { ISession } from '@core/interfaces/session.interface';
 import { map } from 'rxjs/operators';
 import { Apollo } from 'apollo-angular';
 import { Injectable } from '@angular/core';
@@ -31,24 +32,26 @@ export class AuthService extends ApiService {
     },
       {
         headers: new HttpHeaders({
-          Authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjVmN2JhZTU2ZDI5MjBmMWY4Y2UzNzJlYiIsIm5hbWUiOiJMdWNhIiwibGFzdG5hbWUiOiJNZW5kb3phIiwiZW1haWwiOiJtZW5kb3phbHVjYTVAb3V0bG9vay5jb20iLCJyb2xlIjoiQURNSU4iLCJpZCI6MX0sImlhdCI6MTYwMjYzNjI2NSwiZXhwIjoxNjAyNzIyNjY1fQ.BVlSBxHAe9L-VoeQ5Zlacv-shnL01TScerx4Y0DYpoA'
+          Authorization: (this.getSession() as ISession).token
         })
       }).pipe(map((result: any) => {
         return result.me;
       }));
   }
 
-  setSession(token: string, expiresTimeInHours = 24){
+  setSession(token: string, expiresTimeInHours = 24) {
     const date = new Date();
 
-    console.log('Fecha y hora', date.toISOString());
     date.setHours(date.getHours() + expiresTimeInHours);
 
-    const session = {
+    const session: ISession = {
       expiresIn: new Date(date).toISOString(),
       token,
     };
-    console.log(session);
     localStorage.setItem('session', JSON.stringify(session));
+  }
+  // tslint:disable-next-line: typedef
+  getSession() {
+    return JSON.parse(localStorage.getItem('session'));
   }
 }

@@ -19,6 +19,7 @@ export class LoginComponent implements OnInit {
   constructor(private auth: AuthService) { }
 
   ngOnInit(): void {
+    this.auth.getMe().subscribe( result => console.log(result));
   }
 
   // tslint:disable-next-line:typedef
@@ -29,7 +30,6 @@ export class LoginComponent implements OnInit {
         console.log(result);
         if (result.status) {
           if (result.token !== null) {
-            console.log('Inicio de sesión correcto');
             // Guardamos la sesión
             basicAlert(TYPE_ALERT.SUCCESS, result.message);
             this.auth.setSession(result.message);
@@ -42,6 +42,6 @@ export class LoginComponent implements OnInit {
         console.log('Inicio de sesión no correcto');
       }
     );
-
   }
+
 }
