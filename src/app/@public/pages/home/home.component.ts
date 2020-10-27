@@ -13,7 +13,7 @@ export class HomeComponent implements OnInit {
               private auth: AuthService) { }
 
   ngOnInit(): void {
-    this.auth.login('mendozaluca5@outlook.com', '12345678910').subscribe(result => {
+    /*this.auth.login('mendozaluca5@outlook.com', '12345678910').subscribe(result => {
       console.log(result);
 
       this.usersApi.getUsers().subscribe(result => {
@@ -24,7 +24,7 @@ export class HomeComponent implements OnInit {
       this.auth.getMe().subscribe(result => {
         console.log(result); // {  status message user: {}}
       });
-    });
+    });*/
   }
 
 }

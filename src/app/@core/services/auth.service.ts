@@ -11,6 +11,7 @@ import { Subject } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthService extends ApiService {
+
   accessVar = new Subject<IMeData>();
   accessVar$ = this.accessVar.asObservable();
   constructor(apollo: Apollo) {
@@ -47,7 +48,7 @@ export class AuthService extends ApiService {
   // tslint:disable-next-line:typedef
   login(email: string, password: string) {
 
-    return this.get(LOGIN_QUERY, { email, password }).pipe(
+    return this.get(LOGIN_QUERY, { email, password, include: false }).pipe(
       map((result: any) => {
         return result.login;
       })
@@ -70,7 +71,6 @@ export class AuthService extends ApiService {
 
   setSession(token: string, expiresTimeInHours = 24) {
     const date = new Date();
-
     date.setHours(date.getHours() + expiresTimeInHours);
 
     const session: ISession = {
@@ -79,6 +79,7 @@ export class AuthService extends ApiService {
     };
     localStorage.setItem('session', JSON.stringify(session));
   }
+
   // tslint:disable-next-line: typedef
   getSession() {
     return JSON.parse(localStorage.getItem('session'));
@@ -86,6 +87,7 @@ export class AuthService extends ApiService {
 
   resetSession() {
     localStorage.removeItem('session');
+    this.updateSession({ status: false });
 
   }
 }

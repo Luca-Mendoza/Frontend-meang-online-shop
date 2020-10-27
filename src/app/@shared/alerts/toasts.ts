@@ -9,7 +9,9 @@ export function basicAlert( icon = TYPE_ALERT.SUCCESS, title: string = '') {
         title,
         icon ,
         position: 'top',
-        confirmButtonText: 'X',
+        showConfirmButton: false,
         toast: true,
+        timer: 1500,
+        timerProgressBar: true,
     });
 }
