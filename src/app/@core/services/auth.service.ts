@@ -1,19 +1,48 @@
-import { ISession } from '@core/interfaces/session.interface';
+import { IMeData, ISession } from '@core/interfaces/session.interface';
 import { map } from 'rxjs/operators';
 import { Apollo } from 'apollo-angular';
 import { Injectable } from '@angular/core';
 import { LOGIN_QUERY, ME_DATA_QUERY } from '@graphql/operations/query/user';
 import { ApiService } from '@graphql/services/api.service';
 import { HttpHeaders } from '@angular/common/http';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService extends ApiService {
-
+  accessVar = new Subject<IMeData>();
+  accessVar$ = this.accessVar.asObservable();
   constructor(apollo: Apollo) {
     super(apollo);
   }
+
+
+  updateSession(newValue: IMeData) {
+    this.accessVar.next(newValue);
+  }
+
+  start() {
+
+    if (this.getSession() !== null) {
+      this.getMe().subscribe((result: IMeData) => {
+        if (!result.status) {
+          this.resetSession();
+          return;
+        }
+        this.updateSession(result);
+      });
+      console.log('Sesión  iniciada');
+      return;
+    }
+    this.updateSession({
+      status: false
+    });
+
+    console.log('Sesión no iniciada');
+
+  }
+
   // Añadimos métodos para consumir la info de la API
   // tslint:disable-next-line:typedef
   login(email: string, password: string) {
@@ -53,5 +82,10 @@ export class AuthService extends ApiService {
   // tslint:disable-next-line: typedef
   getSession() {
     return JSON.parse(localStorage.getItem('session'));
+  }
+
+  resetSession() {
+    localStorage.removeItem('session');
+
   }
 }

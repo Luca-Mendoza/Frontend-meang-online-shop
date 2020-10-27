@@ -29,8 +29,8 @@
         >
       </li>
     </ul>
-    <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-      <li class="nav-item">
+    <ul class="navbar-nav ml-auto mt-2 mt-lg-0" >
+      <li class="nav-item" *ngIf="access">
         <a
           class="nav-link"
           [routerLink]="['/admin']"
@@ -38,7 +38,7 @@
           >Admin</a
         >
       </li>
-      <li class="nav-item">
+      <li class="nav-item" *ngIf="!access">
         <a
           class="nav-link"
           [routerLink]="['/login']"
@@ -46,7 +46,7 @@
           >Login</a
         >
       </li>
-      <li class="nav-item">
+      <li class="nav-item" *ngIf="!access">
         <a
           class="nav-link"
           [routerLink]="['/register']"
@@ -55,7 +55,7 @@
         >
       </li>
 
-      <li class="nav-item dropdown">
+      <li class="nav-item dropdown" *ngIf="access">
         <a
           class="nav-link dropdown-toggle"
           href="#"

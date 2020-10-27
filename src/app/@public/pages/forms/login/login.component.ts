@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ILoginForm, IResultLogin } from '@core/interfaces/login.interface';
 import { AuthService } from '@core/services/auth.service';
 import { basicAlert } from '@shared/alerts/toasts';
+import { IMeData } from '@core/interfaces/session.interface';
 
 @Component({
   selector: 'app-login',
@@ -19,7 +20,7 @@ export class LoginComponent implements OnInit {
   constructor(private auth: AuthService) { }
 
   ngOnInit(): void {
-    this.auth.getMe().subscribe( result => console.log(result));
+    this.auth.start();
   }
 
   // tslint:disable-next-line:typedef
@@ -33,6 +34,7 @@ export class LoginComponent implements OnInit {
             // Guardamos la sesión
             basicAlert(TYPE_ALERT.SUCCESS, result.message);
             this.auth.setSession(result.message);
+            this.auth.updateSession(result);
             return;
           }
           basicAlert(TYPE_ALERT.WARNING, result.message);
