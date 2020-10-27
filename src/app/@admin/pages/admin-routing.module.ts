@@ -1,3 +1,4 @@
+import { AdminGuard } from '@core/guards/admin.guard';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
@@ -8,6 +9,7 @@ const routes: Routes = [
   {
     path: 'admin',
     component: AdminComponent,
+    canActivateChild: [AdminGuard],
     // Panel Admin redirigiendo a las rutas Hijas
     children: [
       {

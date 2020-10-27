@@ -81,7 +81,7 @@ export class AuthService extends ApiService {
   }
 
   // tslint:disable-next-line: typedef
-  getSession() {
+  getSession(): ISession {
     return JSON.parse(localStorage.getItem('session'));
   }
 
