@@ -13,7 +13,7 @@ export class RegisterComponent implements OnInit {
   }
 
 
-  dataAign($event) {
+  dataAsign($event) {
     console.log('Cogiendo datos', $event);
   }
 
