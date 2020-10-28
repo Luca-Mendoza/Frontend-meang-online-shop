@@ -12,4 +12,9 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {
   }
 
+
+  dataAign($event) {
+    console.log('Cogiendo datos', $event);
+  }
+
 }
