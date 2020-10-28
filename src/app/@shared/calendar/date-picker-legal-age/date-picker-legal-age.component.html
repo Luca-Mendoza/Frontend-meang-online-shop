@@ -1,2 +1,10 @@
 <!-- 2. datepicker in the popup -->
-<input type="text" ngbDatepicker #d="ngbDatepicker"/>
+<input
+  type="text"
+  ngbDatepicker
+  #d="ngbDatepicker"
+  [(ngModel)]="model"
+  (click)="d.toggle()"
+/>
+
+{{ model | json}}

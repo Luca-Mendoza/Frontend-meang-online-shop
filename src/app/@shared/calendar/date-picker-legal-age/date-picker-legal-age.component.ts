@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 @Component({
   selector: 'app-date-picker-legal-age',
   templateUrl: './date-picker-legal-age.component.html',
@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DatePickerLegalAgeComponent implements OnInit {
 
+  model: NgbDateStruct;
+  
   constructor() { }
 
   ngOnInit(): void {
