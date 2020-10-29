@@ -1,50 +1,89 @@
 <div class="container">
-    <div class="row">
-      <div class="col-lg"></div>
-      <div class="col-lg-6">
-        <form>
-          <h1>Registro de usuario</h1>
-          <p>
-            Rellena los datos del formulario para efectuar el registro de tu
-            cuenta de usuario.
-          </p>
-          <hr />
-          <label for="name"><b>Nombre</b></label>
-          <input type="text" placeholder="Enter name" name="name" required />
-          <label for="lastname"><b>Apellido/s</b></label>
-          <input type="text" placeholder="Introduzca su apellido/s" name="lastname" required />
-          <label for="date"><b>Fecha de nacimiento</b></label>
-          <app-date-picker-legal-age (newDate)="dataAsign($event)"></app-date-picker-legal-age>
-          <label for="email"><b>Email</b></label>
-          <input type="text" placeholder="Enter Email" name="email" required />
+  <div class="row">
+    <div class="col-lg"></div>
+    <div class="col-lg-6">
+      <form (ngSubmit)="add()" #forma="ngForm">
+        <h1>Registro de usuario</h1>
+        <p>
+          Rellena los datos del formulario para efectuar el registro de tu
+          cuenta de usuario.
+        </p>
+        <hr />
+        <label for="name"><b>Nombre</b></label>
+        <input
+          type="text"
+          placeholder="Nombre"
+          name="name"
+          required       
+          class="form-control"
+          [ngClass]="{'is-valid': name.invalid, 'is-invalid': name.invalid}"
+          #name="ngModel"
+          [(ngModel)]="register.name"
+        />
 
-          <label for="psw"><b>Password</b></label>
-          <input
-            type="password"
-            placeholder="Enter Password"
-            name="psw"
-            required
-          />
+        <label for="lastname"><b>Apellido/s</b></label>
+        <input
+          type="text"
+          placeholder="Introduzca su apellido/s"
+          name="lastname"
+          required
+          class="form-control"
+          [ngClass]="{'is-valid': lastname.invalid, 'is-invalid': lastname.invalid}"
+          #lastname="ngModel"
+          [(ngModel)]="register.lastname"
+        />
 
-          <p>
-            By creating an account you agree to our
-            <a href="#" style="color: dodgerblue;">Terms & Privacy</a>.
-          </p>
-          <p>
-            ¿Ya tiene una cuenta?
-            <a [routerLink]="['/login']" style="color: dodgerblue;"
-              >Iniciar sesión</a
-            >.
-          </p>
-          <div class="row">
-            <div class="col-lg">
-              <button type="submit" class="signup-btn">Registrarse</button>
-            </div>
+        <label for="birthday"><b>Fecha de nacimiento</b></label>
+        <app-date-picker-legal-age
+          (newDate)="dataAsign($event)"
+        ></app-date-picker-legal-age>
+
+        <label for="email"><b>Email</b></label>
+        <input
+          type="text"
+          placeholder="Email"
+          name="email"
+          required
+          #email="ngModel"
+          [(ngModel)]="register.email"
+          class="form-control"
+          [ngClass]="{'is-valid': email.invalid, 'is-invalid': email.invalid}"
+          pattern="^[a-zA-Z0-9._-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$"
+        />
+
+        <label for="password"><b>Password</b></label>
+        <input
+          type="password"
+          placeholder="Password"
+          name="password"
+          required
+          #password="ngModel"
+          [(ngModel)]="register.password"
+          class="form-control"
+          [ngClass]="{'is-valid': password.invalid, 'is-invalid': password.invalid}"
+        />
+
+        <p>
+          By creating an account you agree to our
+          <a href="#" style="color: dodgerblue">Terms & Privacy</a>.
+        </p>
+        <p>
+          ¿Ya tiene una cuenta?
+          <a [routerLink]="['/login']" style="color: dodgerblue"
+            >Iniciar sesión</a
+          >.
+        </p>
+        <div class="row">
+          <div class="col-lg">
+            <button [disabled]="forma.invalid" type="submit" class="signup-btn">Registrarse</button>
           </div>
-        </form>
-      </div>
-
-      <div class="col-lg"></div>
+        </div>
+      </form>
     </div>
+
+    <div class="col-lg"></div>
   </div>
-<app-date-picker-legal-age (newDate)="dataAsign($event)"></app-date-picker-legal-age>
+</div>
+<app-date-picker-legal-age
+  (newDate)="dataAsign($event)"
+></app-date-picker-legal-age>
