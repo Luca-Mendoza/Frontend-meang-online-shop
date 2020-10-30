@@ -5,6 +5,7 @@ import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { DocumentNode } from 'graphql';
 import { REGISTER_USER } from '../operations/mutation/user';
+import { query } from '@angular/animations';
 
 @Injectable({
   providedIn: 'root'
@@ -25,19 +26,19 @@ export class ApiService {
     }));
   }
 
-  // tslint:disable-next-line:typedef
-  register(user: IRegisterForm) {
+  protected set(mutation: DocumentNode, variables: object = {}, context: object = {}) {
     return this.apollo.mutate({
-      mutation: REGISTER_USER,
-      variables: {
-        user,
-        include: false
-      }
+      mutation,
+      variables,
+      context
     }).pipe(
       map((result) => {
         return result.data;
       })
     );
   }
+
+
+
 
 }

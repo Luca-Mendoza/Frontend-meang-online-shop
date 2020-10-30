@@ -11,7 +11,7 @@ export function basicAlert( icon = TYPE_ALERT.SUCCESS, title: string = '') {
         position: 'top',
         showConfirmButton: false,
         toast: true,
-        timer: 1500,
+        timer: 4000,
         timerProgressBar: true,
     });
 }

@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { ILoginForm, IResultLogin } from '@core/interfaces/login.interface';
 import { AuthService } from '@core/services/auth.service';
 import { basicAlert } from '@shared/alerts/toasts';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +17,8 @@ export class LoginComponent {
     password: ''
   };
 
-  constructor(private auth: AuthService) { }
+  constructor(private auth: AuthService,
+              private router: Router) { }
 
 
 
@@ -32,6 +34,7 @@ export class LoginComponent {
             basicAlert(TYPE_ALERT.SUCCESS, result.message);
             this.auth.setSession(result.token);
             this.auth.updateSession(result);
+            this.router.navigate(['/home']);
             return;
           }
           basicAlert(TYPE_ALERT.WARNING, result.message);
