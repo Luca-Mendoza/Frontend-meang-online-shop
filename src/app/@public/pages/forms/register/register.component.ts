@@ -1,5 +1,6 @@
 import { Component, OnInit, NgModule } from '@angular/core';
-import { IRefisterForm } from '@core/interfaces/register.interface';
+import { IRegisterForm } from '@core/interfaces/register.interface';
+import { ApiService } from '@graphql/services/api.service';
 
 @Component({
   selector: 'app-register',
@@ -8,7 +9,7 @@ import { IRefisterForm } from '@core/interfaces/register.interface';
 })
 export class RegisterComponent implements OnInit {
 
-  register: IRefisterForm = {
+  register: IRegisterForm = {
     name: '',
     lastname: '',
     email: '',
@@ -16,7 +17,7 @@ export class RegisterComponent implements OnInit {
     password: '',
 
   };
-  constructor() { }
+  constructor( private api:ApiService) { }
 
   ngOnInit(): void {
 
@@ -38,6 +39,9 @@ export class RegisterComponent implements OnInit {
 
   add() {
     console.log('Enviando datos', this.register);
+    this.api.register(this.register).subscribe((result) => {
+      console.log('Result', result);
+    });
   }
 
 }

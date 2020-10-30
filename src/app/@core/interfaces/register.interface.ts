@@ -1,4 +1,4 @@
-export interface IRefisterForm {
+export interface IRegisterForm {
     name: string;
     lastname: string;
     email: string;
