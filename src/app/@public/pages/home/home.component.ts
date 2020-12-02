@@ -9,10 +9,17 @@ import { UsersService } from '@core/services/users.service';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private usersApi: UsersService,
-              private auth: AuthService) { }
+  constructor(
+    private usersApi: UsersService,
+    private auth: AuthService
+  ) { }
 
   ngOnInit(): void {
+
+    this.usersApi.getUsers(2, 1).subscribe(result => {
+      console.log(result); // { {obtener la Info : status message users: []}
+    });
+
     /*this.auth.login('mendozaluca5@outlook.com', '12345678910').subscribe(result => {
       console.log(result);
 

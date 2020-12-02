@@ -9,7 +9,7 @@ const jwtDecode = require('jwt-decode');
 export class AdminGuard implements CanActivateChild {
 
   constructor(private auth: AuthService,
-    private router: Router) { }
+              private router: Router) { }
 
 
   canActivateChild(
@@ -36,11 +36,13 @@ export class AdminGuard implements CanActivateChild {
     return this.redirect();
   }
 
+  // tslint:disable-next-line:typedef
   redirect() {
     this.router.navigate(['/login']);
     return false;
   }
 
+  // tslint:disable-next-line:typedef
   decodeToken() {
     return jwtDecode(this.auth.getSession().token);
   }

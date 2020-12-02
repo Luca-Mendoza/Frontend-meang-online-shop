@@ -17,9 +17,11 @@ export class UsersService extends ApiService {
 
 
   // tslint:disable-next-line:typedef
-  getUsers() {
+  getUsers(page: number = 1, itemsPage: number = 20) {
     return this.get(USERS_LIST_QUERY, {
-      include: true
+      include: true,
+      itemsPage,
+      page
     }).pipe(map((result: any) => {
       console.log(result); // { "users": {status message users: []} }
       return result.users;
