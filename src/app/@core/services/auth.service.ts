@@ -19,10 +19,12 @@ export class AuthService extends ApiService {
   }
 
 
+  // tslint:disable-next-line: typedef
   updateSession(newValue: IMeData) {
     this.accessVar.next(newValue);
   }
 
+  // tslint:disable-next-line: typedef
   start() {
 
     if (this.getSession() !== null) {
@@ -69,6 +71,7 @@ export class AuthService extends ApiService {
       }));
   }
 
+  // tslint:disable-next-line: typedef
   setSession(token: string, expiresTimeInHours = 24) {
     const date = new Date();
     date.setHours(date.getHours() + expiresTimeInHours);
@@ -85,6 +88,7 @@ export class AuthService extends ApiService {
     return JSON.parse(localStorage.getItem('session'));
   }
 
+  // tslint:disable-next-line: typedef
   resetSession() {
     localStorage.removeItem('session');
     this.updateSession({ status: false });
