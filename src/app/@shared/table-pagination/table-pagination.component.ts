@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { USERS_LIST_QUERY } from '@graphql/operations/query/user';
+import { TablePaginationService } from './table-pagination.service';
+import { Component, Input, OnInit } from '@angular/core';
+import { DocumentNode } from 'graphql';
 
 @Component({
   selector: 'app-table-pagination',
@@ -7,9 +10,30 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TablePaginationComponent implements OnInit {
 
-  constructor() { }
+  /**
+   * Pasando la información del componente padre 'users' mediante @Input()
+   */
+  @Input() query: DocumentNode = USERS_LIST_QUERY;
+  @Input() context: object;
+  @Input() itemsPage = 20;
+  @Input() include = true;
+
+  constructor(private service: TablePaginationService) { }
 
   ngOnInit(): void {
+    if (this.query === undefined) {
+      throw new Error('Query is indefined, please add');
+    }
+    this.loadData();
+  }
+
+  // tslint:disable-next-line: typedef
+  loadData() {
+    this.service.getCollectionData(this.query, {include: this.include}, {}).subscribe(
+      result => {
+        console.log(result);
+      }
+    );
   }
 
 }
