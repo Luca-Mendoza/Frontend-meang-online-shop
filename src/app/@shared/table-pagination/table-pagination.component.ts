@@ -1,3 +1,4 @@
+import { IResultData } from './../../@core/interfaces/result-data.interface';
 import { USERS_LIST_QUERY } from '@graphql/operations/query/user';
 import { TablePaginationService } from './table-pagination.service';
 import { Component, Input, OnInit } from '@angular/core';
@@ -17,6 +18,7 @@ export class TablePaginationComponent implements OnInit {
   @Input() context: object;
   @Input() itemsPage = 20;
   @Input() include = true;
+  @Input() resultData: IResultData;
 
   constructor(private service: TablePaginationService) { }
 

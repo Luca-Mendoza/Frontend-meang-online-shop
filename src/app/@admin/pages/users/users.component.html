@@ -1,3 +1,13 @@
 <p>users works!</p>
 
-<app-table-pagination></app-table-pagination>
+<app-table-pagination
+  [query]="query"
+  [context]="context"
+  [itemsPage]="itemsPage"
+  [resultData]="resultData"
+  [include]="include"
+  
+></app-table-pagination>
+
+query: DocumentNode; context: object; itemsPage: number; resultData:
+IResultData; include: boolean;

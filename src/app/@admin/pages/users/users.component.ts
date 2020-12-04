@@ -1,3 +1,5 @@
+import { IResultData } from '@core/interfaces/result-data.interface';
+import { DocumentNode } from 'graphql';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,7 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UsersComponent implements OnInit {
 
-  constructor() { }
+  // La consulta
+  query: DocumentNode;
+  // Información del contexto
+  context: object;
+  // Los Items por pagína
+  itemsPage: number;
+  // Resultado de la data
+  resultData: IResultData;
+  // lo que es el include
+  include: boolean;
 
   ngOnInit(): void {
   }
