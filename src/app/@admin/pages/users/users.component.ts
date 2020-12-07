@@ -1,6 +1,7 @@
 import { IResultData } from '@core/interfaces/result-data.interface';
 import { DocumentNode } from 'graphql';
 import { Component, OnInit } from '@angular/core';
+import { USERS_LIST_QUERY } from '@graphql/operations/query/user';
 
 @Component({
   selector: 'app-users',
@@ -10,7 +11,7 @@ import { Component, OnInit } from '@angular/core';
 export class UsersComponent implements OnInit {
 
   // La consulta
-  query: DocumentNode;
+  query: DocumentNode = USERS_LIST_QUERY;
   // Información del contexto
   context: object;
   // Los Items por pagína
@@ -21,6 +22,13 @@ export class UsersComponent implements OnInit {
   include: boolean;
 
   ngOnInit(): void {
+    this.context = {};
+    this.itemsPage = 10;
+    this.resultData =  {
+      listKey: '',
+      definitionKey: ''
+    };
+    this.include = true;
   }
 
 }

@@ -1,4 +1,4 @@
-import { IResultData } from './../../@core/interfaces/result-data.interface';
+import { IInfoPage, IResultData } from '@core/interfaces/result-data.interface';
 import { USERS_LIST_QUERY } from '@graphql/operations/query/user';
 import { TablePaginationService } from './table-pagination.service';
 import { Component, Input, OnInit } from '@angular/core';
@@ -19,6 +19,8 @@ export class TablePaginationComponent implements OnInit {
   @Input() itemsPage = 20;
   @Input() include = true;
   @Input() resultData: IResultData;
+  // Almacenamos la información de la pagína
+  infoPage: IInfoPage;
 
   constructor(private service: TablePaginationService) { }
 
@@ -26,12 +28,26 @@ export class TablePaginationComponent implements OnInit {
     if (this.query === undefined) {
       throw new Error('Query is indefined, please add');
     }
+    if (this.resultData === undefined) {
+      throw new Error('ResultData is indefined, please add');
+    }
+    this.infoPage = {
+      page: 1,
+      pages: 1,
+      total: 1,
+      itemsPage: this.itemsPage
+    };
     this.loadData();
   }
 
   // tslint:disable-next-line: typedef
   loadData() {
-    this.service.getCollectionData(this.query, {include: this.include}, {}).subscribe(
+    const variable = {
+      page: this.infoPage.pages,
+      itemspPage: this.infoPage.itemsPage,
+      include: this.include
+    };
+    this.service.getCollectionData(this.query, variable, {}).subscribe(
       result => {
         console.log(result);
       }
