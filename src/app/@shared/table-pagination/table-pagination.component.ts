@@ -37,8 +37,8 @@ export class TablePaginationComponent implements OnInit {
     this.infoPage = {
       page: 1,
       pages: 1,
+      itemsPage: this.itemsPage,
       total: 1,
-      itemsPage: this.itemsPage
     };
     this.loadData();
   }
@@ -46,15 +46,24 @@ export class TablePaginationComponent implements OnInit {
   // tslint:disable-next-line: typedef
   loadData() {
     const variable = {
-      page: this.infoPage.pages,
-      itemspPage: this.infoPage.itemsPage,
+      page: this.infoPage.page,
+      itemsPage: this.infoPage.itemsPage,
       include: this.include
     };
     this.data$ = this.service.getCollectionData(this.query, variable, {}).pipe(
       map((result: any) => {
-        return result[this.resultData.definitionKey][this.resultData.listKey];
+        const data = result[this.resultData.definitionKey];
+        this.infoPage.pages = data.info.pages;
+        this.infoPage.total = data.info.total;
+        return data[this.resultData.listKey];
       })
     );
+  }
+
+  // tslint:disable-next-line: typedef
+  refreshPage() {
+    console.log(this.infoPage.page);
+    this.loadData();
   }
 
 }
