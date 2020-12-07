@@ -1,8 +1,9 @@
 import { IInfoPage, IResultData } from '@core/interfaces/result-data.interface';
-import { USERS_LIST_QUERY } from '@graphql/operations/query/user';
 import { TablePaginationService } from './table-pagination.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { DocumentNode } from 'graphql';
+import { map } from 'rxjs/internal/operators/map';
+import { Observable } from 'rxjs/internal/Observable';
 
 @Component({
   selector: 'app-table-pagination',
@@ -14,13 +15,15 @@ export class TablePaginationComponent implements OnInit {
   /**
    * Pasando la información del componente padre 'users' mediante @Input()
    */
-  @Input() query: DocumentNode = USERS_LIST_QUERY;
+  @Input() query: DocumentNode;
   @Input() context: object;
   @Input() itemsPage = 20;
   @Input() include = true;
   @Input() resultData: IResultData;
   // Almacenamos la información de la pagína
   infoPage: IInfoPage;
+  // Le damos una el valor data$ para poder mostrar su valor en el Template
+  data$: Observable<any>;
 
   constructor(private service: TablePaginationService) { }
 
@@ -47,10 +50,10 @@ export class TablePaginationComponent implements OnInit {
       itemspPage: this.infoPage.itemsPage,
       include: this.include
     };
-    this.service.getCollectionData(this.query, variable, {}).subscribe(
-      result => {
-        console.log(result);
-      }
+    this.data$ = this.service.getCollectionData(this.query, variable, {}).pipe(
+      map((result: any) => {
+        return result[this.resultData.definitionKey][this.resultData.listKey];
+      })
     );
   }
 
