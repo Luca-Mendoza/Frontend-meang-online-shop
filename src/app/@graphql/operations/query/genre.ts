@@ -3,7 +3,7 @@ import { GENRES_FRANGMENT } from '../fragment/genre';
 
 import gql from 'graphql-tag';
 
-export const LOGIN_QUERY = gql`
+export const GENRES_LIST_QUERY = gql`
 query genresList($page: Int, $itemsPage: Int) {
   genres(page: $page, itemsPage: $itemsPage) {
     info {
