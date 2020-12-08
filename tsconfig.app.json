@@ -9,10 +9,9 @@
       "@shop-core/*": ["src/app/@public/core/*"],
       "@admin/*": ["src/app/@admin/*"],
       "@admin-core/*": ["src/app/@admin/core/*"],
-      "@graphql/*": ["src/app/@graphql/*"],
       "@core/*": ["src/app/@core/*"],
-      "@shared/*": ["src/app/@shared/*"]
-
+      "@shared/*": ["src/app/@shared/*"],
+      "@graphql/*": ["src/app/@graphql/*"],
     }
   },
   "files": ["src/main.ts", "src/polyfills.ts"],

@@ -30,5 +30,4 @@ export class UsersComponent implements OnInit {
     };
     this.include = true;
   }
-
 }
