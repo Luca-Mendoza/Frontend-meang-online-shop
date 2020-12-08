@@ -1,4 +1,4 @@
-import { ITableColumns } from './../../../@core/interfaces/table-columns.interface';
+import { ITableColumns } from '@core/interfaces/table-columns.interface';
 import { IResultData } from '@core/interfaces/result-data.interface';
 import { DocumentNode } from 'graphql';
 import { Component, OnInit } from '@angular/core';
