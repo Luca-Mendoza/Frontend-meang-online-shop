@@ -1,3 +1,4 @@
+import { ITableColumns } from '@core/interfaces/table-columns.interface';
 import { IInfoPage, IResultData } from '@core/interfaces/result-data.interface';
 import { TablePaginationService } from './table-pagination.service';
 import { Component, Input, OnInit } from '@angular/core';
@@ -20,6 +21,7 @@ export class TablePaginationComponent implements OnInit {
   @Input() itemsPage = 20;
   @Input() include = true;
   @Input() resultData: IResultData;
+  @Input() tableColumns: Array<ITableColumns>;
   // Almacenamos la información de la pagína
   infoPage: IInfoPage;
   // Le damos una el valor data$ para poder mostrar su valor en el Template
@@ -33,6 +35,9 @@ export class TablePaginationComponent implements OnInit {
     }
     if (this.resultData === undefined) {
       throw new Error('ResultData is indefined, please add');
+    }
+    if (this.tableColumns === undefined) {
+      throw new Error('Table Columns is indefined, please add');
     }
     this.infoPage = {
       page: 1,

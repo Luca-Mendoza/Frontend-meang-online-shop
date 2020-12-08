@@ -2,18 +2,14 @@
   <table class="table table-striped">
     <thead>
       <tr>
-        <th scope="col">#</th>
-        <th scope="col">Nombre</th>
-        <th scope="col">LastName</th>
-        <th scope="col">Email</th>
+        <th scope="col" *ngFor="let column of tableColumns">
+          {{ column.label }}
+        </th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let data of data$ | async">
-        <th scope="row">{{ data.id }}</th>
-        <td>{{ data.name }}</td>
-        <td>{{ data.lastname }}</td>
-        <td>{{ data.email }}</td>
+        <td *ngFor="let val of tableColumns">{{ data[val.property] }}</td>
       </tr>
     </tbody>
   </table>
