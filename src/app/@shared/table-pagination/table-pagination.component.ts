@@ -1,10 +1,11 @@
 import { ITableColumns } from '@core/interfaces/table-columns.interface';
 import { IInfoPage, IResultData } from '@core/interfaces/result-data.interface';
 import { TablePaginationService } from './table-pagination.service';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output } from '@angular/core';
 import { DocumentNode } from 'graphql';
 import { map } from 'rxjs/internal/operators/map';
 import { Observable } from 'rxjs/internal/Observable';
+import { EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-table-pagination',
@@ -15,6 +16,7 @@ export class TablePaginationComponent implements OnInit {
 
   /**
    * Pasando la información del componente padre 'users' mediante @Input()
+   * Valores de Entrada
    */
   @Input() query: DocumentNode;
   @Input() context: object;
@@ -22,6 +24,10 @@ export class TablePaginationComponent implements OnInit {
   @Input() include = true;
   @Input() resultData: IResultData;
   @Input() tableColumns: Array<ITableColumns>;
+  /**
+   * Valores de Salida
+   */
+  @Output() manageItem = new EventEmitter<Array<any>>();
   // Almacenamos la información de la pagína
   infoPage: IInfoPage;
   // Le damos una el valor data$ para poder mostrar su valor en el Template
@@ -75,6 +81,7 @@ export class TablePaginationComponent implements OnInit {
   // tslint:disable-next-line:typedef
   manageAction(action: string, data: any) {
     console.log(action, data);
+    this.manageItem.emit([action, data]);
   }
 
 }
