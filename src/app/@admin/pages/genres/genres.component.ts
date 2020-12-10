@@ -3,6 +3,7 @@ import { IResultData } from '@core/interfaces/result-data.interface';
 import { GENRES_LIST_QUERY } from '@graphql/operations/query/genre';
 import { DocumentNode } from 'graphql';
 import { Component, OnInit } from '@angular/core';
+import { fromBasicDialog } from '@shared/alerts/alerts';
 
 @Component({
   selector: 'app-genres',
@@ -10,7 +11,6 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./genres.component.scss']
 })
 export class GenresComponent implements OnInit {
-
 
   // La consulta
   query: DocumentNode = GENRES_LIST_QUERY;
@@ -49,8 +49,16 @@ export class GenresComponent implements OnInit {
     ];
   }
 
-  takeAction($event) {
+  // tslint:disable-next-line: typedef
+  takeAction($event): void {
     console.log($event[0], $event[1]);
+
+    const action = $event[0];
+    const html = '<input id="name" class="swal2-input">';
+
+    if (action === 'add') {
+      fromBasicDialog('Añadir género', html, 'name');
+    }
   }
 
 }
