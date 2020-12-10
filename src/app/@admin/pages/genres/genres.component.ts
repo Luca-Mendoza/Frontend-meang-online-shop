@@ -1,9 +1,12 @@
+import { basicAlert } from '@shared/alerts/toasts';
+import { GenresService } from './genres.service';
 import { ITableColumns } from '@core/interfaces/table-columns.interface';
 import { IResultData } from '@core/interfaces/result-data.interface';
 import { GENRES_LIST_QUERY } from '@graphql/operations/query/genre';
 import { DocumentNode } from 'graphql';
 import { Component, OnInit } from '@angular/core';
 import { fromBasicDialog } from '@shared/alerts/alerts';
+import { TYPE_ALERT } from '@shared/alerts/values.config';
 
 @Component({
   selector: 'app-genres',
@@ -24,6 +27,8 @@ export class GenresComponent implements OnInit {
   include: boolean;
   // definimos dato para hacer dinamica la Table
   columns: Array<ITableColumns>;
+
+  constructor(private service: GenresService) { }
 
   ngOnInit(): void {
     this.context = {};
@@ -59,6 +64,16 @@ export class GenresComponent implements OnInit {
     if (action === 'add') {
       const result = await fromBasicDialog('Añadir género', html, 'name');
       console.log(result);
+      this.service.addGenre(result.value).subscribe(
+        (res: any) => {
+          console.log(res);
+          if (res.status) {
+            basicAlert(TYPE_ALERT.SUCCESS, res.message);
+            return;
+          }
+          basicAlert(TYPE_ALERT.WARNING, res.message);
+        }
+      );
     }
   }
 
