@@ -1,4 +1,9 @@
-<button class="btn btn-success float-right mr-3 mb-2"><i class="fas fa-plus-circle"></i> &nbsp; Añadir</button>
+<button
+  class="btn btn-success float-right mr-3 mb-2"
+  (click)="manageAction('add', '')"
+>
+  <i class="fas fa-plus-circle"></i> &nbsp; Añadir
+</button>
 <div class="table-responsive">
   <table class="table table-striped">
     <thead>
@@ -12,7 +17,29 @@
     <tbody>
       <tr *ngFor="let data of data$ | async">
         <td *ngFor="let val of tableColumns">{{ data[val.property] }}</td>
-        <td>Botones</td>
+        <td>
+          <button
+            type="button"
+            class="btn btn-secondary"
+            (click)="manageAction('edit', data)"
+          >
+            <i class="fas fa-edit"></i></button
+          >&nbsp;
+          <button
+            type="button"
+            class="btn btn-info"
+            (click)="manageAction('info', data)"
+          >
+            <i class="fas fa-info"></i></button
+          >&nbsp;
+          <button
+            type="button"
+            class="btn btn-danger"
+            (click)="manageAction('block', data)"
+          >
+            <i class="fas fa-lock"></i></button
+          >&nbsp;
+        </td>
       </tr>
     </tbody>
   </table>

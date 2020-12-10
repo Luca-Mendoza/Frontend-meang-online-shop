@@ -71,4 +71,10 @@ export class TablePaginationComponent implements OnInit {
     this.loadData();
   }
 
+  // Evento de los botones
+  // tslint:disable-next-line:typedef
+  manageAction(action: string, data: any) {
+    console.log(action, data);
+  }
+
 }
