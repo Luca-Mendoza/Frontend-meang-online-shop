@@ -2,20 +2,21 @@ import Swal from 'sweetalert2';
 
 // tslint:disable-next-line:typedef
 export async function fromBasicDialog(title: string, html: string, property: string) {
-    const { value: formValues } = await Swal.fire({
+    return await Swal.fire({
         title,
         html,
         focusConfirm: false,
         cancelButtonText: 'Cancelar',
         showCancelButton: true,
         preConfirm: () => {
-            return [
-                ((document.getElementById('name')) as HTMLInputElement).value,
-            ];
+            const value = (document.getElementById('name') as HTMLInputElement).value;
+            if (value) {
+                return value;
+            }
+            Swal.showValidationMessage('Tiene que añadir un género para poder almacenarlo');
+            return;
         }
     });
 
-    if (formValues) {
-        Swal.fire(JSON.stringify(formValues));
-    }
+
 }

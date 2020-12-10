@@ -50,14 +50,15 @@ export class GenresComponent implements OnInit {
   }
 
   // tslint:disable-next-line: typedef
-  takeAction($event): void {
+  async takeAction($event) {
     console.log($event[0], $event[1]);
 
     const action = $event[0];
-    const html = '<input id="name" class="swal2-input">';
+    const html = '<input id="name" class="swal2-input" required>';
 
     if (action === 'add') {
-      fromBasicDialog('Añadir género', html, 'name');
+      const result = await fromBasicDialog('Añadir género', html, 'name');
+      console.log(result);
     }
   }
 
