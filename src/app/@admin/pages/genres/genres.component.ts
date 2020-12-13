@@ -59,11 +59,33 @@ export class GenresComponent implements OnInit {
     console.log($event[0], $event[1]);
 
     const action = $event[0];
-    const html = '<input id="name" class="swal2-input" required>';
+    const genre = $event[1];
+    console.log(genre);
+    let defaultValue = '';
+
+    if (genre.name !== undefined && genre.name !== '') {
+      defaultValue = genre.name;
+    }
+
+    const html = `<input id="name" value="${defaultValue}" class="swal2-input" required>`;
 
     if (action === 'add') {
       const result = await fromBasicDialog('Añadir género', html, 'name');
       console.log(result);
+      this.addGenre(result);
+      return;
+    }
+    if (action === 'edit') {
+      const result = await fromBasicDialog('Modificar género', html, 'name');
+      console.log(result);
+      // this.addGenre(result);
+      return;
+    }
+  }
+
+  // tslint:disable-next-line: typedef
+  addGenre(result) {
+    if (result.value) {
       this.service.addGenre(result.value).subscribe(
         (res: any) => {
           console.log(res);
