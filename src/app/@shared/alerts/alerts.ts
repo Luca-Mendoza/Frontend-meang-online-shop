@@ -18,5 +18,13 @@ export async function fromBasicDialog(title: string, html: string, property: str
         }
     });
 
+}
 
+// tslint:disable-next-line:typedef
+export function infoDetailsBasic(title: string, html: string, width) {
+    return Swal.fire({
+        title,
+        text: html,
+        width: `${width}px`
+    });
 }

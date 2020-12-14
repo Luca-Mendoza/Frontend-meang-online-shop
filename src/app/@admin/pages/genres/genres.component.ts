@@ -5,7 +5,7 @@ import { IResultData } from '@core/interfaces/result-data.interface';
 import { GENRES_LIST_QUERY } from '@graphql/operations/query/genre';
 import { DocumentNode } from 'graphql';
 import { Component, OnInit } from '@angular/core';
-import { fromBasicDialog } from '@shared/alerts/alerts';
+import { fromBasicDialog, infoDetailsBasic } from '@shared/alerts/alerts';
 import { TYPE_ALERT } from '@shared/alerts/values.config';
 
 @Component({
@@ -61,26 +61,34 @@ export class GenresComponent implements OnInit {
     const action = $event[0];
     const genre = $event[1];
     console.log(genre);
-    let defaultValue = '';
 
-    if (genre.name !== undefined && genre.name !== '') {
-      defaultValue = genre.name;
+    if (action === 'edit' || action === 'add') {
+      let defaultValue = '';
+      if (genre.name !== undefined && genre.name !== '') {
+        defaultValue = genre.name;
+      }
+
+      const html = `<input id="name" value="${defaultValue}" class="swal2-input" required>`;
+
+      if (action === 'add') {
+        const result = await fromBasicDialog('Añadir género', html, 'name');
+        console.log(result);
+        this.addGenre(result);
+        return;
+      }
+      if (action === 'edit') {
+        const result = await fromBasicDialog('Modificar género', html, 'name');
+        console.log(result);
+        this.updateGenre(genre.id, result);
+        return;
+      }
+    } else {
+      if (action === 'info') {
+        infoDetailsBasic('Detalles', `${genre.name} (${genre.slug})`, 250);
+      }
     }
 
-    const html = `<input id="name" value="${defaultValue}" class="swal2-input" required>`;
 
-    if (action === 'add') {
-      const result = await fromBasicDialog('Añadir género', html, 'name');
-      console.log(result);
-      this.addGenre(result);
-      return;
-    }
-    if (action === 'edit') {
-      const result = await fromBasicDialog('Modificar género', html, 'name');
-      console.log(result);
-      this.updateGenre(genre.id, result);
-      return;
-    }
   }
 
   // tslint:disable-next-line: typedef
