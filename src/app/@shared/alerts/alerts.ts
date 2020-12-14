@@ -21,10 +21,24 @@ export async function fromBasicDialog(title: string, html: string, property: str
 }
 
 // tslint:disable-next-line:typedef
-export function infoDetailsBasic(title: string, html: string, width) {
+export function infoDetailsBasic(title: string, html: string, width: number | string) {
     return Swal.fire({
         title,
         text: html,
-        width: `${width}px`
+        width: `${width}px`,
+        showCancelButton: true,
+        confirmButtonColor: '#6C757D',
+        cancelButtonColor: '#dc3545',
+        confirmButtonText: '<i class="fas fa-edit"></i> Editar',
+        cancelButtonText: '<i class="fas fa-lock"></i> Block',
+
+    }).then((result) => {
+        console.log(result);
+        if (result.value) {
+            console.log('Editar');
+        } else if (result.dismiss.toString() === 'cancel'){
+            console.log('Bloquear');
+        }
     });
 }
+
