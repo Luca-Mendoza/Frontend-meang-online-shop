@@ -78,7 +78,7 @@ export class GenresComponent implements OnInit {
     if (action === 'edit') {
       const result = await fromBasicDialog('Modificar género', html, 'name');
       console.log(result);
-      // this.addGenre(result);
+      this.updateGenre(genre.id, result);
       return;
     }
   }
@@ -87,6 +87,22 @@ export class GenresComponent implements OnInit {
   addGenre(result) {
     if (result.value) {
       this.service.addGenre(result.value).subscribe(
+        (res: any) => {
+          console.log(res);
+          if (res.status) {
+            basicAlert(TYPE_ALERT.SUCCESS, res.message);
+            return;
+          }
+          basicAlert(TYPE_ALERT.WARNING, res.message);
+        }
+      );
+    }
+  }
+  // tslint:disable-next-line: typedef
+  updateGenre(id: string, result) {
+    console.log(id, result.value);
+    if (result.value) {
+      this.service.update(id, result.value).subscribe(
         (res: any) => {
           console.log(res);
           if (res.status) {

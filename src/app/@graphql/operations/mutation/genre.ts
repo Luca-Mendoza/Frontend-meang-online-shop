@@ -13,3 +13,17 @@ export const ADD_GENRE = gql`
   }
   ${GENRES_FRANGMENT}
 `;
+
+
+export const MODIFY_GENRE = gql`
+  mutation modificarGenero( $id: ID!, $genre: String!) {
+    updateGenre(id: $id genre: $genre) {
+      status
+      message
+      genre {
+        ...GenresObject
+      }
+    }
+  }
+  ${GENRES_FRANGMENT}
+`;
