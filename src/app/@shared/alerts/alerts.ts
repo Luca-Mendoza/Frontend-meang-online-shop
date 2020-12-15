@@ -9,9 +9,11 @@ export async function fromBasicDialog(
   return await Swal.fire({
     title,
     html,
+    showCloseButton: true,
     focusConfirm: false,
     cancelButtonText: 'Cancelar',
     showCancelButton: true,
+
     preConfirm: () => {
       const value = (document.getElementById('name') as HTMLInputElement).value;
       if (value) {
@@ -31,24 +33,23 @@ export async function optionsWithDetails(
   html: string,
   width: number | string,
   confirmButtonText: string,
-  cancelButtonText: string,
+  cancelButtonText: string
 ) {
   return await Swal.fire({
     title,
     text: html,
     width: `${width}px`,
+    showCloseButton: true,
     showCancelButton: true,
     confirmButtonColor: '#6C757D',
     cancelButtonColor: '#dc3545',
     confirmButtonText,
-    cancelButtonText
+    cancelButtonText,
   }).then((result) => {
     console.log(result);
     if (result.value) {
-      console.log('Editar');
       return true;
     } else if (result.dismiss.toString() === 'cancel') {
-      console.log('Bloquear');
       return false;
     }
   });

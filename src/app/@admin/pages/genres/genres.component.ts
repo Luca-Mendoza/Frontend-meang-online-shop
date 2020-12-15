@@ -55,32 +55,27 @@ export class GenresComponent implements OnInit {
 
   // tslint:disable-next-line: typedef
   async takeAction($event) {
-    console.log($event[0], $event[1]);
-
+    // Coger la información para las acciones
     const action = $event[0];
     const genre = $event[1];
-    console.log(genre);
-
-    let defaultValue = '';
-    if (genre.name !== undefined && genre.name !== '') {
-      defaultValue = genre.name;
-    }
-
+    // Añadir valor por defecto en caso que no se cumpla la condición
+    const defaultValue =
+      genre.name !== undefined && genre.name !== '' ? genre.name : '';
+    // si la condición 'defaultValue' se cumple se le asigna al la const html
     const html = `<input id="name" value="${defaultValue}" class="swal2-input" required>`;
 
-    if (action === 'edit' || action === 'add') {
-      if (action === 'add') {
-        const result = await fromBasicDialog('Añadir género', html, 'name');
-        console.log(result);
-        this.addGenre(result);
-        return;
-      }
-      if (action === 'edit') {
+    // Teniendo en cuenta el caso, ejecutar una acción
+    switch (action) {
+      case 'add':
+        // Añadir el item
+        this.addForm(html);
+        break;
+      case 'edit':
+        // Editar el item
         this.updateForm(html, genre);
-        return;
-      }
-    } else {
-      if (action === 'info') {
+        break;
+      case 'info':
+        // Informacion sobre el item
         const result = await optionsWithDetails(
           'Detalles',
           `${genre.name} (${genre.slug})`,
@@ -93,21 +88,27 @@ export class GenresComponent implements OnInit {
         } else if (result === false) {
           this.blockForm(genre);
         }
-        return;
-      }
-      if (action === 'block') {
+        break;
+      case 'block':
+        // Bloquear el item
         this.blockForm(genre);
-
-        return;
-      }
+        break;
+      default:
+        break;
     }
   }
 
+  // ================ Funciones 'Añadir', 'Bloquear', 'Informacion' ===================== //
+  // tslint:disable-next-line:typedef
+  private async addForm(html: string) {
+    const result = await fromBasicDialog('Añadir género', html, 'name');
+    this.addGenre(result);
+  }
+
   // tslint:disable-next-line: typedef
-  addGenre(result) {
+  private addGenre(result) {
     if (result.value) {
       this.service.addGenre(result.value).subscribe((res: any) => {
-        console.log(res);
         if (res.status) {
           basicAlert(TYPE_ALERT.SUCCESS, res.message);
           return;
@@ -117,11 +118,9 @@ export class GenresComponent implements OnInit {
     }
   }
   // tslint:disable-next-line: typedef
-  updateGenre(id: string, result) {
-    console.log(id, result.value);
+  private updateGenre(id: string, result) {
     if (result.value) {
       this.service.update(id, result.value).subscribe((res: any) => {
-        console.log(res);
         if (res.status) {
           basicAlert(TYPE_ALERT.SUCCESS, res.message);
           return;
@@ -132,16 +131,14 @@ export class GenresComponent implements OnInit {
   }
 
   // tslint:disable-next-line:typedef
-  async updateForm(html: string, genre: any) {
+  private async updateForm(html: string, genre: any) {
     const result = await fromBasicDialog('Modificar género', html, 'name');
-    console.log(result);
     this.updateGenre(genre.id, result);
   }
 
   // tslint:disable-next-line: typedef
-  blockGenre(id: string) {
+  private blockGenre(id: string) {
     this.service.block(id).subscribe((res: any) => {
-      console.log(res);
       if (res.status) {
         basicAlert(TYPE_ALERT.SUCCESS, res.message);
         return;
@@ -151,7 +148,7 @@ export class GenresComponent implements OnInit {
   }
 
   // tslint:disable-next-line:typedef
-  async blockForm(genre: any) {
+  private async blockForm(genre: any) {
     const result = await optionsWithDetails(
       '¿Bloquear?',
       'Si bloqueas el item seleccionado, no se mostrará en la lista',
