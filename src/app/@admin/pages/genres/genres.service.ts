@@ -1,4 +1,4 @@
-import { ADD_GENRE, MODIFY_GENRE } from '@graphql/operations/mutation/genre';
+import { ADD_GENRE, BLOCK_GENRE, MODIFY_GENRE } from '@graphql/operations/mutation/genre';
 import { Apollo } from 'apollo-angular';
 import { Injectable } from '@angular/core';
 import { ApiService } from '@graphql/services/api.service';
@@ -32,6 +32,16 @@ export class GenresService extends ApiService {
         genre: name
       }, {}).pipe(map((result: any) => {
         return result.updateGenre;
+      }));
+  }
+
+  block(id: string) {
+    return this.set(
+      BLOCK_GENRE,
+      {
+        id
+      }, {}).pipe(map((result: any) => {
+        return result.blockGenre;
       }));
   }
 }

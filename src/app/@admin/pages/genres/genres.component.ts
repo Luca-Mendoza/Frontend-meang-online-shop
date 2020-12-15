@@ -85,6 +85,11 @@ export class GenresComponent implements OnInit {
     } else {
       if (action === 'info') {
         infoDetailsBasic('Detalles', `${genre.name} (${genre.slug})`, 400);
+        return;
+      }
+      if (action === 'block') {
+        this.blockGenre(genre.id);
+        return;
       }
     }
 
@@ -122,5 +127,19 @@ export class GenresComponent implements OnInit {
       );
     }
   }
+
+    // tslint:disable-next-line: typedef
+    blockGenre(id: string) {
+      this.service.block(id).subscribe(
+        (res: any) => {
+          console.log(res);
+          if (res.status) {
+            basicAlert(TYPE_ALERT.SUCCESS, res.message);
+            return;
+          }
+          basicAlert(TYPE_ALERT.WARNING, res.message);
+        }
+      );
+    }
 
 }
