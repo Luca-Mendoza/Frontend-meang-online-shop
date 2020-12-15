@@ -5,7 +5,7 @@ import { IResultData } from '@core/interfaces/result-data.interface';
 import { GENRES_LIST_QUERY } from '@graphql/operations/query/genre';
 import { DocumentNode } from 'graphql';
 import { Component, OnInit } from '@angular/core';
-import { fromBasicDialog, infoDetailsBasic } from '@shared/alerts/alerts';
+import { fromBasicDialog, optionsWithDetails } from '@shared/alerts/alerts';
 import { TYPE_ALERT } from '@shared/alerts/values.config';
 
 @Component({
@@ -32,7 +32,7 @@ export class GenresComponent implements OnInit {
 
   ngOnInit(): void {
     this.context = {};
-    this.itemsPage = 10;
+    this.itemsPage = 5;
     this.resultData = {
       listKey: 'genres',
       definitionKey: 'genres'
@@ -84,11 +84,19 @@ export class GenresComponent implements OnInit {
       }
     } else {
       if (action === 'info') {
-        infoDetailsBasic('Detalles', `${genre.name} (${genre.slug})`, 400);
+        optionsWithDetails('Detalles', `${genre.name} (${genre.slug})`, 400,
+        '<i class="fas fa-edit"></i> Editar',
+        '<i class="fas fa-lock"></i> Block');
         return;
       }
       if (action === 'block') {
-        this.blockGenre(genre.id);
+        const result = await optionsWithDetails('¿Bloquear?', 'Si bloqueas el item seleccionado, no se mostrará en la lista', 475,
+        'No, no bloquear',
+        'Si, bloquear');
+        if(!result) { // Si el resultado es falso, queremos bloquear
+          this.blockGenre(genre.id);
+          return;
+        }
         return;
       }
     }
