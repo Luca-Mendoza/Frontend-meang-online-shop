@@ -37,7 +37,7 @@ export async function optionsWithDetails(
 ) {
   return await Swal.fire({
     title,
-    text: html,
+    html,
     width: `${width}px`,
     showCloseButton: true,
     showCancelButton: true,

@@ -3,14 +3,14 @@ import { IResultData } from '@core/interfaces/result-data.interface';
 import { DocumentNode } from 'graphql';
 import { Component, OnInit } from '@angular/core';
 import { USERS_LIST_QUERY } from '@graphql/operations/query/user';
+import { optionsWithDetails } from '@shared/alerts/alerts';
 
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
-  styleUrls: ['./users.component.scss']
+  styleUrls: ['./users.component.scss'],
 })
 export class UsersComponent implements OnInit {
-
   // La consulta
   query: DocumentNode = USERS_LIST_QUERY;
   // Información del contexto
@@ -29,39 +29,78 @@ export class UsersComponent implements OnInit {
     this.itemsPage = 10;
     this.resultData = {
       listKey: 'users',
-      definitionKey: 'users'
+      definitionKey: 'users',
     };
     this.include = true;
     this.columns = [
       {
         property: 'id',
-        label: '#'
+        label: '#',
       },
       {
         property: 'name',
-        label: 'Nombre'
+        label: 'Nombre',
       },
       {
         property: 'lastname',
-        label: 'Apellidos'
+        label: 'Apellidos',
       },
       {
         property: 'email',
-        label: 'Correo electrónico'
+        label: 'Correo electrónico',
       },
       {
         property: 'role',
-        label: 'Permisos'
+        label: 'Permisos',
       },
-      {
-        property: 'registerDate',
-        label: 'Fecha de registro'
-      },
-      {
-        property: 'birthday',
-        label: 'Fecha de nacimiento'
-      }
     ];
   }
-}
 
+  // tslint:disable-next-line: typedef
+  async takeAction($event) {
+    // Coger la información para las acciones
+    const action = $event[0];
+    const user = $event[1];
+    // Añadir valor por defecto en caso que no se cumpla la condición
+    const defaultValue =
+      user.name !== undefined && user.name !== '' ? user.name : '';
+    // si la condición 'defaultValue' se cumple se le asigna al la const html
+    const html = `<input id="name" value="${defaultValue}" class="swal2-input" required>`;
+
+    // Teniendo en cuenta el caso, ejecutar una acción
+    switch (action) {
+      case 'add':
+        // Añadir el item
+        //  this.addForm(html);
+        break;
+      case 'edit':
+        // Editar el item
+        //  this.updateForm(html, user);
+        break;
+      case 'info':
+        // Informacion sobre el item
+        const result = await optionsWithDetails(
+          'Detalles',
+          `${user.name} ${user.lastname} </br>
+          <i class="fas fa-user-tag"></i>&nbsp;${user.role} </br>
+          <i class="far fa-calendar-alt"></i>&nbsp;${user.birthday} </br>
+          <i class="fas fa-envelope-open-text"></i>&nbsp;${user.email} </br>`,
+          400,
+          '<i class="fas fa-edit"></i> Editar', // true
+          '<i class="fas fa-lock"></i> Block'
+        ); // false
+        if (result) {
+          // this.updateForm(html, genre);
+        } else if (result === false) {
+          //   this.blockForm(genre);
+        }
+        break;
+      case 'block':
+        // Bloquear el item
+        // this.blockForm(genre);
+        break;
+      default:
+        break;
+    }
+  }
+}
