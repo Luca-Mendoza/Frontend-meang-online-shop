@@ -3,7 +3,7 @@ import { IResultData } from '@core/interfaces/result-data.interface';
 import { DocumentNode } from 'graphql';
 import { Component, OnInit } from '@angular/core';
 import { USERS_LIST_QUERY } from '@graphql/operations/query/user';
-import { fromBasicDialog, optionsWithDetails } from '@shared/alerts/alerts';
+import { optionsWithDetails, userFromBasicDialog } from '@shared/alerts/alerts';
 
 @Component({
   selector: 'app-users',
@@ -120,7 +120,7 @@ export class UsersComponent implements OnInit {
   // ================ Funciones 'Añadir', 'Bloquear', 'Informacion' ===================== //
   // tslint:disable-next-line:typedef
   private async addForm(html: string) {
-    const result = await fromBasicDialog('Añadir género', html, 'name');
+    const result = await userFromBasicDialog('Añadir usuario', html, 'name');
     // this.addGenre(result);
   }
 
