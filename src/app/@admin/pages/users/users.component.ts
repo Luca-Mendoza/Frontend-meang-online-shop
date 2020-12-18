@@ -28,7 +28,7 @@ export class UsersComponent implements OnInit {
   // definimos dato para hacer dinamica la Table
   columns: Array<ITableColumns>;
 
-  constructor(private service: UsarsAdminService) {}
+  constructor(private service: UsarsAdminService) { }
 
   ngOnInit(): void {
     this.context = {};
@@ -63,6 +63,8 @@ export class UsersComponent implements OnInit {
   }
 
   private initializeForm(user: any) {
+    // Añadir valor por defecto en caso que no se cumpla la condición
+    // si la condición 'defaultValue' se cumple se le asigna al la const html
     const defaultName =
       user.name !== undefined && user.name !== '' ? user.name : '';
     const defaulLastname =
@@ -76,23 +78,14 @@ export class UsersComponent implements OnInit {
       user.role !== undefined && user.role !== 'CLIENT' ? 'selected' : '';
 
     return `
-    <input id="name" value="" placeholder="Nombre" class="swal2-input" required>
-    <input id="lastname" value="" placeholder="Apellido" class="swal2-input" required>
-    <input id="email" value="" placeholder="Correo Electronico" class="swal2-input" required>
+    <input id="name" value="${defaultName}" placeholder="Nombre" class="swal2-input" required>
+    <input id="name" value="${defaulLastname}" placeholder="Apellido" class="swal2-input" required>
+    <input id="name" value="${defaultEmail}" placeholder="Correo Electronico" class="swal2-input" required>
     <select id="role" class="swal2-input">
-      <option value="ADMIN" >Administrador</option>
-      <option value="ADMIN" >Cliente</option>
+      <option value="ADMIN" ${roles[0]}>Administrador</option>
+      <option value="ADMIN" ${roles[0]}>Cliente</option>
     </select>
 `;
-    /** return `
-            <input id="name" value="${defaultName}" placeholder="Nombre" class="swal2-input" required>
-            <input id="name" value="${defaulLastname}" placeholder="Apellido" class="swal2-input" required>
-            <input id="name" value="${defaultEmail}" placeholder="Correo Electronico" class="swal2-input" required>
-            <select id="role" class="swal2-input">
-              <option value="ADMIN" ${roles[0]}>Administrador</option>
-              <option value="ADMIN" ${roles[0]}>Cliente</option>
-            </select>
-    `; */
   }
 
   // tslint:disable-next-line: typedef
@@ -100,11 +93,6 @@ export class UsersComponent implements OnInit {
     // Coger la información para las acciones
     const action = $event[0];
     const user = $event[1];
-    // Añadir valor por defecto en caso que no se cumpla la condición
-    // const defaultValue =
-    // user.name !== undefined && user.name !== '' ? user.name : '';
-    // si la condición 'defaultValue' se cumple se le asigna al la const html
-    // const html = `<input id="name" value="${defaultValue}" class="swal2-input" required>`;
 
     // Teniendo en cuenta el caso, ejecutar una acción
     const html = this.initializeForm(user);
@@ -115,7 +103,7 @@ export class UsersComponent implements OnInit {
         break;
       case 'edit':
         // Editar el item
-        //  this.updateForm(html, user);
+        this.updateForm(html, user);
         break;
       case 'info':
         // Informacion sobre el item
@@ -164,5 +152,10 @@ export class UsersComponent implements OnInit {
         basicAlert(TYPE_ALERT.WARNING, res.message);
       });
     }
+  }
+
+  private async updateForm(html: string, user: any) {
+    const result = await userFormBasicDialog('Modificar usuario', html);
+    console.log(result);
   }
 }
