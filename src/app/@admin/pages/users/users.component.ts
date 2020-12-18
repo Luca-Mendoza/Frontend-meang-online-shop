@@ -3,7 +3,11 @@ import { IResultData } from '@core/interfaces/result-data.interface';
 import { DocumentNode } from 'graphql';
 import { Component, OnInit } from '@angular/core';
 import { USERS_LIST_QUERY } from '@graphql/operations/query/user';
-import { fromBasicDialog, optionsWithDetails, userFormBasicDialog } from '@shared/alerts/alerts';
+import { optionsWithDetails, userFormBasicDialog } from '@shared/alerts/alerts';
+import { UsarsAdminService } from './usars-admin.service';
+import { IRegisterForm } from '../../../@core/interfaces/register.interface';
+import { basicAlert } from '@shared/alerts/toasts';
+import { TYPE_ALERT } from '@shared/alerts/values.config';
 
 @Component({
   selector: 'app-users',
@@ -23,6 +27,8 @@ export class UsersComponent implements OnInit {
   include: boolean;
   // definimos dato para hacer dinamica la Table
   columns: Array<ITableColumns>;
+
+  constructor(private service: UsarsAdminService) {}
 
   ngOnInit(): void {
     this.context = {};
@@ -58,16 +64,16 @@ export class UsersComponent implements OnInit {
 
   private initializeForm(user: any) {
     const defaultName =
-    user.name !== undefined && user.name !== '' ? user.name : '';
+      user.name !== undefined && user.name !== '' ? user.name : '';
     const defaulLastname =
-    user.lastname !== undefined && user.lastname !== '' ? user.lastname : '';
+      user.lastname !== undefined && user.lastname !== '' ? user.lastname : '';
     const defaultEmail =
-    user.email !== undefined && user.email !== '' ? user.email : '';
+      user.email !== undefined && user.email !== '' ? user.email : '';
     const roles = new Array(2);
-    roles[0] = user.role !== undefined && user.role !== 'ADMIN' ? 'selected' : '';
-    roles[1] = user.role !== undefined && user.role !== 'CLIENT' ? 'selected' : '';
-
-
+    roles[0] =
+      user.role !== undefined && user.role !== 'ADMIN' ? 'selected' : '';
+    roles[1] =
+      user.role !== undefined && user.role !== 'CLIENT' ? 'selected' : '';
 
     return `
     <input id="name" value="" placeholder="Nombre" class="swal2-input" required>
@@ -96,9 +102,9 @@ export class UsersComponent implements OnInit {
     const user = $event[1];
     // Añadir valor por defecto en caso que no se cumpla la condición
     // const defaultValue =
-     // user.name !== undefined && user.name !== '' ? user.name : '';
+    // user.name !== undefined && user.name !== '' ? user.name : '';
     // si la condición 'defaultValue' se cumple se le asigna al la const html
-     // const html = `<input id="name" value="${defaultValue}" class="swal2-input" required>`;
+    // const html = `<input id="name" value="${defaultValue}" class="swal2-input" required>`;
 
     // Teniendo en cuenta el caso, ejecutar una acción
     const html = this.initializeForm(user);
@@ -139,12 +145,24 @@ export class UsersComponent implements OnInit {
   }
 
   // ================ Funciones 'Añadir', 'Bloquear', 'Informacion' ===================== //
-  // tslint:disable-next-line:typedef
   private async addForm(html: string) {
     const result = await userFormBasicDialog('Añadir usuario', html);
     console.log(result);
-    // this.addUser(result);
+    this.addUser(result);
   }
 
+  private addUser(result) {
+    if (result.value) {
+      const user: IRegisterForm = result.value;
+      user.password = '1234';
+      user.active = false;
+      this.service.register(user).subscribe((res: any) => {
+        if (res.status) {
+          basicAlert(TYPE_ALERT.SUCCESS, res.message);
+          return;
+        }
+        basicAlert(TYPE_ALERT.WARNING, res.message);
+      });
+    }
+  }
 }
-

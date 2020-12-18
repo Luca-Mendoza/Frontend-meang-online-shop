@@ -5,6 +5,8 @@ export interface IRegisterForm {
     email: string;
     password: string;
     birthday: string;
+    role?: string;
+    active?: boolean;
 }
 
 
