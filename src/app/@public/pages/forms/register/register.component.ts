@@ -1,3 +1,4 @@
+import { EMAIL_PATTERN } from '@core/constants/regex';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { IRegisterForm, IResultRegister } from '@core/interfaces/register.interface';
@@ -12,7 +13,7 @@ import { TYPE_ALERT } from '@shared/alerts/values.config';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
-
+  emailPattern = EMAIL_PATTERN;
   register: IRegisterForm = {
     name: '',
     lastname: '',
@@ -47,7 +48,7 @@ export class RegisterComponent implements OnInit {
     console.log('Enviando datos', this.register);
     this.api.register(this.register).subscribe((result: IResultRegister) => {
       console.log('Result', result);
-      if(!result.status) {
+      if (!result.status) {
         basicAlert(TYPE_ALERT.WARNING, result.message);
         return;
       }

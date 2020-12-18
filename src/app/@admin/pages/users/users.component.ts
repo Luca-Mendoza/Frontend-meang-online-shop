@@ -66,15 +66,27 @@ export class UsersComponent implements OnInit {
     const roles = new Array(2);
     roles[0] = user.role !== undefined && user.role !== 'ADMIN' ? 'selected' : '';
     roles[1] = user.role !== undefined && user.role !== 'CLIENT' ? 'selected' : '';
+
+
+
     return `
-            <input id="name" value="${defaultName}" placeholder="Usuario" class="swal2-input" required>
+    <input id="name" value="" placeholder="Nombre" class="swal2-input" required>
+    <input id="lastname" value="" placeholder="Apellido" class="swal2-input" required>
+    <input id="email" value="" placeholder="Correo Electronico" class="swal2-input" required>
+    <select id="role" class="swal2-input">
+      <option value="ADMIN" >Administrador</option>
+      <option value="ADMIN" >Cliente</option>
+    </select>
+`;
+    /** return `
+            <input id="name" value="${defaultName}" placeholder="Nombre" class="swal2-input" required>
             <input id="name" value="${defaulLastname}" placeholder="Apellido" class="swal2-input" required>
             <input id="name" value="${defaultEmail}" placeholder="Correo Electronico" class="swal2-input" required>
             <select id="role" class="swal2-input">
               <option value="ADMIN" ${roles[0]}>Administrador</option>
               <option value="ADMIN" ${roles[0]}>Cliente</option>
             </select>
-    `;
+    `; */
   }
 
   // tslint:disable-next-line: typedef

@@ -1,3 +1,4 @@
+import { EMAIL_PATTERN } from '@core/constants/regex';
 import Swal from 'sweetalert2';
 
 // tslint:disable-next-line:typedef
@@ -42,7 +43,7 @@ export async function userFormBasicDialog(
       let error = '';
       const name = (document.getElementById('name') as HTMLInputElement)?.value;
       if (!name) {
-        error += 'Usuario es obligatorio<br/>';
+        error += 'Nombre es obligatorio<br/>';
       }
       const lastname = (document.getElementById('lastname') as HTMLInputElement)?.value;
       if (!lastname) {
@@ -51,6 +52,9 @@ export async function userFormBasicDialog(
       const email = (document.getElementById('email') as HTMLInputElement)?.value;
       if (!email) {
         error += 'Email es obligatorio<br/>';
+      }
+      if (!EMAIL_PATTERN.test(email)) {
+        error += 'Email no es correcto en su formato';
       }
       const role = (document.getElementById('role') as HTMLInputElement)?.value;
       if (error !== '') {

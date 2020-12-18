@@ -61,7 +61,7 @@
           [(ngModel)]="register.email"
           class="form-control"
           [ngClass]="{ 'is-valid': email.invalid, 'is-invalid': email.invalid }"
-          pattern="^[a-zA-Z0-9._-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$"
+          [pattern]="emailPattern"
         />
         <div
           class="alert alert-danger"

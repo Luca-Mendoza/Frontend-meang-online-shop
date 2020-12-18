@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { CanActivateChild, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
 
 const jwtDecode = require('jwt-decode');
-console.log(jwtDecode);
 @Injectable({
   providedIn: 'root'
 })
