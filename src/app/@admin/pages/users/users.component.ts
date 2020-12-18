@@ -3,7 +3,7 @@ import { IResultData } from '@core/interfaces/result-data.interface';
 import { DocumentNode } from 'graphql';
 import { Component, OnInit } from '@angular/core';
 import { USERS_LIST_QUERY } from '@graphql/operations/query/user';
-import { optionsWithDetails } from '@shared/alerts/alerts';
+import { fromBasicDialog, optionsWithDetails } from '@shared/alerts/alerts';
 
 @Component({
   selector: 'app-users',
@@ -56,6 +56,18 @@ export class UsersComponent implements OnInit {
     ];
   }
 
+  private initializeForm(user: any) {
+    return `
+            <input id="name" value="" placeholder="Usuario" class="swal2-input" required>
+            <input id="name" value="" placeholder="Apellido" class="swal2-input" required>
+            <input id="name" value="" placeholder="Correo Electronico" class="swal2-input" required>
+            <select id="role" class="swal2-input">
+              <option value="ADMIN">Administrador</option>
+              <option value="CLIENT">Cliente</option>
+            </select>
+    `;
+  }
+
   // tslint:disable-next-line: typedef
   async takeAction($event) {
     // Coger la información para las acciones
@@ -65,13 +77,14 @@ export class UsersComponent implements OnInit {
     const defaultValue =
       user.name !== undefined && user.name !== '' ? user.name : '';
     // si la condición 'defaultValue' se cumple se le asigna al la const html
-    const html = `<input id="name" value="${defaultValue}" class="swal2-input" required>`;
+    // const html = `<input id="name" value="${defaultValue}" class="swal2-input" required>`;
 
     // Teniendo en cuenta el caso, ejecutar una acción
+    const html = this.initializeForm(user);
     switch (action) {
       case 'add':
         // Añadir el item
-        //  this.addForm(html);
+        this.addForm(html);
         break;
       case 'edit':
         // Editar el item
@@ -103,4 +116,13 @@ export class UsersComponent implements OnInit {
         break;
     }
   }
+
+  // ================ Funciones 'Añadir', 'Bloquear', 'Informacion' ===================== //
+  // tslint:disable-next-line:typedef
+  private async addForm(html: string) {
+    const result = await fromBasicDialog('Añadir género', html, 'name');
+    // this.addGenre(result);
+  }
+
 }
+
