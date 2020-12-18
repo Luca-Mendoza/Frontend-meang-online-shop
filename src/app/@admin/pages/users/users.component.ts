@@ -3,7 +3,7 @@ import { IResultData } from '@core/interfaces/result-data.interface';
 import { DocumentNode } from 'graphql';
 import { Component, OnInit } from '@angular/core';
 import { USERS_LIST_QUERY } from '@graphql/operations/query/user';
-import { optionsWithDetails, userFromBasicDialog } from '@shared/alerts/alerts';
+import { fromBasicDialog, optionsWithDetails, userFormBasicDialog } from '@shared/alerts/alerts';
 
 @Component({
   selector: 'app-users',
@@ -57,13 +57,22 @@ export class UsersComponent implements OnInit {
   }
 
   private initializeForm(user: any) {
+    const defaultName =
+    user.name !== undefined && user.name !== '' ? user.name : '';
+    const defaulLastname =
+    user.lastname !== undefined && user.lastname !== '' ? user.lastname : '';
+    const defaultEmail =
+    user.email !== undefined && user.email !== '' ? user.email : '';
+    const roles = new Array(2);
+    roles[0] = user.role !== undefined && user.role !== 'ADMIN' ? 'selected' : '';
+    roles[1] = user.role !== undefined && user.role !== 'CLIENT' ? 'selected' : '';
     return `
-            <input id="name" value="" placeholder="Usuario" class="swal2-input" required>
-            <input id="name" value="" placeholder="Apellido" class="swal2-input" required>
-            <input id="name" value="" placeholder="Correo Electronico" class="swal2-input" required>
+            <input id="name" value="${defaultName}" placeholder="Usuario" class="swal2-input" required>
+            <input id="name" value="${defaulLastname}" placeholder="Apellido" class="swal2-input" required>
+            <input id="name" value="${defaultEmail}" placeholder="Correo Electronico" class="swal2-input" required>
             <select id="role" class="swal2-input">
-              <option value="ADMIN">Administrador</option>
-              <option value="CLIENT">Cliente</option>
+              <option value="ADMIN" ${roles[0]}>Administrador</option>
+              <option value="ADMIN" ${roles[0]}>Cliente</option>
             </select>
     `;
   }
@@ -74,10 +83,10 @@ export class UsersComponent implements OnInit {
     const action = $event[0];
     const user = $event[1];
     // Añadir valor por defecto en caso que no se cumpla la condición
-    const defaultValue =
-      user.name !== undefined && user.name !== '' ? user.name : '';
+    // const defaultValue =
+     // user.name !== undefined && user.name !== '' ? user.name : '';
     // si la condición 'defaultValue' se cumple se le asigna al la const html
-    // const html = `<input id="name" value="${defaultValue}" class="swal2-input" required>`;
+     // const html = `<input id="name" value="${defaultValue}" class="swal2-input" required>`;
 
     // Teniendo en cuenta el caso, ejecutar una acción
     const html = this.initializeForm(user);
@@ -120,8 +129,9 @@ export class UsersComponent implements OnInit {
   // ================ Funciones 'Añadir', 'Bloquear', 'Informacion' ===================== //
   // tslint:disable-next-line:typedef
   private async addForm(html: string) {
-    const result = await userFromBasicDialog('Añadir usuario', html, 'name');
-    // this.addGenre(result);
+    const result = await userFormBasicDialog('Añadir usuario', html);
+    console.log(result);
+    // this.addUser(result);
   }
 
 }
