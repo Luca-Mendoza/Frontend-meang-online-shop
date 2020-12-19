@@ -79,8 +79,8 @@ export class UsersComponent implements OnInit {
 
     return `
     <input id="name" value="${defaultName}" placeholder="Nombre" class="swal2-input" required>
-    <input id="name" value="${defaulLastname}" placeholder="Apellido" class="swal2-input" required>
-    <input id="name" value="${defaultEmail}" placeholder="Correo Electronico" class="swal2-input" required>
+    <input id="lastname" value="${defaulLastname}" placeholder="Apellido" class="swal2-input" required>
+    <input id="email" value="${defaultEmail}" placeholder="Correo Electronico" class="swal2-input" required>
     <select id="role" class="swal2-input">
       <option value="ADMIN" ${roles[0]}>Administrador</option>
       <option value="ADMIN" ${roles[0]}>Cliente</option>
@@ -88,7 +88,7 @@ export class UsersComponent implements OnInit {
 `;
   }
 
-  // tslint:disable-next-line: typedef
+
   async takeAction($event) {
     // Coger la información para las acciones
     const action = $event[0];
@@ -157,5 +157,22 @@ export class UsersComponent implements OnInit {
   private async updateForm(html: string, user: any) {
     const result = await userFormBasicDialog('Modificar usuario', html);
     console.log(result);
+    this.updateUser(result, user.id);
   }
+
+  private updateUser(result, id: string) {
+    if (result.value) {
+      const user = result.value;
+      user.id = id;
+      console.log(user);
+      this.service.update(result.value).subscribe((res: any) => {
+        if (res.status) {
+          basicAlert(TYPE_ALERT.SUCCESS, res.message);
+          return;
+        }
+        basicAlert(TYPE_ALERT.WARNING, res.message);
+      });
+    }
+  }
+
 }
