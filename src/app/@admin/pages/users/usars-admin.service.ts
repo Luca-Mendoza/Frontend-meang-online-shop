@@ -1,4 +1,5 @@
-import { UPDATE_USER } from '@graphql/operations/mutation/user';
+
+import { UPDATE_USER, BLOCK_USER } from '@graphql/operations/mutation/user';
 import { Apollo } from 'apollo-angular';
 import { Injectable } from '@angular/core';
 import { UsersService } from '@core/services/users.service';
@@ -31,5 +32,14 @@ export class UsarsAdminService extends ApiService {
     ).pipe(map((result: any) => {
       return result.updateUser;
     }));
+  }
+  block(id: string) {
+    return this.set(
+      BLOCK_USER,
+      {
+        id
+      }, {}).pipe(map((result: any) => {
+        return result.blockUser;
+      }));
   }
 }

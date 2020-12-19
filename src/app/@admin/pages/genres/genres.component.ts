@@ -136,7 +136,6 @@ export class GenresComponent implements OnInit {
     this.updateGenre(genre.id, result);
   }
 
-  // tslint:disable-next-line: typedef
   private blockGenre(id: string) {
     this.service.block(id).subscribe((res: any) => {
       if (res.status) {
@@ -147,7 +146,6 @@ export class GenresComponent implements OnInit {
     });
   }
 
-  // tslint:disable-next-line:typedef
   private async blockForm(genre: any) {
     const result = await optionsWithDetails(
       '¿Bloquear?',
