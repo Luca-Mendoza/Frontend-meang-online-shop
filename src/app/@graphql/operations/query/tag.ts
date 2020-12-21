@@ -11,7 +11,7 @@ query tagsList($page: Int, $itemsPage: Int) {
         }
         status
         message
-        tag {
+        tags {
             ...tagObject
         }
     }
