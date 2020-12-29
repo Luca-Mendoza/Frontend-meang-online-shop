@@ -53,7 +53,6 @@ export class GenresComponent implements OnInit {
     ];
   }
 
-  // tslint:disable-next-line: typedef
   async takeAction($event) {
     // Coger la información para las acciones
     const action = $event[0];
