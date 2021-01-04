@@ -19,4 +19,8 @@ export class ActiveComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  add(){}
+
+  dataAsign($event){console.log('Cogiendo datos', $event);}
+
 }
