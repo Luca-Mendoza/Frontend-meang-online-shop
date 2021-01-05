@@ -4,7 +4,8 @@ import { USERS_LIST_QUERY } from '@graphql/operations/query/user';
 import { ApiService } from '@graphql/services/api.service';
 import { map } from 'rxjs/operators';
 import { IRegisterForm } from '@core/interfaces/register.interface';
-import { REGISTER_USER } from '@graphql/operations/mutation/user';
+import { REGISTER_USER, ACTIVE_USER } from '@graphql/operations/mutation/user';
+import { HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -35,11 +36,25 @@ export class UsersService extends ApiService {
         user,
         include: false
       }).pipe(
-      map((result: any) => {
-        return result.register;
-      })
-    );
+        map((result: any) => {
+          return result.register;
+        })
+      );
   }
 
-  active(token: string, birthday: string, password: string){}
+  active(token: string, birthday: string, password: string) {
+    const user = JSON.parse(atob(token.split('.')[1])).user;
+    return this.set(ACTIVE_USER,
+      {
+        id: user,
+        birthday,
+        password
+      }, {
+      headers: new HttpHeaders({
+        autorization: token
+      })
+    }).pipe(map((result: any) => {
+      return result.activeUserAction;
+    }));
+  }
 }
