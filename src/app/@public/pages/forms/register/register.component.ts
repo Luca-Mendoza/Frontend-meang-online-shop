@@ -22,6 +22,7 @@ export class RegisterComponent implements OnInit {
     password: '',
 
   };
+  
   constructor(
     private api: UsersService,
     private router: Router) { }
