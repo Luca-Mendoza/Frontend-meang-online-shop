@@ -1,5 +1,7 @@
+import { basicAlert } from '@shared/alerts/toasts';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { TYPE_ALERT } from '@shared/alerts/values.config';
 
 
 @Component({
@@ -39,7 +41,14 @@ export class ActiveComponent implements OnInit {
     this.values.birthday = fecha;
   }
 
-  add() { }
+  add() {
+    console.log(this.values);
+    if (this.values.password !== this.values.passwordTwo) {
+      basicAlert(TYPE_ALERT.WARNING, 'Las contraseña no coinciden y no es válido para activar el usuario. Procura asegurarte que las contraseña son iguales');
+    }
+    // Todo validado, vamos a enviarlo a la API de Graphql
+    // service => active
+  }
 
 
 }

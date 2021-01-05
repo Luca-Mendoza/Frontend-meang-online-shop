@@ -40,4 +40,6 @@ export class UsersService extends ApiService {
       })
     );
   }
+
+  active(token: string, birthday: string, password: string){}
 }
