@@ -46,12 +46,12 @@ export class UsersService extends ApiService {
     const user = JSON.parse(atob(token.split('.')[1])).user;
     return this.set(ACTIVE_USER,
       {
-        id: user,
+        id: user.id,
         birthday,
         password
       }, {
       headers: new HttpHeaders({
-        autorization: token
+        Authorization: token
       })
     }).pipe(map((result: any) => {
       return result.activeUserAction;

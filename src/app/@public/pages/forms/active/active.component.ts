@@ -1,3 +1,4 @@
+import { UsersService } from '@core/services/users.service';
 import { basicAlert } from '@shared/alerts/toasts';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
@@ -16,7 +17,7 @@ export class ActiveComponent implements OnInit {
     password: '',
     birthday: ''
   };
-  constructor(private route: ActivatedRoute) {
+  constructor(private route: ActivatedRoute, private userService: UsersService) {
     this.route.params.subscribe(params => {
       this.token = params.token;
       console.log(this.token);
@@ -48,6 +49,17 @@ export class ActiveComponent implements OnInit {
     }
     // Todo validado, vamos a enviarlo a la API de Graphql
     // service => active
+    this.userService.active(this.token, this.values.birthday, this.values.password).subscribe(
+      result => {
+        console.log(result);
+        if (result.status) {
+          basicAlert(TYPE_ALERT.SUCCESS, result.message);
+          // redireccionar a login
+          return;
+        }
+        basicAlert(TYPE_ALERT.WARNING, result.message);
+      }
+    );
   }
 
 
