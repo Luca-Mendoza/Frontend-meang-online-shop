@@ -1,7 +1,7 @@
 import { UsersService } from '@core/services/users.service';
 import { basicAlert } from '@shared/alerts/toasts';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TYPE_ALERT } from '@shared/alerts/values.config';
 
 
@@ -17,7 +17,7 @@ export class ActiveComponent implements OnInit {
     password: '',
     birthday: ''
   };
-  constructor(private route: ActivatedRoute, private userService: UsersService) {
+  constructor(private route: ActivatedRoute, private userService: UsersService, private router: Router) {
     this.route.params.subscribe(params => {
       this.token = params.token;
       console.log(this.token);
@@ -46,6 +46,7 @@ export class ActiveComponent implements OnInit {
     console.log(this.values);
     if (this.values.password !== this.values.passwordTwo) {
       basicAlert(TYPE_ALERT.WARNING, 'Las contraseña no coinciden y no es válido para activar el usuario. Procura asegurarte que las contraseña son iguales');
+      return;
     }
     // Todo validado, vamos a enviarlo a la API de Graphql
     // service => active
@@ -55,6 +56,7 @@ export class ActiveComponent implements OnInit {
         if (result.status) {
           basicAlert(TYPE_ALERT.SUCCESS, result.message);
           // redireccionar a login
+          this.router.navigate(['login']);
           return;
         }
         basicAlert(TYPE_ALERT.WARNING, result.message);

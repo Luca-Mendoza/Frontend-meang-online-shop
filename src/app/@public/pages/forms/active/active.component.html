@@ -4,55 +4,33 @@
 
     <div class="col-lg-6">
       <form (ngSubmit)="add()" #forma="ngForm">
+        <h1>Activar usuario</h1>
+        <p>Introduzca el password y verificalo antes de activar el usuario. Seleccione tu fecha de nacimiento.</p>
         <label for="birthday"><b>Fecha de nacimiento</b></label>
-        <app-date-picker-legal-age
-          (newDate)="dataAsign($event)"
-        ></app-date-picker-legal-age>
+        <app-date-picker-legal-age (newDate)="dataAsign($event)"></app-date-picker-legal-age>
 
         <label for="password"><b>Contraseña</b></label>
-        <input
-          type="password"
-          placeholder="Introduzca la contraseña"
-          name="password"
-          #password="ngModel"
-          [(ngModel)]="values.password"
-          required
-          class="form-control"
-          [ngClass]="{
+        <input type="password" placeholder="Introduzca la contraseña" name="password" #password="ngModel"
+          [(ngModel)]="values.password" required class="form-control" [ngClass]="{
             'is-valid': !password.invalid,
             'is-invalid': password.invalid
-          }"
-        />
-        <div
-          class="alert alert-danger"
-          *ngIf="password.invalid && (password.dirty || password.touched)"
-        >
+          }" />
+        <div class="alert alert-danger" *ngIf="password.invalid && (password.dirty || password.touched)">
           <div class="" *ngIf="password.errors.required">
             Introdusca una contraseña válida por favor
           </div>
         </div>
 
         <label for="passwordTwo"><b> Repetir contraseña</b></label>
-        <input
-          type="password"
-          placeholder="Repita la contraseña"
-          name="passwordTwo"
-          #passwordTwo="ngModel"
-          [(ngModel)]="values.passwordTwo"
-          required
-          class="form-control"
-          [ngClass]="{
+        <input type="password" placeholder="Repita la contraseña" name="passwordTwo" #passwordTwo="ngModel"
+          [(ngModel)]="values.passwordTwo" required class="form-control" [ngClass]="{
             'is-valid': !passwordTwo.invalid,
             'is-invalid': passwordTwo.invalid
-          }"
-        />
+          }" />
 
-        <div
-          class="alert alert-danger"
-          *ngIf="
+        <div class="alert alert-danger" *ngIf="
             passwordTwo.invalid && (passwordTwo.dirty || passwordTwo.touched)
-          "
-        >
+          ">
           <div *ngIf="passwordTwo.errors.required">
             Introduzca una contraseña por favor
           </div>
