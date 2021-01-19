@@ -28,6 +28,11 @@ const routes: Routes = [
         path: 'register',
         loadChildren: () => import('./forms/register/register.module').then(m => m.RegisterModule)
       },
+      // @public --> pages --> RecuperarPassword
+      {
+        path: 'forgot',
+        loadChildren: () => import('./forms/forgot/forgot.module').then(m => m.ForgotModule)
+      },
       // @public --> pages --> ActiveUser
       {
         path: 'active/:token',
