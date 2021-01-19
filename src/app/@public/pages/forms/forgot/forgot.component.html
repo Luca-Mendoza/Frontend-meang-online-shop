@@ -1,1 +1,53 @@
-<p>forgot works!</p>
+<div class="container">
+  <div class="row">
+    <div class="col-lg"></div>
+    <div class="col-lg-6">
+      <form (ngSubmit)="reset()" #forma="ngForm">
+        <h1>Añade tu correo electrónico</h1>
+        <p>Te enviaremos un enlace a tu correo electrónico para resetear tu contraseña y cambiarla</p>
+        <p class="psw">
+          ¿No tienes cuenta? Entra
+          <a href="#">aquí</a> para crearla gratis
+        </p>
+        <hr />
+        <label for="email"><b>Correo electrónico</b></label>
+        <input
+          type="email"
+          placeholder="Introduzca la correo electrónico"
+          name="email"
+          #email="ngModel"
+          [(ngModel)]="emailValue"
+          class="form-control"
+          required
+          [ngClass]="{
+            'is-valid': !email.invalid,
+            'is-invalid': email.invalid
+          }"
+          [pattern]="pattern"
+        />
+
+        <div
+          class="alert alert-danger"
+          *ngIf="email.invalid && (email.dirty || email.touched)"
+        >
+          <div class="" *ngIf="email.errors.required">
+            Introduzca un correo electrónico válido por favor
+          </div>
+
+          <div class="" *ngIf="email.errors && email.errors.pattern">
+            El correo electrónico no sigue el formato correcto. Sigue este
+            ejemplo: 'Gamezonia_2020@gmail.com'
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg">
+            <button type="submit" [disabled]="!forma.valid" class="signup-btn">
+              Resetear Password
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="col-lg"></div>
+  </div>
+</div>
