@@ -13,6 +13,7 @@ export class ForgotComponent implements OnInit {
   emailValue: string;
   pattern = EMAIL_PATTERN;
 
+
   constructor(private passwordService: PasswordService) { }
 
   ngOnInit(): void {
