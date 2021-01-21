@@ -1,7 +1,8 @@
 <button class="btn btn-success float-right mr-3 mb-2" (click)="manageAction('add', '')">
   <i class="fas fa-plus-circle"></i> &nbsp; Añadir
 </button>
-<select class="custom-select float-right mr-3" style="width: auto" [(ngModel)]="filterActiveValues" (ngModelChange)="loadData()">
+<select class="custom-select float-right mr-3" style="width: auto" [(ngModel)]="filterActiveValues"
+  (ngModelChange)="loadData()">
   <option [ngValue]="'ALL'">Todos</option>
   <option [ngValue]="'ACTIVE'">Activos</option>
   <option [ngValue]="'INACTIVE'">Inactivos</option>
@@ -18,7 +19,17 @@
     </thead>
     <tbody>
       <tr *ngFor="let data of data$ | async">
-        <td *ngFor="let val of tableColumns">{{ data[val.property] }}</td>
+        <td *ngFor="let val of tableColumns">
+          <span *ngIf="val.property !='active'; else activeValue">
+            {{ data[val.property] }}
+          </span>
+          <ng-template #activeValue>
+            <span *ngIf="data[val.property] == true ">x</span>
+            <span *ngIf="data[val.property] !== true ">o</span>
+
+          </ng-template>
+
+        </td>
         <td>
           <button type="button" class="btn btn-secondary" (click)="manageAction('edit', data)">
             <i class="fas fa-edit"></i></button>&nbsp;

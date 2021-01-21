@@ -25,7 +25,7 @@ export class UsersComponent implements OnInit {
   // Resultado de la data
   resultData: IResultData;
   // Informacion de usuarios activos y inactivos
-  filterActiveValues = ACTIVE_FILTERS.INACTIVE;
+  filterActiveValues = ACTIVE_FILTERS.ACTIVE;
   // lo que es el include
   include: boolean;
   // definimos dato para hacer dinamica la Table
@@ -61,6 +61,10 @@ export class UsersComponent implements OnInit {
       {
         property: 'role',
         label: 'Permisos',
+      },
+      {
+        property: 'active',
+        label: '¿Activos?',
       },
     ];
   }
