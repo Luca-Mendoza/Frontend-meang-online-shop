@@ -19,7 +19,7 @@
     </thead>
     <tbody>
       <tr *ngFor="let data of data$ | async">
-        <td *ngFor="let val of tableColumns" >
+        <td *ngFor="let val of tableColumns">
           <span *ngIf="val.property !='active'; else activeValue">
             {{ data[val.property] }}
           </span>
@@ -35,8 +35,17 @@
             <i class="fas fa-edit"></i></button>&nbsp;
           <button type="button" class="btn btn-info" (click)="manageAction('info', data)">
             <i class="fas fa-info"></i></button>&nbsp;
-          <button type="button" class="btn btn-danger" (click)="manageAction('block', data)">
+
+          <button type="button" class="btn btn-danger" (click)="manageAction('block', data)"
+            *ngIf="data['active'] !=false; else unblockBtn">
             <i class="fas fa-lock"></i></button>&nbsp;
+
+          <ng-template #unblockBtn>
+            <button type="button" class="btn btn-danger" (click)="manageAction('block', data)">
+              <i class="fas fa-lock-open"></i>
+            </button>&nbsp;
+          </ng-template>
+
         </td>
       </tr>
     </tbody>

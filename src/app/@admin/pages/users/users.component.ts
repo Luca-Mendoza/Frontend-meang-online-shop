@@ -120,9 +120,11 @@ export class UsersComponent implements OnInit {
           <i class="fas fa-user-tag"></i>&nbsp;${user.role} </br>
           <i class="far fa-calendar-alt"></i>&nbsp;${user.birthday} </br>
           <i class="fas fa-envelope-open-text"></i>&nbsp;${user.email} </br>`,
-          400,
+          (user.active != false) ? 425 : 445,
           '<i class="fas fa-edit"></i> Editar', // true
-          '<i class="fas fa-lock"></i> Block'
+          (user.active != false) ?
+          '<i class="fas fa-lock"></i> Bloquear' :
+          '<i class="fas fa-lock-open btn-success"></i> Desbloquear'
         ); // false
         if (result) {
           this.updateForm(html, user);
