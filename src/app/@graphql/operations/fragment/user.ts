@@ -12,6 +12,7 @@ export const USER_FRAGMENT = gql`
         registerDate @include(if: $include)
         birthday @include(if: $include)
         role
+        active
     }
 `;
 

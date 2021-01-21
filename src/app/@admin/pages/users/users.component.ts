@@ -8,6 +8,7 @@ import { UsarsAdminService } from './usars-admin.service';
 import { IRegisterForm } from '../../../@core/interfaces/register.interface';
 import { basicAlert } from '@shared/alerts/toasts';
 import { TYPE_ALERT } from '@shared/alerts/values.config';
+import { ACTIVE_FILTERS } from '@core/constants/filter';
 
 @Component({
   selector: 'app-users',
@@ -23,6 +24,8 @@ export class UsersComponent implements OnInit {
   itemsPage: number;
   // Resultado de la data
   resultData: IResultData;
+  // Informacion de usuarios activos y inactivos
+  filterActiveValues = ACTIVE_FILTERS.INACTIVE;
   // lo que es el include
   include: boolean;
   // definimos dato para hacer dinamica la Table
