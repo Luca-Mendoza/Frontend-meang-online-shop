@@ -19,13 +19,13 @@
     </thead>
     <tbody>
       <tr *ngFor="let data of data$ | async">
-        <td *ngFor="let val of tableColumns">
+        <td *ngFor="let val of tableColumns" >
           <span *ngIf="val.property !='active'; else activeValue">
             {{ data[val.property] }}
           </span>
           <ng-template #activeValue>
-            <span *ngIf="data[val.property] == true ">x</span>
-            <span *ngIf="data[val.property] !== true ">o</span>
+            <span *ngIf="data[val.property] == true "><i class="fas fa-check-circle"></i></span>
+            <span *ngIf="data[val.property] !== true "><i class="fas fa-times-circle"></i></span>
 
           </ng-template>
 
