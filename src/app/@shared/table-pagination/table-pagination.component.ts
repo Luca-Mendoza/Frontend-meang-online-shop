@@ -6,6 +6,7 @@ import { DocumentNode } from 'graphql';
 import { map } from 'rxjs/internal/operators/map';
 import { Observable } from 'rxjs/internal/Observable';
 import { EventEmitter } from '@angular/core';
+import { ACTIVE_FILTERS } from '@core/constants/filter'
 
 @Component({
   selector: 'app-table-pagination',
@@ -23,6 +24,8 @@ export class TablePaginationComponent implements OnInit {
   @Input() itemsPage = 20;
   @Input() include = true;
   @Input() resultData: IResultData;
+  @Input() filterActiveValues: ACTIVE_FILTERS = ACTIVE_FILTERS.ACTIVE;
+
   @Input() tableColumns: Array<ITableColumns>;
   /**
    * Valores de Salida

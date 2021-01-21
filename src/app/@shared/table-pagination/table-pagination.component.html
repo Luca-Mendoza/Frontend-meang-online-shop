@@ -1,9 +1,11 @@
-<button
-  class="btn btn-success float-right mr-3 mb-2"
-  (click)="manageAction('add', '')"
->
+<button class="btn btn-success float-right mr-3 mb-2" (click)="manageAction('add', '')">
   <i class="fas fa-plus-circle"></i> &nbsp; Añadir
 </button>
+<select class="custom-select float-right mr-3" style="width: auto" [(ngModel)]="filterActiveValues" (ngModelChange)="loadData()">
+  <option [ngValue]="'ALL'">Todos</option>
+  <option [ngValue]="'ACTIVE'">Activos</option>
+  <option [ngValue]="'INACTIVE'">Inactivos</option>
+</select>
 <div class="table-responsive">
   <table class="table table-striped">
     <thead>
@@ -18,27 +20,12 @@
       <tr *ngFor="let data of data$ | async">
         <td *ngFor="let val of tableColumns">{{ data[val.property] }}</td>
         <td>
-          <button
-            type="button"
-            class="btn btn-secondary"
-            (click)="manageAction('edit', data)"
-          >
-            <i class="fas fa-edit"></i></button
-          >&nbsp;
-          <button
-            type="button"
-            class="btn btn-info"
-            (click)="manageAction('info', data)"
-          >
-            <i class="fas fa-info"></i></button
-          >&nbsp;
-          <button
-            type="button"
-            class="btn btn-danger"
-            (click)="manageAction('block', data)"
-          >
-            <i class="fas fa-lock"></i></button
-          >&nbsp;
+          <button type="button" class="btn btn-secondary" (click)="manageAction('edit', data)">
+            <i class="fas fa-edit"></i></button>&nbsp;
+          <button type="button" class="btn btn-info" (click)="manageAction('info', data)">
+            <i class="fas fa-info"></i></button>&nbsp;
+          <button type="button" class="btn btn-danger" (click)="manageAction('block', data)">
+            <i class="fas fa-lock"></i></button>&nbsp;
         </td>
       </tr>
     </tbody>
@@ -46,20 +33,11 @@
 </div>
 
 <div class="d-flex justify-content-between p-2">
-  <ngb-pagination
-    [collectionSize]="infoPage.total"
-    [(page)]="infoPage.page"
-    [pageSize]="infoPage.itemsPage"
-    (pageChange)="refreshPage()"
-  >
+  <ngb-pagination [collectionSize]="infoPage.total" [(page)]="infoPage.page" [pageSize]="infoPage.itemsPage"
+    (pageChange)="refreshPage()">
   </ngb-pagination>
 
-  <select
-    class="custom-select"
-    style="width: auto"
-    [(ngModel)]="infoPage.itemsPage"
-    (ngModelChange)="loadData()"
-  >
+  <select class="custom-select" style="width: auto" [(ngModel)]="infoPage.itemsPage" (ngModelChange)="loadData()">
     <option [ngValue]="5">5 items per page</option>
     <option [ngValue]="10">10 items per page</option>
   </select>
