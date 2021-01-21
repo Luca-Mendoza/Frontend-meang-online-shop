@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PasswordService } from '@core/services/password.service';
+import { basicAlert } from '@shared/alerts/toasts';
+import { TYPE_ALERT } from '@shared/alerts/values.config';
 
 @Component({
   selector: 'app-change-password',
@@ -15,7 +17,7 @@ export class ChangePasswordComponent implements OnInit {
     password: '',
   };
 
-  constructor(private route: ActivatedRoute,private passwordService: PasswordService, private router: Router) {
+  constructor(private route: ActivatedRoute, private passwordService: PasswordService, private router: Router) {
     this.route.params.subscribe(params => {
       this.token = params.token;
       console.log(this.token);
@@ -25,6 +27,25 @@ export class ChangePasswordComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  reset(){}
+  reset() {
+    console.log(this.values);
+    if (this.values.password !== this.values.passwordTwo) {
+      basicAlert(TYPE_ALERT.WARNING, 'Las contraseña no coinciden y no es válido para cambiar la contraseña. Procura asegurarte que las contraseña son iguales');
+      return;
+    }
+    // Todo validado, vamos a enviarlo a la API de Graphql
+    // service => cambio Password
+    this.passwordService.change(this.token, this.values.password).subscribe(
+      result => {
+        if (result.status) {
+          basicAlert(TYPE_ALERT.SUCCESS, result.mmessage);
+          // redireccionar al login
+          this.router.navigate(['login']);
+          return;
+        }
+        basicAlert(TYPE_ALERT.WARNING, result.message);
+      }
+    );
+  }
 
 }
