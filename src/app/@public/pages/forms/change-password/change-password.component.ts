@@ -10,6 +10,10 @@ import { PasswordService } from '@core/services/password.service';
 export class ChangePasswordComponent implements OnInit {
 
   token: string;
+  values: any = {
+    passwordTwo: '',
+    password: '',
+  };
 
   constructor(private route: ActivatedRoute,private passwordService: PasswordService, private router: Router) {
     this.route.params.subscribe(params => {
@@ -20,5 +24,7 @@ export class ChangePasswordComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
+  reset(){}
 
 }
