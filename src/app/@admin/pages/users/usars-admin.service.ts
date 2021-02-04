@@ -1,4 +1,8 @@
-import { UPDATE_USER, BLOCK_USER } from '@graphql/operations/mutation/user';
+import {
+  UPDATE_USER,
+  BLOCK_USER,
+  ACTIVE_EMAIL_USER,
+} from '@graphql/operations/mutation/user';
 import { Apollo } from 'apollo-angular';
 import { Injectable } from '@angular/core';
 import { UsersService } from '@core/services/users.service';
@@ -35,12 +39,20 @@ export class UsarsAdminService extends ApiService {
       {
         id,
         unblock,
-        admin
+        admin,
       },
       {}
     ).pipe(
       map((result: any) => {
         return result.blockUser;
+      })
+    );
+  }
+
+  sendEmailActive(id: string, email: string) {
+    return this.set(ACTIVE_EMAIL_USER, { id, email }).pipe(
+      map((result: any) => {
+        return result.activeUserEmail;
       })
     );
   }
