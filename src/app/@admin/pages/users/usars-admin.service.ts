@@ -1,4 +1,3 @@
-
 import { UPDATE_USER, BLOCK_USER } from '@graphql/operations/mutation/user';
 import { Apollo } from 'apollo-angular';
 import { Injectable } from '@angular/core';
@@ -11,10 +10,7 @@ import { map } from 'rxjs/internal/operators/map';
   providedIn: 'root',
 })
 export class UsarsAdminService extends ApiService {
-  constructor(
-    private usersService: UsersService,
-    apollo: Apollo
-  ) {
+  constructor(private usersService: UsersService, apollo: Apollo) {
     super(apollo);
   }
 
@@ -23,23 +19,29 @@ export class UsarsAdminService extends ApiService {
   }
 
   update(user: IRegisterForm) {
-    return this.set(
-      UPDATE_USER,
-      {
-        user,
-        include: false
-      }
-    ).pipe(map((result: any) => {
-      return result.updateUser;
-    }));
+    return this.set(UPDATE_USER, {
+      user,
+      include: false,
+    }).pipe(
+      map((result: any) => {
+        return result.updateUser;
+      })
+    );
   }
-  block(id: string) {
+
+  unblock(id: string, unblock: boolean = false, admin: boolean = false) {
     return this.set(
       BLOCK_USER,
       {
-        id
-      }, {}).pipe(map((result: any) => {
+        id,
+        unblock,
+        admin
+      },
+      {}
+    ).pipe(
+      map((result: any) => {
         return result.blockUser;
-      }));
+      })
+    );
   }
 }

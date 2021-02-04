@@ -33,8 +33,8 @@ mutation updateUser($user: UserInput!, $include: Boolean!){
 
 export const BLOCK_USER = gql`
 
-  mutation bloquearUser( $id: ID!) {
-    blockUser(id: $id) {
+  mutation blockUser( $id: ID!, $unblock: Boolean, $admin: Boolean) {
+    blockUser(id: $id, unblock: $unblock, admin: $admin) {
       status
       message
     }

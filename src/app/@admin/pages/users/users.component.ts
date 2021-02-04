@@ -194,30 +194,26 @@ export class UsersComponent implements OnInit {
       await optionsWithDetails(
         '¿Desbloquear?',
         'Si desbloqueas el usuario seleccionado, se mostrara en la lista y podra hacer compras',
-        475,
-        'No, no bloquear',
-        'Si, bloquear'
+        520,
+        'No, no desbloquear',
+        'Si, desbloquear'
       ) :
       await optionsWithDetails(
         '¿Bloquear?',
         'Si bloqueas el usuario seleccionado, no se mostrará en la lista',
         520,
-        'No, no desbloquear',
-        'Si, desbloquear'
+        'No, no bloquear',
+        'Si, bloquear'
       )
     if (result === false) {
-      // Si el resultado es falso, queremos bloquear
+      // Si el resultado es falso, queremos bloquear / desbloquear
       // this.blockUser(user.id);
-      if(unblock){
-        console.log('Desbloqueando el usuario', user);
-      } else {
-        console.log('Bloqueando el usuario', user);
-      }
+      this.unblockUser(user.id, unblock, true);
     }
   }
 
-  private blockUser(id: string) {
-    this.service.block(id).subscribe((res: any) => {
+  private unblockUser(id: string, unblock: boolean = false, admin: boolean = false) {
+    this.service.unblock(id, unblock, admin).subscribe((res: any) => {
       if (res.status) {
         basicAlert(TYPE_ALERT.SUCCESS, res.message);
         return;
