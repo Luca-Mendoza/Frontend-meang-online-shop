@@ -123,18 +123,22 @@ export class UsersComponent implements OnInit {
           (user.active != false) ? 425 : 445,
           '<i class="fas fa-edit"></i> Editar', // true
           (user.active != false) ?
-          '<i class="fas fa-lock"></i> Bloquear' :
-          '<i class="fas fa-lock-open btn-success"></i> Desbloquear'
+            '<i class="fas fa-lock"></i> Bloquear' :
+            '<i class="fas fa-lock-open"></i> Desbloquear'
         ); // false
         if (result) {
           this.updateForm(html, user);
         } else if (result === false) {
-          this.blockForm(user);
+          this.unblockForm(user, false);
         }
         break;
       case 'block':
         // Bloquear el item
-        this.blockForm(user);
+        this.unblockForm(user, false);
+        break;
+      case 'unblock':
+        // Desbloquear el item
+        this.unblockForm(user, true);
         break;
       default:
         break;
@@ -185,17 +189,30 @@ export class UsersComponent implements OnInit {
   }
 
 
-  private async blockForm(user: any) {
-    const result = await optionsWithDetails(
-      '¿Bloquear?',
-      'Si bloqueas el usuario seleccionado, no se mostrará en la lista',
-      475,
-      'No, no bloquear',
-      'Si, bloquear'
-    );
+  private async unblockForm(user: any, unblock: boolean) {
+    const result = (unblock) ?
+      await optionsWithDetails(
+        '¿Desbloquear?',
+        'Si desbloqueas el usuario seleccionado, se mostrara en la lista y podra hacer compras',
+        475,
+        'No, no bloquear',
+        'Si, bloquear'
+      ) :
+      await optionsWithDetails(
+        '¿Bloquear?',
+        'Si bloqueas el usuario seleccionado, no se mostrará en la lista',
+        520,
+        'No, no desbloquear',
+        'Si, desbloquear'
+      )
     if (result === false) {
       // Si el resultado es falso, queremos bloquear
-      this.blockUser(user.id);
+      // this.blockUser(user.id);
+      if(unblock){
+        console.log('Desbloqueando el usuario', user);
+      } else {
+        console.log('Bloqueando el usuario', user);
+      }
     }
   }
 
