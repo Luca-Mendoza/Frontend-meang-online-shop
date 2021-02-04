@@ -160,6 +160,13 @@ export class UsersComponent implements OnInit {
       this.service.register(user).subscribe((res: any) => {
         if (res.status) {
           basicAlert(TYPE_ALERT.SUCCESS, res.message);
+          this.service.sendEmailActive(res.user.id, user.email).subscribe(
+            resEmail => {
+              (resEmail.status) ?
+              basicAlert(TYPE_ALERT.SUCCESS, resEmail.message) :
+              basicAlert(TYPE_ALERT.WARNING, resEmail.message)
+            }
+          );
           return;
         }
         basicAlert(TYPE_ALERT.WARNING, res.message);
