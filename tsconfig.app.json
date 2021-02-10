@@ -12,7 +12,7 @@
       "@core/*": ["src/app/@core/*"],
       "@shared/*": ["src/app/@shared/*"],
       "@graphql/*": ["src/app/@graphql/*"],
-      "@gdata/*": ["src/assets/@data/*"],
+      "@data/*": ["src/assets/@data/*"],
     }
   },
   "files": ["src/main.ts", "src/polyfills.ts"],
