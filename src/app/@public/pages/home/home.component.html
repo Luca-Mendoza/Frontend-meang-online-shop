@@ -1,44 +1,18 @@
 <shop-carousel-items [items]="items"></shop-carousel-items>
 
-<section class="container">
-  <h2>Juegos con más éxitos</h2>
-  <hr />
-  <div class="row">
-    <div class="col-lg-3" *ngFor="let p of listOne" style="margin-bottom: 12px">
-      <shop-product-item
-        [showDesc]="false"
-        [product]="p"
-        (add)="addToCart($event)"
-        (itemDetails)="showProductDetails($event)"
-      ></shop-product-item>
-    </div>
-  </div>
-</section>
-<section class="container">
-  <h2>Juegos mas económicos </h2>
-  <hr />
-  <div class="row">
-    <div class="col-lg-3" *ngFor="let p of listTwo" style="margin-bottom: 12px">
-      <shop-product-item
-        [showDesc]="false"
-        [product]="p"
-        (add)="addToCart($event)"
-        (itemDetails)="showProductDetails($event)"
-      ></shop-product-item>
-    </div>
-  </div>
-</section>
-<section class="container">
-  <h2>Juegos más recientes</h2>
-  <hr />
-  <div class="row">
-    <div class="col-lg-3" *ngFor="let p of listThree" style="margin-bottom: 12px">
-      <shop-product-item
-        [showDesc]="false"
-        [product]="p"
-        (add)="addToCart($event)"
-        (itemDetails)="showProductDetails($event)"
-      ></shop-product-item>
-    </div>
-  </div>
-</section>
+<app-product-category-list *ngIf="listOne"
+[title]="'Juego más exitosos'"
+[productsList]="listOne"
+></app-product-category-list>
+
+<app-product-category-list *ngIf="listTwo"
+[title]="'Juegos mas económicos'"
+[productsList]="listTwo"
+></app-product-category-list>
+
+<app-product-category-list *ngIf="listThree"
+[title]="'Juegos más recientes'"
+[productsList]="listThree"
+></app-product-category-list>
+
+

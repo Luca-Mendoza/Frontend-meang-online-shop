@@ -23,24 +23,14 @@ export class HomeComponent implements OnInit {
     this.items = carouselItem;
     this.productsList = productsList;
 
-    console.log('Carousel items', this.items);
+    // console.log('Carousel items', this.items);
     // tslint:disable-next-line: deprecation
     this.usersApi.getUsers(2, 1).subscribe((result) => {
-      console.log(result); // { {obtener la Info : status message users: []}
+    // console.log(result); // { {obtener la Info : status message users: []}
     });
-
     this.listOne = this.fakeRandomProductsList();
     this.listTwo = this.fakeRandomProductsList();
     this.listThree = this.fakeRandomProductsList();
-  }
-
-  addToCart($event: IProduct) {
-    // Usar la información del producto pasado para llevarlo al carrito de compra
-    console.log('Carrito', $event);
-  }
-
-  showProductDetails($event: IProduct) {
-    console.log('Info', $event);
   }
 
   fakeRandomProductsList() {
