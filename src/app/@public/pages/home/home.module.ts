@@ -15,4 +15,6 @@ import { CarouselItemsModule, ProductItemModule } from '@mugan86/ng-shop-ui';
     ProductItemModule
   ]
 })
+
 export class HomeModule { }
+
