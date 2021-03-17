@@ -1,4 +1,5 @@
 import gql from 'graphql-tag';
+import { SHOP_PRODUCT_FRANGMENT } from '@graphql/operations/fragment/shop-product';
 
 export const SHOP_LAST_UNITS_OFFERS = gql`
   query shopProductsOffersLast(
@@ -17,51 +18,14 @@ export const SHOP_LAST_UNITS_OFFERS = gql`
       topPrice: $topPrice
       lastUnits: $lastUnits
     ) {
-      info {
-        page
-        pages
-        itemsPage
-        total
-      }
       status
       message
       shopProducts {
-        id
-        price
-        active
-        stock
-        productId
-        product {
-          id
-          slug
-          name
-          img
-          released
-          rating {
-            value
-            count
-          }
-          clip {
-            clips {
-              low
-              medium
-              full
-            }
-            preview
-            video
-          }
-          screenshoot
-        }
-        platformId
-        platform {
-          id
-          slug
-          name
-          active
-        }
+        ...shopProductsObject
       }
     }
   }
+  ${SHOP_PRODUCT_FRANGMENT}
 `;
 
 export const SHOP_PRODUCT_BY_PLATFORM = gql`
@@ -79,49 +43,12 @@ export const SHOP_PRODUCT_BY_PLATFORM = gql`
       random: $random
       platform: $platform
     ) {
-      info {
-        page
-        pages
-        itemsPage
-        total
-      }
       status
       message
       shopProducts {
-        id
-        price
-        active
-        stock
-        productId
-        product {
-          id
-          slug
-          name
-          img
-          released
-          rating {
-            value
-            count
-          }
-          clip {
-            clips {
-              low
-              medium
-              full
-            }
-            preview
-            video
-          }
-          screenshoot
-        }
-        platformId
-        platform {
-          id
-          slug
-          name
-          active
-        }
+        ...shopProductsObject
       }
     }
   }
+  ${SHOP_PRODUCT_FRANGMENT}
 `;
