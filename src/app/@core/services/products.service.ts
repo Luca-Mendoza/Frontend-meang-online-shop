@@ -1,3 +1,4 @@
+import { IProduct } from '@mugan86/ng-shop-ui/lib/interfaces/product.interface';
 import { map } from 'rxjs/internal/operators/map';
 import {
   SHOP_LAST_UNITS_OFFERS,
@@ -30,7 +31,7 @@ export class ProductsService extends ApiService {
       platform,
     }).pipe(
       map((result: any) => {
-        return result.shopProductsPlatforms;
+        return this.manageInfo(result.shopProductsPlatforms.shopProducts);
       })
     );
   }
@@ -52,8 +53,24 @@ export class ProductsService extends ApiService {
       lastUnits,
     }).pipe(
       map((result: any) => {
-        return result.shopProductsOffersLast;
+        return this.manageInfo(result.shopProductsOffersLast.shopProducts);
       })
     );
+  }
+  private manageInfo(listProducto) {
+    const resulList: Array<IProduct> = [];
+    listProducto.map((shopObject) => {
+      resulList.push({
+        id: shopObject.id,
+        img: shopObject.product.img,
+        name: shopObject.product.name,
+        rating: shopObject.product.rating,
+        description: '',
+        qty: 1,
+        price: shopObject.price,
+        stock: shopObject.stock,
+      });
+    });
+    return resulList;
   }
 }

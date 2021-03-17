@@ -25,14 +25,16 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.product
-      .getByLastUnitsOffers(1, 4, ACTIVE_FILTERS.ACTIVE, true, 40)
+      .getByLastUnitsOffers(1, 4, ACTIVE_FILTERS.ACTIVE, true, 35, 40)
       .subscribe((result) => {
-        console.log('productos menos de 40', result);
+        console.log('productos menos de 35', result);
+        this.listTwo = result;
       });
     this.product
-      .shopProductsPlatforms(1, 4, ACTIVE_FILTERS.ACTIVE, true, '18')
+      .shopProductsPlatforms(1, 4, ACTIVE_FILTERS.ACTIVE, true, '4')
       .subscribe((result) => {
         console.log('productos por plataforma', result);
+        this.listOne = result;
       });
     this.items = carouselItem;
     this.productsList = productsList;
