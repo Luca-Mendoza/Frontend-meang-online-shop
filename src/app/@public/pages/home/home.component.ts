@@ -29,6 +29,11 @@ export class HomeComponent implements OnInit {
       .subscribe((result) => {
         console.log('productos menos de 40', result);
       });
+    this.product
+      .shopProductsPlatforms(1, 4, ACTIVE_FILTERS.ACTIVE, true, '18')
+      .subscribe((result) => {
+        console.log('productos por plataforma', result);
+      });
     this.items = carouselItem;
     this.productsList = productsList;
 
