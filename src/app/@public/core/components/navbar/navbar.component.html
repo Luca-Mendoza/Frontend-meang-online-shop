@@ -23,13 +23,21 @@
       <li class="nav-item">
         <a
           class="nav-link"
+          [routerLink]="['/games/platforms/sony']"
+          routerLinkActive="router-link-active"
+          >Games</a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+          class="nav-link"
           [routerLink]="['/contact']"
           routerLinkActive="router-link-active"
           >Contact</a
         >
       </li>
     </ul>
-    <ul class="navbar-nav ml-auto mt-2 mt-lg-0" >
+    <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
       <li class="nav-item" *ngIf="access && role == 'ADMIN'">
         <a
           class="nav-link"
@@ -65,7 +73,7 @@
           aria-haspopup="true"
           aria-expanded="false"
         >
-          {{userLabel}}
+          {{ userLabel }}
         </a>
         <div
           class="dropdown-menu dropdown-menu-right"
