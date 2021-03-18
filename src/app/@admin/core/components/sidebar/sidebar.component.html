@@ -1,23 +1,22 @@
 <!-- Sidebar -->
 <div class="sidebar__wrapper border-right" id="sidebar-wrapper">
   <div class="sidebar-heading sidebar__title__container">
-    <a class="sidebar__title" [routerLink]="['/home']" routerLinkActive="router-link-active">
+    <a
+      class="sidebar__title"
+      [routerLink]="['/home']"
+      routerLinkActive="router-link-active"
+    >
       Gamezonia
     </a>
   </div>
   <div class="list-group list-group-flush">
-    <a [routerLink]="['/admin']" routerLinkActive="router-link-active"  class="list-group-item list-group-item-action bg-light"
-      ><i class="fas fa-columns"></i> Dashboard</a
+    <a
+      [routerLink]="item.url"
+      routerLinkActive="router-link-active"
+      class="list-group-item list-group-item-action bg-light"
+      *ngFor="let item of menuItems"
+      ><i class="{{ item.icon }}"></i> {{ item.label }}</a
     >
-    <a [routerLink]="['/admin/users']" routerLinkActive="router-link-active"  class="list-group-item list-group-item-action bg-light"
-      ><i class="fas fa-address-card"></i> Users</a
-    >
-    <a [routerLink]="['/admin/tags']" routerLinkActive="router-link-active"  class="list-group-item list-group-item-action bg-light"
-    ><i class="fas fa-tags"></i> Tags</a
-  >
-    <a [routerLink]="['/admin/genres']" routerLinkActive="router-link-active"  class="list-group-item list-group-item-action bg-light"
-    ><i class="fas fa-archive"></i> Genres</a
-  >
   </div>
 </div>
 <!-- /#sidebar-wrapper -->
