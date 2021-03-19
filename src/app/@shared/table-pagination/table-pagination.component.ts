@@ -6,7 +6,7 @@ import { DocumentNode } from 'graphql';
 import { map } from 'rxjs/internal/operators/map';
 import { Observable } from 'rxjs/internal/Observable';
 import { EventEmitter } from '@angular/core';
-import { ACTIVE_FILTERS } from '@core/constants/filter'
+import { ACTIVE_FILTERS } from '@core/constants/filter';
 
 @Component({
   selector: 'app-table-pagination',
