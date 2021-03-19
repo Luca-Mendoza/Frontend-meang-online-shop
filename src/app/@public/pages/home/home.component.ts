@@ -2,7 +2,6 @@ import { IProduct } from '@mugan86/ng-shop-ui/lib/interfaces/product.interface';
 import { ProductsService } from '@core/services/products.service';
 import { Component, OnInit } from '@angular/core';
 import { ICarouselItem } from '@mugan86/ng-shop-ui/lib/interfaces/carousel-item.interface';
-import carouselItem from '@data/carousel.json';
 import { ACTIVE_FILTERS } from '@core/constants/filter';
 
 @Component({
