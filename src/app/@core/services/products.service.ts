@@ -21,7 +21,7 @@ export class ProductsService extends ApiService {
     itemsPage: number = 10,
     active: ACTIVE_FILTERS = ACTIVE_FILTERS.ACTIVE,
     random: boolean = false,
-    platform: string,
+    platform: Array<string>,
     showInfo: boolean = false
   ) {
     return this.get(SHOP_PRODUCT_BY_PLATFORM, {

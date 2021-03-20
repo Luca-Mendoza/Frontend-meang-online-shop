@@ -21,7 +21,7 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     // productos PC
     this.product
-      .shopProductsPlatforms(1, 4, ACTIVE_FILTERS.ACTIVE, true, '4')
+      .shopProductsPlatforms(1, 4, ACTIVE_FILTERS.ACTIVE, true, ['4'])
       .subscribe((data) => {
         this.listOne = data.result;
       });
@@ -33,7 +33,7 @@ export class HomeComponent implements OnInit {
       });
     // productos ps4
     this.product
-      .shopProductsPlatforms(1, 4, ACTIVE_FILTERS.ACTIVE, true, '18')
+      .shopProductsPlatforms(1, 4, ACTIVE_FILTERS.ACTIVE, true, ['18'])
       .subscribe((data) => {
         this.listThree = data.result;
       });
