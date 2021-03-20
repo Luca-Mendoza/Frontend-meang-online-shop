@@ -22,26 +22,26 @@ export class HomeComponent implements OnInit {
     // productos PC
     this.product
       .shopProductsPlatforms(1, 4, ACTIVE_FILTERS.ACTIVE, true, '4')
-      .subscribe((result) => {
-        this.listOne = result;
+      .subscribe((data) => {
+        this.listOne = data.result;
       });
     // Producto mas economicos $35 y que tengamos en stock -40
     this.product
       .getByLastUnitsOffers(1, 4, ACTIVE_FILTERS.ACTIVE, true, 35, 40)
-      .subscribe((result) => {
-        this.listTwo = result;
+      .subscribe((data) => {
+        this.listTwo = data.result;
       });
     // productos ps4
     this.product
       .shopProductsPlatforms(1, 4, ACTIVE_FILTERS.ACTIVE, true, '18')
-      .subscribe((result) => {
-        this.listThree = result;
+      .subscribe((data) => {
+        this.listThree = data.result;
       });
     // Producto que van en el carousel
     this.product
       .getByLastUnitsOffers(1, 4, ACTIVE_FILTERS.ACTIVE, true, -1, 20)
-      .subscribe((result: IProduct[]) => {
-        result.map((item: IProduct) => {
+      .subscribe((data) => {
+        data.result.map((item: IProduct) => {
           this.items.push({
             id: item.id,
             title: item.name,

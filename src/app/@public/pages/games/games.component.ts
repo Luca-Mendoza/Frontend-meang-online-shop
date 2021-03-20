@@ -33,10 +33,12 @@ export class GamesComponent implements OnInit {
         this.infoPage.itemsPage,
         ACTIVE_FILTERS.ACTIVE,
         false,
-        '4'
+        '4',
+        true,
       )
-      .subscribe((result) => {
-        this.productsList = result;
+      .subscribe((data) => {
+        this.productsList = data.result;
+        this.infoPage = data.info;
       });
   }
 }

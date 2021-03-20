@@ -21,7 +21,8 @@ export class ProductsService extends ApiService {
     itemsPage: number = 10,
     active: ACTIVE_FILTERS = ACTIVE_FILTERS.ACTIVE,
     random: boolean = false,
-    platform: string
+    platform: string,
+    showInfo: boolean = false
   ) {
     return this.get(SHOP_PRODUCT_BY_PLATFORM, {
       page,
@@ -29,9 +30,14 @@ export class ProductsService extends ApiService {
       active,
       random,
       platform,
+      showInfo,
     }).pipe(
       map((result: any) => {
-        return this.manageInfo(result.shopProductsPlatforms.shopProducts);
+        const data = result.shopProductsPlatforms;
+        return {
+          info: data.info,
+          result: this.manageInfo(data.shopProducts),
+        };
       })
     );
   }
@@ -42,7 +48,8 @@ export class ProductsService extends ApiService {
     active: ACTIVE_FILTERS = ACTIVE_FILTERS.ACTIVE,
     random: boolean = false,
     topPrice: number = -1,
-    lastUnits: number = -1
+    lastUnits: number = -1,
+    showInfo: boolean = false
   ) {
     return this.get(SHOP_LAST_UNITS_OFFERS, {
       page,
@@ -51,9 +58,14 @@ export class ProductsService extends ApiService {
       random,
       topPrice,
       lastUnits,
+      showInfo,
     }).pipe(
       map((result: any) => {
-        return this.manageInfo(result.shopProductsOffersLast.shopProducts);
+        const data = result.shopProductsOffersLast;
+        return {
+          info: data.info,
+          result: this.manageInfo(data.shopProducts),
+        };
       })
     );
   }
