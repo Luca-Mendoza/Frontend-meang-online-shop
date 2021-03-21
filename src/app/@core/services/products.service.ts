@@ -22,7 +22,8 @@ export class ProductsService extends ApiService {
     active: ACTIVE_FILTERS = ACTIVE_FILTERS.ACTIVE,
     random: boolean = false,
     platform: Array<string>,
-    showInfo: boolean = false
+    showInfo: boolean = false,
+    showPlatform: boolean = false
   ) {
     return this.get(SHOP_PRODUCT_BY_PLATFORM, {
       page,
@@ -31,6 +32,7 @@ export class ProductsService extends ApiService {
       random,
       platform,
       showInfo,
+      showPlatform,
     }).pipe(
       map((result: any) => {
         const data = result.shopProductsPlatforms;
@@ -49,7 +51,8 @@ export class ProductsService extends ApiService {
     random: boolean = false,
     topPrice: number = -1,
     lastUnits: number = -1,
-    showInfo: boolean = false
+    showInfo: boolean = false,
+    showPlatform: boolean = false
   ) {
     return this.get(SHOP_LAST_UNITS_OFFERS, {
       page,
@@ -59,6 +62,7 @@ export class ProductsService extends ApiService {
       topPrice,
       lastUnits,
       showInfo,
+      showPlatform,
     }).pipe(
       map((result: any) => {
         const data = result.shopProductsOffersLast;
@@ -77,7 +81,7 @@ export class ProductsService extends ApiService {
         img: shopObject.product.img,
         name: shopObject.product.name,
         rating: shopObject.product.rating,
-        description: '',
+        description: shopObject ? shopObject.platform.name : '',
         qty: 1,
         price: shopObject.price,
         stock: shopObject.stock,

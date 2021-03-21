@@ -27,7 +27,16 @@ export class HomeComponent implements OnInit {
       });
     // Producto mas economicos $35 y que tengamos en stock -40
     this.product
-      .getByLastUnitsOffers(1, 4, ACTIVE_FILTERS.ACTIVE, true, 35, 40)
+      .getByLastUnitsOffers(
+        1,
+        4,
+        ACTIVE_FILTERS.ACTIVE,
+        true,
+        35,
+        -1,
+        false,
+        true
+      )
       .subscribe((data) => {
         this.listTwo = data.result;
       });
