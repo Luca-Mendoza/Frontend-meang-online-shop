@@ -81,7 +81,7 @@ export class ProductsService extends ApiService {
         img: shopObject.product.img,
         name: shopObject.product.name,
         rating: shopObject.product.rating,
-        description: shopObject ? shopObject.platform.name : '',
+        description: shopObject.platform ? shopObject.platform.name : '',
         qty: 1,
         price: shopObject.price,
         stock: shopObject.stock,

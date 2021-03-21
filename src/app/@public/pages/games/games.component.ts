@@ -34,6 +34,7 @@ export class GamesComponent implements OnInit {
         ACTIVE_FILTERS.ACTIVE,
         false,
         ['18', '16'],
+        true,
         true
       )
       .subscribe((data) => {
@@ -42,3 +43,4 @@ export class GamesComponent implements OnInit {
       });
   }
 }
+
