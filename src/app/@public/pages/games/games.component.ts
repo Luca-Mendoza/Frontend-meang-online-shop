@@ -1,3 +1,6 @@
+import { GAMES_PAGES_INFO } from './game.constants';
+import { IGamePageInfo } from './games-page-info.interface';
+import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { ACTIVE_FILTERS } from '@core/constants/filter';
 import { IInfoPage } from '@core/interfaces/result-data.interface';
@@ -17,10 +20,18 @@ export class GamesComponent implements OnInit {
     total: 160,
     itemsPage: 20,
   };
+  gamesPageInfo: IGamePageInfo;
   productsList: Array<IProduct> = [];
-  constructor(private product: ProductsService) {}
+  constructor(
+    private product: ProductsService,
+    private activatedRouter: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
+    this.activatedRouter.params.subscribe((params) => {
+      const keyPage = `${params.type}/${params.filter}`;
+      this.gamesPageInfo = GAMES_PAGES_INFO[keyPage];
+    });
     // productos PC
     this.loadData();
   }
@@ -43,4 +54,3 @@ export class GamesComponent implements OnInit {
       });
   }
 }
-

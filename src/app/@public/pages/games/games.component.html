@@ -1,8 +1,9 @@
 <div class="container">
   <app-product-category-list
     *ngIf="productsList"
-    [title]="'Juego de Sony'"
+    [title]="gamesPageInfo.title"
     [productsList]="productsList"
+    [description]="gamesPageInfo.description"
   ></app-product-category-list>
 
   <div class="d-flex justify-content-between p-2">

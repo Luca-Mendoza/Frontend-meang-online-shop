@@ -20,12 +20,12 @@
     "icon": ""
   },
   {
-    "url": "/games/platforms/last-units",
+    "url": "/games/promotions/last-units",
     "label": "Últimas Novedades",
     "icon": ""
   },
   {
-    "url": "/games/platforms/offers",
+    "url": "/games/promotions/offers",
     "label": "En Liquidación",
     "icon": ""
   },
