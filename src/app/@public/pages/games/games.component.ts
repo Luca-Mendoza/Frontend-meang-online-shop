@@ -1,4 +1,4 @@
-import { GAMES_PAGES_INFO } from './game.constants';
+import { GAMES_PAGES_INFO, TYPE_OPERATION } from './game.constants';
 import { IGamePageInfo } from './games-page-info.interface';
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
@@ -20,6 +20,7 @@ export class GamesComponent implements OnInit {
     total: 160,
     itemsPage: 20,
   };
+  typeData: TYPE_OPERATION;
   gamesPageInfo: IGamePageInfo;
   productsList: Array<IProduct> = [];
   constructor(
@@ -31,26 +32,50 @@ export class GamesComponent implements OnInit {
     this.activatedRouter.params.subscribe((params) => {
       const keyPage = `${params.type}/${params.filter}`;
       this.gamesPageInfo = GAMES_PAGES_INFO[keyPage];
+      this.typeData = params.type;
+      this.selectPage = 1;
+      this.loadData();
     });
-    // productos PC
-    this.loadData();
   }
 
   loadData() {
-    // productos PC
+    //
+    if (this.typeData === TYPE_OPERATION.PLATFORMS) {
+      this.product
+        .shopProductsPlatforms(
+          this.selectPage,
+          this.infoPage.itemsPage,
+          ACTIVE_FILTERS.ACTIVE,
+          false,
+          this.gamesPageInfo.platformsIds,
+          true,
+          true
+        )
+        .subscribe((data) => {
+          this.asignResult(data);
+        });
+      return;
+    }
+
+    // Producto mas economicos $45 y que tengamos en stock -40
     this.product
-      .shopProductsPlatforms(
-        this.infoPage.page,
+      .getByLastUnitsOffers(
+        this.selectPage,
         this.infoPage.itemsPage,
         ACTIVE_FILTERS.ACTIVE,
         false,
-        ['18', '16'],
+        this.gamesPageInfo.topPrice,
+        this.gamesPageInfo.stock,
         true,
         true
       )
       .subscribe((data) => {
-        this.productsList = data.result;
-        this.infoPage = data.info;
+        this.asignResult(data);
       });
+  }
+  // asignamos el valor del resultado  de la busqueda
+  private asignResult(data) {
+    this.productsList = data.result;
+    this.infoPage = data.info;
   }
 }
