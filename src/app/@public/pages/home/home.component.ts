@@ -16,11 +16,13 @@ export class HomeComponent implements OnInit {
   listOne;
   listTwo;
   listThree;
+  loading: boolean;
 
   constructor(private product: ProductsService) {}
 
   ngOnInit(): void {
-    loadData('title', 'html');
+    this.loading = true;
+    loadData('Cargando datos', 'Espera mientra carga la información');
     this.product.getHomePage().subscribe((data) => {
       console.log(data);
       this.listOne = data.pc;
@@ -28,6 +30,7 @@ export class HomeComponent implements OnInit {
       this.listThree = data.ps4;
       this.items = this.manageCarousel(data.carousel);
       closeAlert();
+      this.loading = false;
     });
   }
   private manageCarousel(list) {

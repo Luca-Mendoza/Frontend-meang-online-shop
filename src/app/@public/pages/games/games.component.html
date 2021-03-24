@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" *ngIf="infoPage && !loading">
   <app-product-category-list
     *ngIf="productsList"
     [title]="gamesPageInfo.title"

@@ -6,6 +6,7 @@ import { ACTIVE_FILTERS } from '@core/constants/filter';
 import { IInfoPage } from '@core/interfaces/result-data.interface';
 import { ProductsService } from '@core/services/products.service';
 import { IProduct } from '@mugan86/ng-shop-ui/lib/interfaces/product.interface';
+import { closeAlert, loadData } from '@shared/alerts/alerts';
 
 @Component({
   selector: 'app-games',
@@ -20,6 +21,7 @@ export class GamesComponent implements OnInit {
     total: 160,
     itemsPage: 20,
   };
+  loading: boolean;
   typeData: TYPE_OPERATION;
   gamesPageInfo: IGamePageInfo;
   productsList: Array<IProduct> = [];
@@ -29,6 +31,8 @@ export class GamesComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.loading = true;
+    loadData('Cargando datos', 'Espera mientra carga la información');
     this.activatedRouter.params.subscribe((params) => {
       const keyPage = `${params.type}/${params.filter}`;
       this.gamesPageInfo = GAMES_PAGES_INFO[keyPage];
@@ -77,5 +81,7 @@ export class GamesComponent implements OnInit {
   private asignResult(data) {
     this.productsList = data.result;
     this.infoPage = data.info;
+    closeAlert();
+    this.loading = false;
   }
 }
