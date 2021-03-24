@@ -1,3 +1,4 @@
+import { HOME_PAGE } from './../../@graphql/operations/query/home-page';
 import { IProduct } from '@mugan86/ng-shop-ui/lib/interfaces/product.interface';
 import { map } from 'rxjs/internal/operators/map';
 import {
@@ -15,6 +16,15 @@ import { ApiService } from '../../@graphql/services/api.service';
 export class ProductsService extends ApiService {
   constructor(apollo: Apollo) {
     super(apollo);
+  }
+  getHomePage() {
+    return this.get(HOME_PAGE, {
+      showPlatform : true,
+    }).pipe(
+      map((result: any) => {
+        console.log('Home page', result);
+      })
+    );
   }
   shopProductsPlatforms(
     page: number = 1,

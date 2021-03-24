@@ -19,7 +19,10 @@ export class HomeComponent implements OnInit {
   constructor(private product: ProductsService) {}
 
   ngOnInit(): void {
-    // productos PC
+    this.product.getHomePage().subscribe((data) => {
+      console.log(data);
+    });
+    /*  // productos PC
     this.product
       .shopProductsPlatforms(1, 4, ACTIVE_FILTERS.ACTIVE, true, ['4'])
       .subscribe((data) => {
@@ -60,5 +63,6 @@ export class HomeComponent implements OnInit {
           });
         });
       });
+      */
   }
 }
