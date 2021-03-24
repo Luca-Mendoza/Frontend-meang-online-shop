@@ -7,14 +7,14 @@ import { map } from 'rxjs/internal/operators/map';
 import { Observable } from 'rxjs/internal/Observable';
 import { EventEmitter } from '@angular/core';
 import { ACTIVE_FILTERS } from '@core/constants/filter';
+import { closeAlert, loadData } from '@shared/alerts/alerts';
 
 @Component({
   selector: 'app-table-pagination',
   templateUrl: './table-pagination.component.html',
-  styleUrls: ['./table-pagination.component.scss']
+  styleUrls: ['./table-pagination.component.scss'],
 })
 export class TablePaginationComponent implements OnInit {
-
   /**
    * Pasando la información del componente padre 'users' mediante @Input()
    * Valores de Entrada
@@ -36,7 +36,9 @@ export class TablePaginationComponent implements OnInit {
   // Le damos una el valor data$ para poder mostrar su valor en el Template
   data$: Observable<any>;
 
-  constructor(private service: TablePaginationService) { }
+  loading: boolean;
+
+  constructor(private service: TablePaginationService) {}
 
   ngOnInit(): void {
     if (this.query === undefined) {
@@ -59,17 +61,22 @@ export class TablePaginationComponent implements OnInit {
 
   // tslint:disable-next-line: typedef
   loadData() {
+    this.loading = true;
+    loadData('Cargando datos', 'Espera mientra carga la información');
     const variable = {
       page: this.infoPage.page,
       itemsPage: this.infoPage.itemsPage,
       include: this.include,
-      active: this.filterActiveValues
+      active: this.filterActiveValues,
     };
     this.data$ = this.service.getCollectionData(this.query, variable, {}).pipe(
       map((result: any) => {
         const data = result[this.resultData.definitionKey];
         this.infoPage.pages = data.info.pages;
         this.infoPage.total = data.info.total;
+
+        this.loading = false;
+        closeAlert();
         return data[this.resultData.listKey];
       })
     );
@@ -87,5 +94,4 @@ export class TablePaginationComponent implements OnInit {
     console.log(action, data);
     this.manageItem.emit([action, data]);
   }
-
 }
