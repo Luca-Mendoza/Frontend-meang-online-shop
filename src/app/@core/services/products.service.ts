@@ -19,10 +19,16 @@ export class ProductsService extends ApiService {
   }
   getHomePage() {
     return this.get(HOME_PAGE, {
-      showPlatform : true,
+      showPlatform: true,
     }).pipe(
       map((result: any) => {
         console.log('Home page', result);
+        return {
+          carousel: result.carousel,
+          pc: this.manageInfo(result.pc.shopProducts, false),
+          ps4: this.manageInfo(result.ps4.shopProducts, false),
+          topPrice35: this.manageInfo(result.topPrice35.shopProducts),
+        };
       })
     );
   }
@@ -83,7 +89,7 @@ export class ProductsService extends ApiService {
       })
     );
   }
-  private manageInfo(listProducto) {
+  private manageInfo(listProducto, showDescription = false) {
     const resulList: Array<IProduct> = [];
     listProducto.map((shopObject) => {
       resulList.push({
@@ -91,7 +97,10 @@ export class ProductsService extends ApiService {
         img: shopObject.product.img,
         name: shopObject.product.name,
         rating: shopObject.product.rating,
-        description: shopObject.platform ? shopObject.platform.name : '',
+        description:
+          (shopObject.platform && showDescription)
+            ? shopObject.platform.name
+            : '',
         qty: 1,
         price: shopObject.price,
         stock: shopObject.stock,

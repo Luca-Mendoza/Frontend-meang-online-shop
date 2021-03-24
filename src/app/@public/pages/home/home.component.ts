@@ -21,48 +21,23 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.product.getHomePage().subscribe((data) => {
       console.log(data);
+      this.listOne = data.pc;
+      this.listTwo = data.topPrice35;
+      this.listThree = data.ps4;
+      this.items = this.manageCarousel(data.carousel);
     });
-    /*  // productos PC
-    this.product
-      .shopProductsPlatforms(1, 4, ACTIVE_FILTERS.ACTIVE, true, ['4'])
-      .subscribe((data) => {
-        this.listOne = data.result;
+  }
+  private manageCarousel(list) {
+    const itemsValues: Array<ICarouselItem> = [];
+    list.shopProducts.map((item) => {
+      itemsValues.push({
+        id: item.id,
+        title: item.product.name,
+        description: item.platform.name,
+        background: item.product.img,
+        url: '',
       });
-    // Producto mas economicos $35 y que tengamos en stock -40
-    this.product
-      .getByLastUnitsOffers(
-        1,
-        4,
-        ACTIVE_FILTERS.ACTIVE,
-        true,
-        35,
-        -1,
-        false,
-        true
-      )
-      .subscribe((data) => {
-        this.listTwo = data.result;
-      });
-    // productos ps4
-    this.product
-      .shopProductsPlatforms(1, 4, ACTIVE_FILTERS.ACTIVE, true, ['18'])
-      .subscribe((data) => {
-        this.listThree = data.result;
-      });
-    // Producto que van en el carousel
-    this.product
-      .getByLastUnitsOffers(1, 4, ACTIVE_FILTERS.ACTIVE, true, -1, 20)
-      .subscribe((data) => {
-        data.result.map((item: IProduct) => {
-          this.items.push({
-            id: item.id,
-            title: item.name,
-            description: item.description,
-            background: item.img,
-            url: '',
-          });
-        });
-      });
-      */
+    });
+    return itemsValues;
   }
 }

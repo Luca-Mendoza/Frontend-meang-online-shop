@@ -20,7 +20,7 @@ export const HOME_PAGE = gql`
         ...shopProductsObject
       }
     }
-    topProce35: shopProductsOffersLast(
+    topPrice35: shopProductsOffersLast(
       itemsPage: 4
       topPrice: 35
       random: true
