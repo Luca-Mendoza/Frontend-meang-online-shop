@@ -14,4 +14,8 @@ export class DetailsComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {}
+
+  changeValue(qty: number) {
+    console.log(qty);
+  }
 }
