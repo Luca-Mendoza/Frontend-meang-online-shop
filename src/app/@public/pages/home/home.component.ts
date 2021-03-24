@@ -3,6 +3,7 @@ import { ProductsService } from '@core/services/products.service';
 import { Component, OnInit } from '@angular/core';
 import { ICarouselItem } from '@mugan86/ng-shop-ui/lib/interfaces/carousel-item.interface';
 import { ACTIVE_FILTERS } from '@core/constants/filter';
+import { loadData, closeAlert } from '@shared/alerts/alerts';
 
 @Component({
   selector: 'app-home',
@@ -19,12 +20,14 @@ export class HomeComponent implements OnInit {
   constructor(private product: ProductsService) {}
 
   ngOnInit(): void {
+    loadData('title', 'html');
     this.product.getHomePage().subscribe((data) => {
       console.log(data);
       this.listOne = data.pc;
       this.listTwo = data.topPrice35;
       this.listThree = data.ps4;
       this.items = this.manageCarousel(data.carousel);
+      closeAlert();
     });
   }
   private manageCarousel(list) {

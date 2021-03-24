@@ -27,7 +27,7 @@ export class ProductsService extends ApiService {
           carousel: result.carousel,
           pc: this.manageInfo(result.pc.shopProducts, false),
           ps4: this.manageInfo(result.ps4.shopProducts, false),
-          topPrice35: this.manageInfo(result.topPrice35.shopProducts),
+          topPrice35: this.manageInfo(result.topPrice35.shopProducts, true),
         };
       })
     );
@@ -89,7 +89,7 @@ export class ProductsService extends ApiService {
       })
     );
   }
-  private manageInfo(listProducto, showDescription = false) {
+  private manageInfo(listProducto, showDescription = true) {
     const resulList: Array<IProduct> = [];
     listProducto.map((shopObject) => {
       resulList.push({
