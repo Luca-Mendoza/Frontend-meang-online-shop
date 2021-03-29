@@ -10,7 +10,10 @@ export class DetailsComponent implements OnInit {
   // Función  aleatoria para que recorra el total de la lista
   products = products[Math.floor(Math.random() * products.length)];
   selectImage = this.products.img;
-  corruncySelect = CURRENCIES_SYMBOL[CURRENCY_LIST.US_DOLLAR];
+
+
+
+  currencySelect = CURRENCIES_SYMBOL[CURRENCY_LIST.US_DOLLAR];
   constructor() {}
 
   ngOnInit(): void {}
