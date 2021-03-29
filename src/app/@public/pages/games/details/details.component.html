@@ -4,6 +4,11 @@
   <div class="row">
     <div class="col-md-1">
       <img
+        class="img-fluid mini"
+        *ngFor="let miniImg of screens; let i = index;"
+        [src]="miniImg"
+        alt="Screen {{ i }}"
+        (click)="selectImgMain(i)"
       />
     </div>
     <div class="col-md-7">
