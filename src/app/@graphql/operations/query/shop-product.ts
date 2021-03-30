@@ -12,6 +12,7 @@ export const SHOP_LAST_UNITS_OFFERS = gql`
     $random: Boolean
     $showInfo: Boolean = false
     $showPlatform: Boolean = false
+    $relationScreens: Boolean = false
   ) {
     shopProductsOffersLast(
       page: $page
@@ -44,6 +45,7 @@ export const SHOP_PRODUCT_BY_PLATFORM = gql`
     $random: Boolean
     $showInfo: Boolean = false
     $showPlatform: Boolean = false
+    $relationScreens: Boolean = false
   ) {
     shopProductsPlatforms(
       page: $page
@@ -66,7 +68,11 @@ export const SHOP_PRODUCT_BY_PLATFORM = gql`
   ${SHOP_PRODUCT_FRANGMENT}
 `;
 export const SHOP_PRODUCT_DETAILS = gql`
-  query detallesProducto($id: Int!, $showPlatform: Boolean = true) {
+  query detallesProducto(
+    $id: Int!
+    $showPlatform: Boolean = true
+    $relationScreens: Boolean = true
+  ) {
     shopProductDetails(id: $id) {
       shopProduct {
         ...shopProductsObject

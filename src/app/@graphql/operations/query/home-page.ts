@@ -4,7 +4,10 @@ import { SHOP_PRODUCT_FRANGMENT } from '../../../@graphql/operations/fragment/sh
 import { RESULT_INFO_FRAGMENT } from '../fragment/result-info';
 
 export const HOME_PAGE = gql`
-  query HomePageInfo($showPlatform: Boolean = false) {
+  query HomePageInfo(
+    $showPlatform: Boolean = false
+    $relationScreens: Boolean = false
+  ) {
     carousel: shopProductsOffersLast(itemsPage: 4, topPrice: 30, random: true) {
       shopProducts {
         ...shopProductsObject
