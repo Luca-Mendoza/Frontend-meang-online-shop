@@ -65,3 +65,13 @@ export const SHOP_PRODUCT_BY_PLATFORM = gql`
   ${RESULT_INFO_FRAGMENT},
   ${SHOP_PRODUCT_FRANGMENT}
 `;
+export const SHOP_PRODUCT_DETAILS = gql`
+  query detallesProducto($id: Int!, $showPlatform: Boolean = true) {
+    shopProductDetails(id: $id) {
+      shopProduct {
+        ...shopProductsObject
+      }
+    }
+  }
+  ${SHOP_PRODUCT_FRANGMENT}
+`;

@@ -1,3 +1,4 @@
+import { SHOP_PRODUCT_DETAILS } from './../../@graphql/operations/query/shop-product';
 import { HOME_PAGE } from './../../@graphql/operations/query/home-page';
 import { IProduct } from '@mugan86/ng-shop-ui/lib/interfaces/product.interface';
 import { map } from 'rxjs/internal/operators/map';
@@ -89,6 +90,17 @@ export class ProductsService extends ApiService {
       })
     );
   }
+
+  getDetailsProduct(id: number){
+    return this.get(
+      SHOP_PRODUCT_DETAILS,
+      {id},
+    ).pipe(map((result: any) => {
+      return result.shopProductDetails;
+    }));
+  }
+
+
   private manageInfo(listProducto, showDescription = true) {
     const resulList: Array<IProduct> = [];
     listProducto.map((shopObject) => {
