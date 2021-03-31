@@ -28,6 +28,9 @@ export class DetailsComponent implements OnInit {
     this.activatedRouter.params.subscribe((params) => {
       console.log('parametros detalles', +params.id);
       this.loadDataValue(+params.id);
+      this.productService.getRandomItems().subscribe((result) => {
+        console.log('Random', result);
+      });
     });
   }
 

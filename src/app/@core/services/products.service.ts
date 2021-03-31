@@ -1,4 +1,7 @@
-import { SHOP_PRODUCT_DETAILS } from './../../@graphql/operations/query/shop-product';
+import {
+  SHOP_PRODUCT_DETAILS,
+  SHOP_PRODUCT_RANDOM_ITEMS,
+} from './../../@graphql/operations/query/shop-product';
 import { HOME_PAGE } from './../../@graphql/operations/query/home-page';
 import { IProduct } from '@mugan86/ng-shop-ui/lib/interfaces/product.interface';
 import { map } from 'rxjs/internal/operators/map';
@@ -98,12 +101,22 @@ export class ProductsService extends ApiService {
         return {
           product: this.setInObject(data.shopProduct, true),
           screens: data.shopProduct.product.screenshoot,
-          relational: data.shopProduct.relationalProducts
+          relational: data.shopProduct.relationalProducts,
         };
       })
     );
   }
- // recoremos la lista de producto
+
+  getRandomItems() {
+    return this.get(SHOP_PRODUCT_RANDOM_ITEMS).pipe(
+      map((result: any) => {
+        console.log(result.randomItems.shopProducts);
+        const data = result.randomItems.shopProducts;
+        return this.manageInfo(data, true);
+      })
+    );
+  }
+  // recoremos la lista de producto
   private setInObject(shopObject, showDescription) {
     return {
       id: shopObject.id,
