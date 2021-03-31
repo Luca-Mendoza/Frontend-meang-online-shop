@@ -48,7 +48,7 @@
       </div>
       <br />
       <span class="h5">Platafotmas:</span>&nbsp;
-      <select name="" id="">
+      <select name="" id="" (change)="selectOtherPlatform($event)">
         <option [value]="product.id">{{ product.description }}</option>
         <option [value]="opt.id" *ngFor="let opt of relationalProducts">{{ opt.platform.name }}</option>
       </select>

@@ -25,20 +25,19 @@ export class DetailsComponent implements OnInit {
 
   ngOnInit(): void {
     // consumir los detallles del producto por item
-    this.activeRouting();
-  }
-
-  private  activeRouting(){
-    // tslint:disable-next-line: deprecation
     this.activatedRouter.params.subscribe((params) => {
       console.log('parametros detalles', +params.id);
-      this.productService.getDetailsProduct(+params.id).subscribe((result) => {
-        console.log(result);
-        this.product = result.product;
-        this.selectImage = this.product.img;
-        this.screens = result.screens;
-        this.relationalProducts = result.relational;
-      });
+      this.loadDataValue(+params.id);
+    });
+  }
+
+  loadDataValue(id: number) {
+    this.productService.getDetailsProduct(id).subscribe((result) => {
+      console.log(result);
+      this.product = result.product;
+      this.selectImage = this.product.img;
+      this.screens = result.screens;
+      this.relationalProducts = result.relational;
     });
   }
 
@@ -46,7 +45,11 @@ export class DetailsComponent implements OnInit {
     console.log(qty);
   }
 
-  selectImgMain(i) {
+  selectOtherPlatform($event) {
+    console.log($event.target.value);
+    this.loadDataValue(+$event.target.value);
+  }
+  selectImgMain(i: number) {
     this.selectImage = this.screens[i];
   }
 }
