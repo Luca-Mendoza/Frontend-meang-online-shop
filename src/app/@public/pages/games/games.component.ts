@@ -31,9 +31,9 @@ export class GamesComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.loading = true;
-    loadData('Cargando datos', 'Espera mientra carga la información');
     this.activatedRouter.params.subscribe((params) => {
+      this.loading = true;
+      loadData('Cargando datos', 'Espera mientra carga la información');
       const keyPage = `${params.type}/${params.filter}`;
       this.gamesPageInfo = GAMES_PAGES_INFO[keyPage];
       this.typeData = params.type;
