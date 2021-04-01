@@ -25,6 +25,38 @@ export class CartService {
     return this.cart;
   }
 
+  manageProduct(product: IProduct) {
+    // Obtener cantidad de productos en el carrito
+    const productTotal = this.cart.products.length;
+    // Comprobamos si tenemos productos
+    if (productTotal === 0) {
+      console.log('Añadiendo primer producto');
+      this.cart.products.push(product);
+    } else {
+      // Si tenemos productos hacer lo siguiente
+      let actionUpdateOk = false;
+      for (let i = 0; i < productTotal; i++) {
+        // Comprobar que coincide el producto con alguno de la lista
+        if (product.id === this.cart.products[i].id) {
+          console.log('Producto existente y vamos a gestionarlo');
+          if (product.qty === 0) {
+            console.log('Borrar item seleccionado');
+            // Quitar elemento
+            this.cart.products.slice(i, 1);
+          } else {
+            // Actualizar con la nueva información
+            this.cart.products[i] = product;
+          }
+          actionUpdateOk = true;
+          i = productTotal;
+        }
+      }
+      if (!actionUpdateOk) {
+        this.cart.products.push(product);
+      }
+    }
+    localStorage.setItem('cart', JSON.stringify(this.cart));
+  }
   open() {
     console.log('openNav');
     document.getElementById('mySidenav').style.width = '350px';

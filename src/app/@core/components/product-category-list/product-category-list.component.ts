@@ -1,3 +1,4 @@
+import { CartService } from '@shop/core/services/cart.service.ts.service';
 import { Router } from '@angular/router';
 import { Component, Input } from '@angular/core';
 import { IProduct } from '@mugan86/ng-shop-ui/lib/interfaces/product.interface';
@@ -11,11 +12,12 @@ export class ProductCategoryListComponent {
   @Input() title = 'Titulo de la categoria';
   @Input() productsList: Array<IProduct> = [];
   @Input() description = '';
-  constructor(private router: Router) {}
+  constructor(private router: Router, private cartService: CartService) {}
 
   addToCart($event: IProduct) {
     // Usar la información del producto pasado para llevarlo al carrito de compra
     console.log('Carrito', $event);
+    this.cartService.manageProduct($event);
   }
 
   showProductDetails($event: IProduct) {
