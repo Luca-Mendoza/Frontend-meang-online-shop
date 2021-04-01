@@ -7,6 +7,7 @@ import { PublicComponent } from './public.component';
 import { HeaderComponent } from '@shop-core/components/header/header.component';
 import { NavbarComponent } from '@shop-core/components/navbar/navbar.component';
 import { FooterComponent } from '@shop-core/components/footer/footer.component';
+import { ShoppingCartModule } from '@shop-core/components/shopping-cart/shopping-cart.module';
 
 
 
@@ -14,7 +15,8 @@ import { FooterComponent } from '@shop-core/components/footer/footer.component';
   declarations: [PublicComponent, HeaderComponent, NavbarComponent, FooterComponent],
   imports: [
     CommonModule,
-    PublicRoutingModule
+    PublicRoutingModule,
+    ShoppingCartModule
   ]
 })
 export class PublicModule { }
