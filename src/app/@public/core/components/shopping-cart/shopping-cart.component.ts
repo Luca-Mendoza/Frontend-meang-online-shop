@@ -1,3 +1,4 @@
+import { ICart } from './shopping-cart.interface';
 import { Component, OnInit } from '@angular/core';
 import { CartService } from '@shop/core/services/cart.service.ts.service';
 
@@ -7,12 +8,15 @@ import { CartService } from '@shop/core/services/cart.service.ts.service';
   styleUrls: ['./shopping-cart.component.scss'],
 })
 export class ShoppingCartComponent implements OnInit {
-
+  cart: ICart;
   constructor(private cartService: CartService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    // Traemos la informacion que tenemos guardada en el localstorage
+    this.cart = this.cartService.initialize();
+  }
 
- closeNav() {
-   this.cartService.close();
- }
+  closeNav() {
+    this.cartService.close();
+  }
 }
