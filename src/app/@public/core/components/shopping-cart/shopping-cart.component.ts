@@ -13,7 +13,9 @@ export class ShoppingCartComponent implements OnInit {
 
   ngOnInit(): void {
     // Traemos la informacion que tenemos guardada en el localstorage
+
     this.cart = this.cartService.initialize();
+    console.log(this.cart);
   }
 
   closeNav() {

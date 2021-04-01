@@ -26,7 +26,7 @@ export class ProductsService extends ApiService {
       showPlatform: true,
     }).pipe(
       map((result: any) => {
-        console.log('Home page', result);
+        // console.log('Home page', result);
         return {
           carousel: result.carousel,
           pc: this.manageInfo(result.pc.shopProducts, false),

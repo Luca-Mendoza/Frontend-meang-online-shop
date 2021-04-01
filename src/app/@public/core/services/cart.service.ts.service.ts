@@ -55,6 +55,19 @@ export class CartService {
         this.cart.products.push(product);
       }
     }
+    this.checkoutTotal();
+  }
+
+  checkoutTotal() {
+    let subtotal = 0;
+    let total = 0;
+    this.cart.products.map((product: IProduct) => {
+      subtotal += product.qty; // subtotal = total + product.qty
+      total += product.qty * product.price; // total = Multiplicamos la cantidad de producto por su precio
+    });
+    this.cart.total = total;
+    this.cart.subtotal = subtotal;
+    console.log(this.cart, 'calcular');
     localStorage.setItem('cart', JSON.stringify(this.cart));
   }
   open() {
