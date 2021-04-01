@@ -30,9 +30,6 @@ export class DetailsComponent implements OnInit {
     this.activatedRouter.params.subscribe((params) => {
       console.log('parametros detalles', +params.id);
       this.loadDataValue(+params.id);
-      this.productService.getRandomItems().subscribe((result) => {
-        this.randomItems = result;
-      });
     });
   }
 
@@ -43,6 +40,7 @@ export class DetailsComponent implements OnInit {
       this.selectImage = this.product.img;
       this.screens = result.screens;
       this.relationalProducts = result.relational;
+      this.randomItems = result.random;
     });
   }
 
