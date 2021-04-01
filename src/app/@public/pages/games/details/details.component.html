@@ -5,7 +5,7 @@
     <div class="col-md-1">
       <img
         class="img-fluid mini"
-        *ngFor="let miniImg of screens; let i = index;"
+        *ngFor="let miniImg of screens; let i = index"
         [src]="miniImg"
         alt="Screen {{ i }}"
         (click)="selectImgMain(i)"
@@ -50,50 +50,30 @@
       <span class="h5">Platafotmas:</span>&nbsp;
       <select name="" id="" (change)="selectOtherPlatform($event)">
         <option [value]="product.id">{{ product.description }}</option>
-        <option [value]="opt.id" *ngFor="let opt of relationalProducts">{{ opt.platform.name }}</option>
+        <option [value]="opt.id" *ngFor="let opt of relationalProducts">
+          {{ opt.platform.name }}
+        </option>
       </select>
     </div>
   </div>
   <!-- /.row -->
 
-  <!-- Related Projects Row -->
-  <h3 class="my-4">Juegos relacionado con pla plataforma</h3>
+  <!-- Random items shop products-->
+  <h3 class="my-4">Juegos que te puedan interesar</h3>
 
   <div class="row">
-    <div class="col-md-2 col-sm-6 mb-4" >
-      <a href="#">
-        <img class="img-fluid" src="http://placehold.it/500x300" alt="" />
+    <div class="col-md-2 col-sm-6 mb-4" *ngFor="let itemsInfo of randomItems">
+      <a
+        [routerLink]="['/games/details', itemsInfo.id]"
+        title="{{ itemsInfo.name }} {{ itemsInfo.description }}"
+      >
+        <img class="img-fluid more-game" [src]="itemsInfo.img" alt="{{ itemsInfo.name }} {{ itemsInfo.description }}" />
       </a>
+      <h6 class="text-center">{{ itemsInfo.name }}</h6>
+
     </div>
 
-    <div class="col-md-2 col-sm-6 mb-4">
-      <a href="#">
-        <img class="img-fluid" src="http://placehold.it/500x300" alt="" />
-      </a>
-    </div>
-
-    <div class="col-md-2 col-sm-6 mb-4">
-      <a href="#">
-        <img class="img-fluid" src="http://placehold.it/500x300" alt="" />
-      </a>
-    </div>
-
-    <div class="col-md-2 col-sm-6 mb-4">
-      <a href="#">
-        <img class="img-fluid" src="http://placehold.it/500x300" alt="" />
-      </a>
-    </div>
-    <div class="col-md-2 col-sm-6 mb-4">
-      <a href="#">
-        <img class="img-fluid" src="http://placehold.it/500x300" alt="" />
-      </a>
-    </div>
-    <div class="col-md-2 col-sm-6 mb-4">
-      <a href="#">
-        <img class="img-fluid" src="http://placehold.it/500x300" alt="" />
-      </a>
-    </div>
+    <!-- /.row -->
   </div>
-  <!-- /.row -->
+  <!-- /.container -->
 </div>
-<!-- /.container -->

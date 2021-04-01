@@ -18,6 +18,8 @@ export class DetailsComponent implements OnInit {
   currencySelect = CURRENCIES_SYMBOL[CURRENCY_LIST.US_DOLLAR];
   screens = [];
   relationalProducts: Array<object> = [];
+  randomItems: Array<IProduct> = [];
+
   constructor(
     private productService: ProductsService,
     private activatedRouter: ActivatedRoute
@@ -29,7 +31,7 @@ export class DetailsComponent implements OnInit {
       console.log('parametros detalles', +params.id);
       this.loadDataValue(+params.id);
       this.productService.getRandomItems().subscribe((result) => {
-        console.log('Random', result);
+        this.randomItems = result;
       });
     });
   }
