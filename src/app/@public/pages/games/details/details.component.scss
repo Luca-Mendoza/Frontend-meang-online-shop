@@ -26,9 +26,22 @@
 .discount-percentage {
   text-decoration: none;
 }
-// More games - Random Items
-.more-game{
+
+//@
+@media (max-width: 600px) {
+  .screens-section {
+    display: none;
+  }
+}
+.main-img,
+.more-game {
+  object-fit: cover;
+  object-position: center;
+  display: block;
   height: 100%;
   width: 100%;
-  max-height:100px;
+}
+// More games - Random Items
+.more-game {
+  max-height: 100px;
 }

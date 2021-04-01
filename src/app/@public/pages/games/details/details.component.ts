@@ -5,6 +5,7 @@ import { CURRENCIES_SYMBOL, CURRENCY_LIST } from '@mugan86/ng-shop-ui';
 import { IProduct } from '@mugan86/ng-shop-ui/lib/interfaces/product.interface';
 import { timeStamp } from 'console';
 import { ActivatedRoute } from '@angular/router';
+import { loadData, closeAlert } from '@shared/alerts/alerts';
 @Component({
   selector: 'app-details',
   templateUrl: './details.component.html',
@@ -19,6 +20,7 @@ export class DetailsComponent implements OnInit {
   screens = [];
   relationalProducts: Array<object> = [];
   randomItems: Array<IProduct> = [];
+  loading: boolean;
 
   constructor(
     private productService: ProductsService,
@@ -29,6 +31,8 @@ export class DetailsComponent implements OnInit {
     // consumir los detallles del producto por item
     this.activatedRouter.params.subscribe((params) => {
       console.log('parametros detalles', +params.id);
+      this.loading = true;
+      loadData('Cargando datos', 'Espera mientra carga la información');
       this.loadDataValue(+params.id);
     });
   }
@@ -41,6 +45,9 @@ export class DetailsComponent implements OnInit {
       this.screens = result.screens;
       this.relationalProducts = result.relational;
       this.randomItems = result.random;
+
+      this.loading = false;
+      closeAlert();
     });
   }
 

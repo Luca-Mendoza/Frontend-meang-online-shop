@@ -1,8 +1,8 @@
 <!-- Page Content -->
-<div class="container" *ngIf="product">
+<div class="container" *ngIf="product && !loading">
   <!-- Portfolio Item Row -->
   <div class="row">
-    <div class="col-md-1">
+    <div class="col-md-1 screens-section">
       <img
         class="img-fluid mini"
         *ngFor="let miniImg of screens; let i = index"
@@ -12,7 +12,7 @@
       />
     </div>
     <div class="col-md-7">
-      <img class="img-fluid" [src]="selectImage" alt="" />
+      <img class="img-fluid main-img" [src]="selectImage" alt="" />
     </div>
 
     <div class="col-md-4">
@@ -57,7 +57,7 @@
     </div>
   </div>
   <!-- /.row -->
-
+  <hr />
   <!-- Random items shop products-->
   <h3 class="my-4">Juegos que te puedan interesar</h3>
 
@@ -67,10 +67,13 @@
         [routerLink]="['/games/details', itemsInfo.id]"
         title="{{ itemsInfo.name }} {{ itemsInfo.description }}"
       >
-        <img class="img-fluid more-game" [src]="itemsInfo.img" alt="{{ itemsInfo.name }} {{ itemsInfo.description }}" />
+        <img
+          class="img-fluid more-game"
+          [src]="itemsInfo.img"
+          alt="{{ itemsInfo.name }} {{ itemsInfo.description }}"
+        />
       </a>
       <h6 class="text-center">{{ itemsInfo.name }}</h6>
-
     </div>
 
     <!-- /.row -->
