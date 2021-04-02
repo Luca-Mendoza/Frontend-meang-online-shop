@@ -1,6 +1,7 @@
 import { ICart } from './../components/shopping-cart/shopping-cart.interface';
 import { IProduct } from '@mugan86/ng-shop-ui/lib/interfaces/product.interface';
 import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs/internal/Subject';
 
 @Injectable({
   providedIn: 'root',
@@ -12,6 +13,10 @@ export class CartService {
     total: 0,
     subtotal: 0,
   };
+
+  // Para gestionar los productos con las notificacones cuando se realiza acciones Ej: 'Borrar'
+  public itemsVar = new Subject<ICart>();
+  public itemsVar$ = this.itemsVar.asObservable();
   constructor() {}
 
   /**
@@ -23,6 +28,12 @@ export class CartService {
       this.cart = storeData;
     }
     return this.cart;
+  }
+  /**
+   * Observable de las acciones
+   */
+  public updateItemsInCart(newValue: ICart) {
+    this.itemsVar.next(newValue);
   }
 
   manageProduct(product: IProduct) {
@@ -85,6 +96,7 @@ export class CartService {
   /** Añadir información sea para vaciar carrito o almacene los productos que añadimos al carrito */
   private setInfo() {
     localStorage.setItem('cart', JSON.stringify(this.cart));
+    this.updateItemsInCart(this.cart);
   }
 
   /** Abrir modal del carrito de compra */

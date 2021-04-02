@@ -9,7 +9,13 @@ import { CartService } from '@shop/core/services/cart.service.ts.service';
 })
 export class ShoppingCartComponent implements OnInit {
   cart: ICart;
-  constructor(private cartService: CartService) {}
+  constructor(private cartService: CartService) {
+    this.cartService.itemsVar$.subscribe((data: ICart) => {
+      if (data !== null && data !== undefined) {
+        this.cart = data;
+      }
+    });
+  }
 
   ngOnInit(): void {
     // Traemos la informacion que tenemos guardada en el localstorage
