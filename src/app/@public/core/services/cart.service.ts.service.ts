@@ -57,7 +57,7 @@ export class CartService {
     }
     this.checkoutTotal();
   }
-
+  /** Añadir información final antes de hacer el pedido */
   checkoutTotal() {
     let subtotal = 0;
     let total = 0;
@@ -68,15 +68,33 @@ export class CartService {
     this.cart.total = total;
     this.cart.subtotal = subtotal;
     console.log(this.cart, 'calcular');
+    this.setInfo();
+  }
+
+  clear() {
+    this.products = [];
+    this.cart = {
+      total: 0,
+      subtotal: 0,
+      products: this.products,
+    };
+    this.setInfo();
+    console.log('Hemos borrado la información');
+    return this.cart;
+  }
+  /** Añadir información sea para vaciar carrito o almacene los productos que añadimos al carrito */
+  private setInfo() {
     localStorage.setItem('cart', JSON.stringify(this.cart));
   }
+
+  /** Abrir modal del carrito de compra */
   open() {
     console.log('openNav');
     document.getElementById('mySidenav').style.width = '350px';
     document.getElementById('overlay').style.display = 'block';
     document.getElementById('app').style.overflow = 'hidden';
   }
-
+  /** Cerrar modal del carrito de compra */
   close() {
     console.log('closeNav');
     document.getElementById('mySidenav').style.width = '0';

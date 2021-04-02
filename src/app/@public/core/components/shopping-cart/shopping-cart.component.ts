@@ -17,7 +17,10 @@ export class ShoppingCartComponent implements OnInit {
     this.cart = this.cartService.initialize();
     console.log(this.cart);
   }
-
+  /** Limpiar carrito */
+  clear() {
+    this.cartService.clear();
+  }
   closeNav() {
     this.cartService.close();
   }
