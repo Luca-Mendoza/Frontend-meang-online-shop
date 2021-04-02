@@ -90,9 +90,10 @@ export class CartService {
   /** Abrir modal del carrito de compra */
   open() {
     console.log('openNav');
-    document.getElementById('mySidenav').style.width = '350px';
+    document.getElementById('mySidenav').style.width = '450px';
     document.getElementById('overlay').style.display = 'block';
     document.getElementById('app').style.overflow = 'hidden';
+    document.getElementById('mySidenav').style.transition = '0.5s';
   }
   /** Cerrar modal del carrito de compra */
   close() {
@@ -100,5 +101,6 @@ export class CartService {
     document.getElementById('mySidenav').style.width = '0';
     document.getElementById('overlay').style.display = 'none';
     document.getElementById('app').style.overflow = 'auto';
+    document.getElementById('mySidenav').style.transition = '0s';
   }
 }
