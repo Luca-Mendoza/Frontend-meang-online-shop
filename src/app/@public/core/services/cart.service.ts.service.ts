@@ -53,7 +53,7 @@ export class CartService {
           if (product.qty === 0) {
             console.log('Borrar item seleccionado');
             // Quitar elemento
-            this.cart.products.slice(i, 1);
+            this.cart.products.splice(i, 1);
           } else {
             // Actualizar con la nueva información
             this.cart.products[i] = product;
