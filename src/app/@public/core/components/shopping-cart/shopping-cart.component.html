@@ -10,10 +10,24 @@
     <div class="row">
       <div class="col-lg-2">
         <img class="img-fluid" [src]="product.img" [alt]="product.name" />
-        <button (click)="clearItem(product)" class="btn btn-sm btn-danger">X</button>
+        <button (click)="clearItem(product)" class="btn btn-sm btn-danger">
+          X
+        </button>
       </div>
       <div class="col-lg">
-        {{ product.name }}
+        <div class="row">
+          <div class="col-lg-9">
+            <shop-qty-selector
+              [qty]="product.qty"
+              [stock]="product.stock"
+              (updateValue)="changeValue($event, product)"
+            ></shop-qty-selector>
+          </div>
+          <div class="col-lg">
+            {{ currencySelect }} {{ product.price | number }}
+          </div>
+        </div>
+        <h6>{{ product.name }}</h6>
       </div>
     </div>
   </div>

@@ -2,6 +2,7 @@ import { IProduct } from '@mugan86/ng-shop-ui/lib/interfaces/product.interface';
 import { ICart } from './shopping-cart.interface';
 import { Component, OnInit } from '@angular/core';
 import { CartService } from '@shop/core/services/cart.service.ts.service';
+import { CURRENCY_SELECT } from '@core/constants/config';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -9,6 +10,7 @@ import { CartService } from '@shop/core/services/cart.service.ts.service';
   styleUrls: ['./shopping-cart.component.scss'],
 })
 export class ShoppingCartComponent implements OnInit {
+  currencySelect = CURRENCY_SELECT;
   cart: ICart;
   constructor(private cartService: CartService) {
     this.cartService.itemsVar$.subscribe((data: ICart) => {
@@ -24,12 +26,21 @@ export class ShoppingCartComponent implements OnInit {
     this.cart = this.cartService.initialize();
     console.log(this.cart);
   }
+
   /** Limpiar carrito */
   clear() {
     this.cartService.clear();
   }
   clearItem(product: IProduct) {
-    product.qty = 0;
+    this.manageProductUnitInfo(0, product);
+  }
+  /*Agegamos valor al cart shop*/
+  changeValue(qty: number, product: IProduct) {
+    this.manageProductUnitInfo(qty, product);
+  }
+  /** Informacion del service que hay en el LocalStorage  */
+  manageProductUnitInfo(qty: number, product: IProduct) {
+    product.qty = qty;
     this.cartService.manageProduct(product);
   }
   closeNav() {

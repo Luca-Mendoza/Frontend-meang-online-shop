@@ -1,9 +1,8 @@
 import { ProductsService } from '@core/services/products.service';
+import { CURRENCY_SELECT } from '@core/constants/config';
+
 import { Component, OnInit } from '@angular/core';
-import products from '@data/products.json';
-import { CURRENCIES_SYMBOL, CURRENCY_LIST } from '@mugan86/ng-shop-ui';
 import { IProduct } from '@mugan86/ng-shop-ui/lib/interfaces/product.interface';
-import { timeStamp } from 'console';
 import { ActivatedRoute } from '@angular/router';
 import { loadData, closeAlert } from '@shared/alerts/alerts';
 @Component({
@@ -16,7 +15,7 @@ export class DetailsComponent implements OnInit {
   // Función  aleatoria para que recorra el total de la lista
   // products = products[Math.floor(Math.random() * products.length)];
   selectImage: string;
-  currencySelect = CURRENCIES_SYMBOL[CURRENCY_LIST.US_DOLLAR];
+  currencySelect = CURRENCY_SELECT;
   screens = [];
   relationalProducts: Array<object> = [];
   randomItems: Array<IProduct> = [];
