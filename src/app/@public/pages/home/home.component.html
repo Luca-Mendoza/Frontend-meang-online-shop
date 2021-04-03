@@ -5,17 +5,20 @@
     *ngIf="listOne"
     [title]="'Juego de PC'"
     [productsList]="listOne"
+    [showDesc]="false"
   ></app-product-category-list>
 
   <app-product-category-list
     *ngIf="listTwo"
     [title]="'Juegos más económicos'"
     [productsList]="listTwo"
+    [showDesc]="true"
   ></app-product-category-list>
 
   <app-product-category-list
     *ngIf="listThree"
     [title]="'Juegos de PS4'"
     [productsList]="listThree"
+    [showDesc]="false"
   ></app-product-category-list>
 </div>

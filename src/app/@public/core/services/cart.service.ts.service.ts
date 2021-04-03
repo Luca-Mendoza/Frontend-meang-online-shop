@@ -102,7 +102,7 @@ export class CartService {
   /** Abrir modal del carrito de compra */
   open() {
     console.log('openNav');
-    document.getElementById('mySidenav').style.width = '450px';
+    document.getElementById('mySidenav').style.width = '600px';
     document.getElementById('overlay').style.display = 'block';
     document.getElementById('app').style.overflow = 'hidden';
     document.getElementById('mySidenav').style.transition = '0.5s';
