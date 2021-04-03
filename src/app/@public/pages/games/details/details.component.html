@@ -26,7 +26,7 @@
             <div class="price">{{ currencySelect }} {{ product.price }}</div>
           </ng-template>
           <div class="price" *ngIf="product.discount; else noDiscount">
-            {{ currencySelect }} {{ product.discount | number }}
+            {{ currencySelect }} {{ product.priceDiscount | number }}
             <span class="price_span">
               {{ currencySelect }} {{ product.price | number }}
             </span>
