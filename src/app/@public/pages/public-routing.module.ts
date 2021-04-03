@@ -28,6 +28,12 @@ const routes: Routes = [
       },
       // @public --> pages --> contact
       {
+        path: 'checkout',
+        loadChildren: () =>
+          import('./forms/checkout/checkout.module').then((m) => m.CheckoutModule),
+      },
+      // @public --> pages --> contact
+      {
         path: 'contact',
         loadChildren: () =>
           import('./contact/contact.module').then((m) => m.ContactModule),
