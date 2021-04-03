@@ -26,6 +26,9 @@ export class ShoppingCartComponent implements OnInit {
     this.cart = this.cartService.initialize();
     console.log(this.cart);
   }
+  proccess(){
+    console.log('Proceso de pago');
+  }
 
   /** Limpiar carrito */
   clear() {
