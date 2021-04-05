@@ -9,7 +9,9 @@
   >
     <div>
       <h6 class="my-0">{{ product.name }}</h6>
-      <small class="text-muted">{{ product.description }}</small>
+      <small class="text-muted"
+        >{{ product.description }} - {{ product.qty }} uds.</small
+      >
     </div>
     <span class="text-muted"
       >{{ currencySelect }} {{ product.price | number }}</span
