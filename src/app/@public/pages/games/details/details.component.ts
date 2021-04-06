@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
 import { IProduct } from '@mugan86/ng-shop-ui/lib/interfaces/product.interface';
 import { ActivatedRoute } from '@angular/router';
 import { loadData, closeAlert } from '@shared/alerts/alerts';
+import { ICart } from '@shop/core/components/shopping-cart/shopping-cart.interface';
 @Component({
   selector: 'app-details',
   templateUrl: './details.component.html',
@@ -25,7 +26,7 @@ export class DetailsComponent implements OnInit {
   constructor(
     private productService: ProductsService,
     private activatedRouter: ActivatedRoute,
-    private cartService: CartService,
+    private cartService: CartService
   ) {}
 
   ngOnInit(): void {
@@ -36,12 +37,24 @@ export class DetailsComponent implements OnInit {
       loadData('Cargando datos', 'Espera mientra carga la información');
       this.loadDataValue(+params.id);
     });
+    this.cartService.itemsVar$.subscribe((data: ICart) => {
+      if (data.subtotal === 0) {
+        this.product.qty = 1;
+        return;
+      }
+      this.product.qty = this.findProduct(+this.product.id).qty;
+    });
+  }
+  findProduct(id: number) {
+    return this.cartService.cart.products.find((item) => +item.id === id);
   }
 
   loadDataValue(id: number) {
     this.productService.getDetailsProduct(id).subscribe((result) => {
-      console.log(result);
+
       this.product = result.product;
+      const saveProductInCart = this.findProduct(+this.product.id);
+      this.product.qty = (saveProductInCart !== undefined) ? saveProductInCart.qty : this.product.qty;
       this.selectImage = this.product.img;
       this.screens = result.screens;
       this.relationalProducts = result.relational;
@@ -65,7 +78,7 @@ export class DetailsComponent implements OnInit {
     this.selectImage = this.screens[i];
   }
 
-  addToCart(){
+  addToCart() {
     this.cartService.manageProduct(this.product);
   }
 }
