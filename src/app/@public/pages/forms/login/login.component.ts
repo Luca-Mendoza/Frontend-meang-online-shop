@@ -8,32 +8,31 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent {
-
   login: ILoginForm = {
     email: '',
-    password: ''
+    password: '',
   };
 
-  constructor(private auth: AuthService,
-              private router: Router) { }
-
-
+  constructor(private auth: AuthService, private router: Router) {}
 
   // tslint:disable-next-line:typedef
   init() {
-    console.log(this.login);
-    this.auth.login(this.login.email, this.login.password).subscribe(
-      (result: IResultLogin) => {
-        console.log(result);
+    this.auth
+      .login(this.login.email, this.login.password)
+      .subscribe((result: IResultLogin) => {
         if (result.status) {
           if (result.token !== null) {
             // Guardamos la sesión
-            basicAlert(TYPE_ALERT.SUCCESS, result.message);
             this.auth.setSession(result.token);
             this.auth.updateSession(result);
+            if (localStorage.getItem('route_after_login')) {
+              this.router.navigate([localStorage.getItem('route_after_login')]);
+              localStorage.removeItem('route_after_login');
+              return;
+            }
             this.router.navigate(['/home']);
             return;
           }
@@ -41,8 +40,6 @@ export class LoginComponent {
           return;
         }
         basicAlert(TYPE_ALERT.INFO, result.message);
-      }
-    );
+      });
   }
-
 }
