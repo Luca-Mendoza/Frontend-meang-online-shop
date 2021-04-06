@@ -1,3 +1,4 @@
+import { ICart } from '@shop/core/components/shopping-cart/shopping-cart.interface';
 import { CartService } from './../../services/cart.service.ts.service';
 import { Component, OnInit } from '@angular/core';
 import { IMeData } from '@core/interfaces/session.interface';
@@ -14,6 +15,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent implements OnInit {
+  cartItemsTotal: number;
   menuItems: Array<IMenuItem> = shopMenuItems;
   session: IMeData = {
     status: false,
@@ -34,9 +36,16 @@ export class NavbarComponent implements OnInit {
       this.role = this.session.user?.role;
       this.userLabel = `${this.session.user?.name} ${this.session.user?.lastname}`;
     });
+    this.cartService.itemsVar$.subscribe((data: ICart) => {
+      if (data !== undefined && data !== null) {
+        this.cartItemsTotal = data.subtotal;
+      }
+    });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.cartItemsTotal = this.cartService.initialize().subtotal;
+  }
 
   open() {
     console.log('Navbar Open Cart');

@@ -71,11 +71,14 @@
       </li>
       <li class="nav-item">
         <a
-          class="nav-link "
+          class="nav-link"
           routerLinkActive="router-link-active"
           (click)="open()"
           ><i class="fas fa-shopping-cart"></i
-        ></a>
+          ><span class="badge badge-success notification">{{
+            cartItemsTotal
+          }}</span></a
+        >
       </li>
     </ul>
   </div>
