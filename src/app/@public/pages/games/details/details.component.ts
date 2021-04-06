@@ -1,3 +1,4 @@
+import { CartService } from '@shop/core/services/cart.service.ts.service';
 import { ProductsService } from '@core/services/products.service';
 import { CURRENCY_SELECT } from '@core/constants/config';
 
@@ -23,7 +24,8 @@ export class DetailsComponent implements OnInit {
 
   constructor(
     private productService: ProductsService,
-    private activatedRouter: ActivatedRoute
+    private activatedRouter: ActivatedRoute,
+    private cartService: CartService,
   ) {}
 
   ngOnInit(): void {
@@ -52,6 +54,7 @@ export class DetailsComponent implements OnInit {
 
   changeValue(qty: number) {
     console.log(qty);
+    this.product.qty = qty;
   }
 
   selectOtherPlatform($event) {
@@ -60,5 +63,9 @@ export class DetailsComponent implements OnInit {
   }
   selectImgMain(i: number) {
     this.selectImage = this.screens[i];
+  }
+
+  addToCart(){
+    this.cartService.manageProduct(this.product);
   }
 }
