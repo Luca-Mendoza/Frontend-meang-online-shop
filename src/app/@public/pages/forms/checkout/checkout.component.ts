@@ -4,6 +4,10 @@ import { IMeData } from '@core/interfaces/session.interface';
 import { Component, OnInit } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { StripePaymentService } from '@mugan86/stripe-payment-form';
+import { take } from 'rxjs/internal/operators/take';
+
+import { CartService } from '@shop/core/services/cart.service.ts.service';
+import { CURRENCY_CODE, CURRENCY_SELECT } from '@core/constants/config';
 
 @Component({
   selector: 'app-checkout',
@@ -17,7 +21,8 @@ export class CheckoutComponent implements OnInit {
   constructor(
     private auth: AuthService,
     private route: Router,
-    private stripePayment: StripePaymentService
+    private stripePayment: StripePaymentService,
+    private cartService: CartService
   ) {
     this.auth.accessVar$.subscribe((data: IMeData) => {
       if (!data.status) {
@@ -28,20 +33,30 @@ export class CheckoutComponent implements OnInit {
       this.meData = data;
     });
 
-    this.stripePayment.cardTokenVar$.subscribe((token: string) => {
-      if (
-        token.indexOf('tok_') > -1 &&
-        this.meData.status &&
-        this.address !== ''
-      ) {
-        // Podemos enviar los datos
-        console.log('Podemos enviar la info correctamente: ', token);
-      }
-    });
+    this.stripePayment.cardTokenVar$
+      .pipe(take(1))
+      .subscribe((token: string) => {
+        if (
+          token.indexOf('tok_') > -1 &&
+          this.meData.status &&
+          this.address !== ''
+        ) {
+          // Podemos enviar los datos
+          console.log('Podemos enviar la info correctamente: ', token);
+          // Descripcion del pedido (tenemos que crear función en el carrito)
+          // Divisa
+          console.log('Divisa: ', CURRENCY_SELECT, 'Código: ', CURRENCY_CODE);
+          // Cliente de Stripe
+          console.log('Cliente de Stripe: ', this.meData.user.stripeCustomer);
+          // Total a pagar
+          console.log('Total a pagar: ', this.cartService.cart.total);
+        }
+      });
   }
 
   ngOnInit(): void {
     this.auth.start();
+    this.cartService.initialize();
     localStorage.removeItem('router_after_login');
   }
 
@@ -50,3 +65,4 @@ export class CheckoutComponent implements OnInit {
     console.log('send data', true);
   }
 }
+;
