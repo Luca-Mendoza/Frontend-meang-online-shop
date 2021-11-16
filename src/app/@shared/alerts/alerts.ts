@@ -1,17 +1,17 @@
 import { EMAIL_PATTERN } from '@core/constants/regex';
 import Swal from 'sweetalert2';
+import { TYPE_ALERT } from './values.config';
 
 // tslint:disable-next-line:typedef
 // Aplicando swal.mixin = para reutilizar codigo de la alert
-const swalWithBasicOptions = (title: string, html: string) => Swal.mixin({
-  title,
-  html,
-  focusConfirm: false,
-  cancelButtonText: 'Cancelar',
-  showCancelButton: true,
-});
-
-
+const swalWithBasicOptions = (title: string, html: string) =>
+  Swal.mixin({
+    title,
+    html,
+    focusConfirm: false,
+    cancelButtonText: 'Cancelar',
+    showCancelButton: true,
+  });
 
 // tslint:disable-next-line:typedef
 export async function fromBasicDialog(
@@ -34,10 +34,7 @@ export async function fromBasicDialog(
 }
 
 // tslint:disable-next-line:typedef
-export async function userFormBasicDialog(
-  title: string,
-  html: string
-) {
+export async function userFormBasicDialog(title: string, html: string) {
   return await swalWithBasicOptions(title, html).fire({
     preConfirm: () => {
       let error = '';
@@ -45,11 +42,13 @@ export async function userFormBasicDialog(
       if (!name) {
         error += 'Nombre es obligatorio<br/>';
       }
-      const lastname = (document.getElementById('lastname') as HTMLInputElement)?.value;
+      const lastname = (document.getElementById('lastname') as HTMLInputElement)
+        ?.value;
       if (!lastname) {
         error += 'Apellido es obligatorio<br/>';
       }
-      const email = (document.getElementById('email') as HTMLInputElement)?.value;
+      const email = (document.getElementById('email') as HTMLInputElement)
+        ?.value;
       if (!email) {
         error += 'Email es obligatorio<br/>';
       }
@@ -58,9 +57,7 @@ export async function userFormBasicDialog(
       }
       const role = (document.getElementById('role') as HTMLInputElement)?.value;
       if (error !== '') {
-        Swal.showValidationMessage(
-          error
-        );
+        Swal.showValidationMessage(error);
         return;
       }
       return {
@@ -68,7 +65,7 @@ export async function userFormBasicDialog(
         lastname,
         email,
         role,
-        birthday: new Date().toISOString()
+        birthday: new Date().toISOString(),
       };
     },
   });
@@ -107,11 +104,25 @@ export const loadData = (title: string, html: string) => {
     html,
     onBeforeOpen: () => {
       Swal.showLoading();
-    }
+    },
   });
 };
 
 export const closeAlert = () => {
   Swal.close();
-}
+};
 
+export const infoEventlert = async (
+  title: string,
+  html: string,
+  typeAlert: TYPE_ALERT = TYPE_ALERT.WARNING
+) => {
+  return await Swal.fire({
+    title,
+    html,
+    icon: typeAlert,
+    preConfirm: () => {
+      return true;
+    },
+  });
+};

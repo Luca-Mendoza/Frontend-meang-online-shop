@@ -8,6 +8,7 @@ import { take } from 'rxjs/internal/operators/take';
 
 import { CartService } from '@shop/core/services/cart.service.ts.service';
 import { CURRENCY_CODE, CURRENCY_SELECT } from '@core/constants/config';
+import { infoEventlert } from '@shared/alerts/alerts';
 
 @Component({
   selector: 'app-checkout',
@@ -61,8 +62,15 @@ export class CheckoutComponent implements OnInit {
   }
 
   sendData() {
+    if (this.meData.user.stripeCustomer === null) {
+      // Alerta para mostrar info
+      infoEventlert(
+        'Cliente no existe',
+        'Nesecitamos un cliente  para realizar el pago'
+      );
+      return;
+    }
     this.stripePayment.takeCardToken(true);
     console.log('send data', true);
   }
 }
-;
