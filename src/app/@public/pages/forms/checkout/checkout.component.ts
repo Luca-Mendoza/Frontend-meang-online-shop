@@ -13,6 +13,7 @@ import { StripePaymentService } from '@mugan86/stripe-payment-form';
 export class CheckoutComponent implements OnInit {
   meData: IMeData;
   key = environment.stripePublicKey;
+  address = '';
   constructor(
     private auth: AuthService,
     private route: Router,
@@ -28,7 +29,14 @@ export class CheckoutComponent implements OnInit {
     });
 
     this.stripePayment.cardTokenVar$.subscribe((token: string) => {
-      console.log(token);
+      if (
+        token.indexOf('tok_') > -1 &&
+        this.meData.status &&
+        this.address !== ''
+      ) {
+        // Podemos enviar los datos
+        console.log('Podemos enviar la info correctamente: ', token);
+      }
     });
   }
 

@@ -1,4 +1,4 @@
-<div class="container mt-4" *ngIf="meData">
+<div class="form-container container mt-4" *ngIf="meData">
   <div class="row">
     <div class="col-md-4 order-md-2 mb-4">
       <app-checkout-resume></app-checkout-resume>
@@ -6,7 +6,7 @@
     <div class="col-md-8 order-md-1">
       <h4 class="mb-3">Información de pago</h4>
       <hr />
-      <form class="needs-validation" novalidate="">
+      <form class="needs-validation" (ngSubmit)="sendData()" #forma="ngForm">
         <div class="row">
           <div class="col-md-6 mb-3">
             <label>Nombre/s:</label><br />
@@ -30,7 +30,13 @@
             rows="2"
             class="form-control"
             id="address"
-            placeholder="1234 Main St"
+            #addressData="ngModel"
+            [(ngModel)]="address"
+            name="address"
+            [ngClass]="{
+              'is-valid': !addressData.invalid,
+              'is-invalid': addressData.invalid
+            }"
             required=""
           ></textarea>
           <div class="invalid-feedback">
@@ -52,7 +58,8 @@
         <hr class="mb-4" />
       </form>
       <button
-        class="btn btn-primary btn-lg btn-block"
+        [disabled]="!forma.valid"
+        class="signup-btn btn btn-lg btn-block"
         (click)="sendData()"
         type="submit"
       >

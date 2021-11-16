@@ -1,7 +1,7 @@
 form {
   border: 1px solid #ccc;
   padding: 16px;
-  height: 100%;
+  margin-bottom: 16px;
 }
 
 hr {
@@ -22,16 +22,20 @@ textarea {
 }
 
 /* Set a style for all buttons */
+.form-container {
+  margin-bottom: 24px;
+}
 .signup-btn {
   background-color: #4caf50;
 }
 
 .signup-btn:disabled {
   background-color: #7c7d7c;
-  cursor: not-allowed
+  cursor: not-allowed;
 }
 
-.signup-btn:hover, .cancel-btn:hover {
+.signup-btn:hover,
+.cancel-btn:hover {
   opacity: 1;
 }
 
@@ -41,7 +45,8 @@ textarea {
   background-color: #f44336;
 }
 
-.signup-btn, .cancel-btn {
+.signup-btn,
+.cancel-btn {
   color: white;
   padding: 14px 20px;
   margin: 8px 0;
@@ -52,13 +57,15 @@ textarea {
 }
 
 /* Float cancel and signup buttons and add an equal width */
-.cancel-btn, .signup-btn {
+.cancel-btn,
+.signup-btn {
   width: 100%;
 }
 
 /* Change styles for cancel button and signup button on extra small screens */
 @media screen and (max-width: 300px) {
-  .cancel-btn, .signup-btn {
+  .cancel-btn,
+  .signup-btn {
     width: 100%;
   }
 }

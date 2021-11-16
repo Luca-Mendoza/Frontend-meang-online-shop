@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { CheckoutRoutingModule } from './checkout-routing.module';
 import { CheckoutComponent } from './checkout.component';
 import { StripePaymentFormModule } from '@mugan86/stripe-payment-form';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [CheckoutComponent],
@@ -13,6 +14,7 @@ import { StripePaymentFormModule } from '@mugan86/stripe-payment-form';
     CheckoutRoutingModule,
     CheckoutResumeModule,
     StripePaymentFormModule,
+    FormsModule,
   ],
   schemas: [NO_ERRORS_SCHEMA],
 })
