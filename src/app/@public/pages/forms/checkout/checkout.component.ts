@@ -63,12 +63,18 @@ export class CheckoutComponent implements OnInit {
             //  Divisa
             currency: CURRENCY_CODE,
           };
+          // Enviar la información loanding....
+          loadData(
+            'Realizando el pago',
+            'Espera mientras se procesa la información de pago'
+          );
+
           // Enviar la información y procesarelpago
           this.chargeService
             .pay(payment)
             .pipe(take(1))
             .subscribe(
-              (result: {
+              async (result: {
                 status: boolean;
                 message: string;
                 charge: object;
@@ -77,9 +83,20 @@ export class CheckoutComponent implements OnInit {
                   // Procesar el pago
                   console.log('Ok');
                   console.log(result.charge);
+                  await infoEventlert(
+                    'Pedido realizado correctamente',
+                    'Has efectuado correctamente el pedido. ¡¡Muchas gracias!!',
+                    TYPE_ALERT.SUCCESS
+                  );
+                  this.cartService.clear();
                 } else {
                   // Mostrar mensaje de error
                   console.log('Error', result.message);
+                  await infoEventlert(
+                    'Pedido NO DE HA realizado',
+                    'El predido no se a realizado. Inténtelo de nuevo poravor',
+                    TYPE_ALERT.SUCCESS
+                  );
                 }
               }
             );
