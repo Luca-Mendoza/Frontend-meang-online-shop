@@ -15,7 +15,7 @@ export class ChargeService extends ApiService {
     super(apollo);
   }
 
-  payOrder(payment: IPayment) {
+  pay(payment: IPayment) {
     return this.set(CREATE_PAY_ORDER, { payment }).pipe(
       map((result: any) => {
         return result.chargeOrder;

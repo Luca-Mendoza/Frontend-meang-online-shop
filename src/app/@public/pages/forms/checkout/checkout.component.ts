@@ -13,6 +13,9 @@ import { CURRENCY_CODE, CURRENCY_SELECT } from '@core/constants/config';
 import { infoEventlert, loadData } from '@shared/alerts/alerts';
 import { TYPE_ALERT } from '@shared/alerts/values.config';
 
+import { ChargeService } from '@shop-core/services/stripe/charge.service';
+import { IPayment } from '@core/interfaces/stripe/payment.interface';
+
 @Component({
   selector: 'app-checkout',
   templateUrl: './checkout.component.html',
@@ -27,7 +30,8 @@ export class CheckoutComponent implements OnInit {
     private router: Router,
     private stripePayment: StripePaymentService,
     private cartService: CartService,
-    private customerService: CustomerService
+    private customerService: CustomerService,
+    private chargeService: ChargeService
   ) {
     this.auth.accessVar$.subscribe((data: IMeData) => {
       if (!data.status) {
@@ -46,20 +50,39 @@ export class CheckoutComponent implements OnInit {
           this.meData.status &&
           this.address !== ''
         ) {
-          // Podemos enviar los datos
-          console.log('Podemos enviar la info correctamente: ', token);
-          // Divisa
-          console.log('Divisa: ', CURRENCY_SELECT, 'Código: ', CURRENCY_CODE);
-          // Cliente de Stripe
-          console.log('Cliente de Stripe: ', this.meData.user.stripeCustomer);
-          // Total a pagar
-          console.log('Total a pagar: ', this.cartService.cart.total);
-
-          // Descripcion del pedido (tenemos que crear función en el carrito)
-          console.log(
-            'Descripcion del pedido: ',
-            this.cartService.orderDescription()
-          );
+          // Almacenar la información para enviar
+          const payment: IPayment = {
+            // Podemos enviar los datos del usuario
+            token,
+            // Total a pagar
+            amount: this.cartService.cart.total.toString(),
+            // Descripcion del pedido (tenemos que crear función en el carrito)
+            description: this.cartService.orderDescription(),
+            // Cliente de Stripe
+            customer: this.meData.user.stripeCustomer,
+            //  Divisa
+            currency: CURRENCY_CODE,
+          };
+          // Enviar la información y procesarelpago
+          this.chargeService
+            .pay(payment)
+            .pipe(take(1))
+            .subscribe(
+              (result: {
+                status: boolean;
+                message: string;
+                charge: object;
+              }) => {
+                if (result.status) {
+                  // Procesar el pago
+                  console.log('Ok');
+                  console.log(result.charge);
+                } else {
+                  // Mostrar mensaje de error
+                  console.log('Error', result.message);
+                }
+              }
+            );
         }
       });
   }

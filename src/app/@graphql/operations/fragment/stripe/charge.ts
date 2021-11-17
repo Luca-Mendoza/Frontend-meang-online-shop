@@ -5,13 +5,12 @@ export const CHARGE_FRAGMENT_OBJECT = gql`
     id
     card
     paid
-    amount
-    description
     customer
-    currency
+    created
+    amount
     status
+    typeOrder
     receiptUrl
     receiptEmail
-    typeOrder
   }
 `;
