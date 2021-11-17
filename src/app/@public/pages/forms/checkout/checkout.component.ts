@@ -15,6 +15,7 @@ import { TYPE_ALERT } from '@shared/alerts/values.config';
 
 import { ChargeService } from '@shop-core/services/stripe/charge.service';
 import { IPayment } from '@core/interfaces/stripe/payment.interface';
+import { ICart } from '@shop/core/components/shopping-cart/shopping-cart.interface';
 
 @Component({
   selector: 'app-checkout',
@@ -25,6 +26,7 @@ export class CheckoutComponent implements OnInit {
   meData: IMeData;
   key = environment.stripePublicKey;
   address = '';
+  avaliable = false;
   constructor(
     private auth: AuthService,
     private router: Router,
@@ -42,6 +44,13 @@ export class CheckoutComponent implements OnInit {
       this.meData = data;
     });
 
+    this.cartService.itemsVar$.pipe(take(1)).subscribe((cart: ICart) => {
+      if (this.cartService.cart.total === 0) {
+        this.avaliable = false;
+        this.notAvailableProducts();
+      }
+    });
+
     this.stripePayment.cardTokenVar$
       .pipe(take(1))
       .subscribe((token: string) => {
@@ -50,6 +59,10 @@ export class CheckoutComponent implements OnInit {
           this.meData.status &&
           this.address !== ''
         ) {
+          if (this.cartService.cart.total === 0) {
+            this.avaliable = false;
+            this.notAvailableProducts();
+          }
           // Almacenar la información para enviar
           const payment: IPayment = {
             // Podemos enviar los datos del usuario
@@ -104,6 +117,16 @@ export class CheckoutComponent implements OnInit {
       });
   }
 
+  async notAvailableProducts() {
+    this.cartService.close();
+    this.avaliable = false;
+    await infoEventlert(
+      'Acción no disponible',
+      'No puede realizar el pago sin productos en el carrito de la compra'
+    );
+    this.router.navigate(['/']);
+  }
+
   ngOnInit(): void {
     this.auth.start();
 
@@ -114,6 +137,13 @@ export class CheckoutComponent implements OnInit {
 
     this.cartService.initialize();
     localStorage.removeItem('route_after_login');
+
+    if (this.cartService.cart.total === 0) {
+      this.avaliable = false;
+      this.notAvailableProducts();
+    } else {
+      this.avaliable = true;
+    }
   }
 
   async sendData() {
