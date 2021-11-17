@@ -10,7 +10,7 @@ import { CartService } from '@shop/core/services/cart.service.ts.service';
 import { CustomerService } from '@shop/core/services/stripe/customer.service';
 
 import { CURRENCY_CODE, CURRENCY_SELECT } from '@core/constants/config';
-import { infoEventlert } from '@shared/alerts/alerts';
+import { infoEventlert, loadData } from '@shared/alerts/alerts';
 import { TYPE_ALERT } from '@shared/alerts/values.config';
 
 @Component({
@@ -48,13 +48,18 @@ export class CheckoutComponent implements OnInit {
         ) {
           // Podemos enviar los datos
           console.log('Podemos enviar la info correctamente: ', token);
-          // Descripcion del pedido (tenemos que crear función en el carrito)
           // Divisa
           console.log('Divisa: ', CURRENCY_SELECT, 'Código: ', CURRENCY_CODE);
           // Cliente de Stripe
           console.log('Cliente de Stripe: ', this.meData.user.stripeCustomer);
           // Total a pagar
           console.log('Total a pagar: ', this.cartService.cart.total);
+
+          // Descripcion del pedido (tenemos que crear función en el carrito)
+          console.log(
+            'Descripcion del pedido: ',
+            this.cartService.orderDescription()
+          );
         }
       });
   }
@@ -80,6 +85,9 @@ export class CheckoutComponent implements OnInit {
       );
       const StripeName = `${this.meData.user.name} ${this.meData.user.lastname}`;
       const StripeEmail = this.meData.user.email;
+
+      loadData('Procesando la informacion', 'Creando el Cliente...');
+
       this.customerService
         .add(StripeName, StripeEmail)
         .pipe(take(1))

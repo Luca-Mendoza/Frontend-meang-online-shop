@@ -29,6 +29,16 @@ export class CartService {
     }
     return this.cart;
   }
+  /**  Obtenemos la descripcion del pedido*/
+
+  orderDescription() {
+    let description = '';
+    this.cart.products.map((product: IProduct) => {
+      description += `${product.name}  (${product.description}) x ${product.qty}\n`;
+    });
+    return description;
+  }
+
   /**
    * Observable de las acciones
    */
