@@ -52,7 +52,7 @@ export class CheckoutComponent implements OnInit {
     });
 
     this.cartService.itemsVar$.pipe(take(1)).subscribe((cart: ICart) => {
-      if (this.cartService.cart.total === 0) {
+      if (this.cartService.cart.total === 0 && this.avaliable === false) {
         this.avaliable = false;
         this.notAvailableProducts();
       }
@@ -110,7 +110,9 @@ export class CheckoutComponent implements OnInit {
                     TYPE_ALERT.SUCCESS
                   );
                   this.sendEmail(result.charge as ICharge);
+                  this.router.navigate(['/orders']);
                   this.cartService.clear();
+                  return;
                 } else {
                   // Mostrar mensaje de error
                   console.log('Error', result.message);
