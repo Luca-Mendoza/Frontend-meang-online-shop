@@ -32,6 +32,7 @@ export class CheckoutComponent implements OnInit {
   key = environment.stripePublicKey;
   address = '';
   avaliable = false;
+  block = false;
   constructor(
     private auth: AuthService,
     private router: Router,
@@ -82,6 +83,7 @@ export class CheckoutComponent implements OnInit {
             //  Divisa
             currency: CURRENCY_CODE,
           };
+          this.block = true;
           // Enviar la información loanding....
           loadData(
             'Realizando el pago',
@@ -118,6 +120,7 @@ export class CheckoutComponent implements OnInit {
                     TYPE_ALERT.SUCCESS
                   );
                 }
+                this.block = false;
               }
             );
         }
@@ -157,7 +160,7 @@ export class CheckoutComponent implements OnInit {
 
     this.cartService.initialize();
     localStorage.removeItem('route_after_login');
-
+    this.block = false;
     if (this.cartService.cart.total === 0) {
       this.avaliable = false;
       this.notAvailableProducts();

@@ -58,7 +58,7 @@
         <hr class="mb-4" />
       </form>
       <button
-        [disabled]="!forma.valid"
+        [disabled]="!forma.valid || block "
         class="signup-btn btn btn-lg btn-block"
         (click)="sendData()"
         type="submit"
