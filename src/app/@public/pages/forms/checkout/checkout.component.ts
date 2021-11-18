@@ -14,8 +14,13 @@ import { infoEventlert, loadData } from '@shared/alerts/alerts';
 import { TYPE_ALERT } from '@shared/alerts/values.config';
 
 import { ChargeService } from '@shop-core/services/stripe/charge.service';
+import { MailService } from '@core/services/mail.service';
+
 import { IPayment } from '@core/interfaces/stripe/payment.interface';
+import { ICharge } from '@core/interfaces/stripe/charge.interface';
+
 import { ICart } from '@shop/core/components/shopping-cart/shopping-cart.interface';
+import { IMail } from '@core/interfaces/mail.interface';
 
 @Component({
   selector: 'app-checkout',
@@ -33,7 +38,8 @@ export class CheckoutComponent implements OnInit {
     private stripePayment: StripePaymentService,
     private cartService: CartService,
     private customerService: CustomerService,
-    private chargeService: ChargeService
+    private chargeService: ChargeService,
+    private mailService: MailService
   ) {
     this.auth.accessVar$.subscribe((data: IMeData) => {
       if (!data.status) {
@@ -90,7 +96,7 @@ export class CheckoutComponent implements OnInit {
               async (result: {
                 status: boolean;
                 message: string;
-                charge: object;
+                charge: ICharge;
               }) => {
                 if (result.status) {
                   // Procesar el pago
@@ -101,6 +107,7 @@ export class CheckoutComponent implements OnInit {
                     'Has efectuado correctamente el pedido. ¡¡Muchas gracias!!',
                     TYPE_ALERT.SUCCESS
                   );
+                  this.sendEmail(result.charge as ICharge);
                   this.cartService.clear();
                 } else {
                   // Mostrar mensaje de error
@@ -115,6 +122,19 @@ export class CheckoutComponent implements OnInit {
             );
         }
       });
+  }
+
+  sendEmail(charge: ICharge) {
+    const mail: IMail = {
+      to: charge.receiptEmail,
+      subject: 'Pedido realizado',
+      html: `
+      El pedido se ha sido realizado correctamente.
+      Puedes consultarlo en <a href="${charge.receiptUrl}" target="_blank">esta url</a>
+      `,
+    };
+
+    this.mailService.send(mail).pipe(take(1)).subscribe();
   }
 
   async notAvailableProducts() {

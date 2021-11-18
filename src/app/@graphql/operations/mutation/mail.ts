@@ -1,10 +1,9 @@
 import gql from 'graphql-tag';
 
 export const SEND_EMAIL_ACTION = gql`
-  mutation sendEmail($email: String!) {
-    sendEmail(email: $email) {
+  mutation sendEmail($mail: MailInput!) {
+    sendEmail(mail: $mail) {
       status
-      message
     }
   }
 `;
