@@ -117,7 +117,7 @@ export class CheckoutComponent implements OnInit {
                   // Mostrar mensaje de error
                   console.log('Error', result.message);
                   await infoEventlert(
-                    'Pedido NO DE HA realizado',
+                    'Pedido NO SE HA realizado',
                     'El predido no se a realizado. Inténtelo de nuevo poravor',
                     TYPE_ALERT.SUCCESS
                   );
