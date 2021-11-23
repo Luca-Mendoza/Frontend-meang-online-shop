@@ -128,7 +128,6 @@ export class CheckoutComponent implements OnInit {
         }
       });
   }
-
   sendEmail(charge: ICharge) {
     const mail: IMail = {
       to: charge.receiptEmail,
