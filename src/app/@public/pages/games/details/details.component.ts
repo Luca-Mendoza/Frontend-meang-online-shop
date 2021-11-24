@@ -36,6 +36,8 @@ export class DetailsComponent implements OnInit {
       this.loading = true;
       loadData('Cargando datos', 'Espera mientra carga la información');
       this.loadDataValue(+params.id);
+
+      this.updateListener(+params.id);
     });
     this.cartService.itemsVar$.subscribe((data: ICart) => {
       if (data.subtotal === 0) {
@@ -45,16 +47,23 @@ export class DetailsComponent implements OnInit {
       this.product.qty = this.findProduct(+this.product.id).qty;
     });
   }
+
+  updateListener(id: number) {
+    console.log('escuchando', id);
+  }
+
   findProduct(id: number) {
     return this.cartService.cart.products.find((item) => +item.id === id);
   }
 
   loadDataValue(id: number) {
     this.productService.getDetailsProduct(id).subscribe((result) => {
-
       this.product = result.product;
       const saveProductInCart = this.findProduct(+this.product.id);
-      this.product.qty = (saveProductInCart !== undefined) ? saveProductInCart.qty : this.product.qty;
+      this.product.qty =
+        saveProductInCart !== undefined
+          ? saveProductInCart.qty
+          : this.product.qty;
       this.selectImage = this.product.img;
       this.screens = result.screens;
       this.relationalProducts = result.relational;

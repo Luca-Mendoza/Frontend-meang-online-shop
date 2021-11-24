@@ -11,7 +11,7 @@ import {
   SHOP_PRODUCT_RANDOM_ITEMS,
 } from '@graphql/operations/query/shop-product';
 
-import { SUBSCRIPTION_PRODUCT_SELECT_STOCK } from '@graphql/operations/subscription/shop-product';
+import { SUBSCRIPTIONS_PRODUCT_SELECT_STOCK } from '@graphql/operations/subscription/shop-product';
 
 import { HOME_PAGE } from '@graphql/operations/query/home-page';
 import { DETAILS_PAGE } from '@graphql/operations/query/details-page';
@@ -143,9 +143,9 @@ export class ProductsService extends ApiService {
     return resulList;
   }
 
-  stockUpdateListener() {
-    return this.subscription(SUBSCRIPTION_PRODUCT_SELECT_STOCK, {
-      id: 1,
-    }).pipe(map((result: any) => result.selectProductStockUpdate));
+  stockUpdateListener(id: number) {
+    return this.subscription(SUBSCRIPTIONS_PRODUCT_SELECT_STOCK, { id }).pipe(
+      map((result: any) => result.selectProductStockUpdate)
+    );
   }
 }

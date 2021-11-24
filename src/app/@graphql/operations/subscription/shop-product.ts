@@ -1,11 +1,10 @@
 import gql from 'graphql-tag';
 
-export const SUBSCRIPTION_PRODUCT_SELECT_STOCK = gql`
-  subscriptions selectStockProductupdate(
-    $id: Int!
-  ) {
+export const SUBSCRIPTIONS_PRODUCT_SELECT_STOCK = gql`
+  subscription selectStockProductupdate($id: Int!) {
     selectStockProductupdate(id: $id) {
-        id
-        stock
+      id
+      stock
+    }
   }
 `;

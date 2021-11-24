@@ -33,7 +33,7 @@ export class GraphqlModule {
 
     // Apollo Link para conectar con el servidor subscriptionLink
     const subscriptionLink = new WebSocketLink({
-      uri: `ws://localhost:2002/subscriptions`,
+      uri: `ws://localhost:2002/graphql`,
       options: {
         reconnect: true,
       },
