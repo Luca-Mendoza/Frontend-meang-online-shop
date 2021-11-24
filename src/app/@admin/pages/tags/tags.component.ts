@@ -7,11 +7,13 @@ import { DocumentNode } from 'graphql';
 import { fromBasicDialog, optionsWithDetails } from '@shared/alerts/alerts';
 import { TYPE_ALERT } from '@shared/alerts/values.config';
 import { basicAlert } from '@shared/alerts/toasts';
+import { TitleService } from '@admin/core/services/title.service';
+import { LABEL } from '@admin/core/constants/title.constants';
 
 @Component({
   selector: 'app-tags',
   templateUrl: './tags.component.html',
-  styleUrls: ['./tags.component.scss']
+  styleUrls: ['./tags.component.scss'],
 })
 export class TagsComponent implements OnInit {
   // La consulta
@@ -27,9 +29,13 @@ export class TagsComponent implements OnInit {
   // definimos dato para hacer dinamica la Table
   columns: Array<ITableColumns>;
 
-  constructor(private service: TagsService) { }
+  constructor(
+    private service: TagsService,
+    private titleService: TitleService
+  ) {}
 
   ngOnInit(): void {
+    this.titleService.updateTitle(LABEL.TAGS);
     this.context = {};
     this.itemsPage = 10;
     this.resultData = {
@@ -96,7 +102,7 @@ export class TagsComponent implements OnInit {
     }
   }
 
-    // ================ Funciones 'Añadir', 'Bloquear', 'Informacion' ===================== //
+  // ================ Funciones 'Añadir', 'Bloquear', 'Informacion' ===================== //
   // tslint:disable-next-line:typedef
   private async addForm(html: string) {
     const result = await fromBasicDialog('Añadir tag', html, 'name');
@@ -157,9 +163,4 @@ export class TagsComponent implements OnInit {
       this.blockGenre(tag.id);
     }
   }
-
-
-
-
 }
-
