@@ -63,6 +63,11 @@ const routes: Routes = [
             (m) => m.RegisterModule
           ),
       },
+      // @public --> pages --> faq
+      {
+        path: 'faq',
+        loadChildren: () => import('./faq/faq.module').then((m) => m.FaqModule),
+      },
       // @public --> pages --> RecuperarPassword
       {
         path: 'forgot',

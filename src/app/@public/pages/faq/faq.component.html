@@ -1,0 +1,29 @@
+<div class="container">
+  <h1>FAQ - Preguntas frecuentes</h1>
+  <p>
+    A continuacion preguntas mas frecuentes realizado porlos clientes y sus
+    correspondientes respuestas.
+  </p>
+  <ngb-accordion [closeOthers]="true" activeIds="static-1">
+    <ngb-panel id="static-1" title="¿Qué método de pago estan disponibles?">
+      <ng-template ngbPanelContent>
+        <P>Los pagos se realizan mediante tarjeta de crédito.</P>
+      </ng-template>
+    </ngb-panel>
+    <ngb-panel id="static-2" title="¿En qué plataformas se ejecuta GAMEZONIA?">
+      <ng-template ngbPanelContent>
+        <P
+          >La aplicación solo está disponible para Windows. Las versiones de
+          Linux y macOS están actualmente en proceso.</P
+        >
+      </ng-template>
+    </ngb-panel>
+
+    <ngb-panel id="static-3" title="¿Dónde está mi contraseña?">
+      <ng-template ngbPanelContent>
+        Si perdió su contraseña, puede Recuperarla haciendo clic en el enlace
+        "Olvidé su contraseña".
+      </ng-template>
+    </ngb-panel>
+  </ngb-accordion>
+</div>
