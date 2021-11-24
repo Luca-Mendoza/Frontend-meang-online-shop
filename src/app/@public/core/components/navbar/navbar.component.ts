@@ -8,6 +8,7 @@ import { AuthService } from '@core/services/auth.service';
 import shopMenuItems from '@data/menus/shop.json';
 import { REDIRECTS_ROUTER } from '@core/constants/config';
 import { Router } from '@angular/router';
+import { optionsWithDetails } from '@shared/alerts/alerts';
 
 @Component({
   selector: 'app-navbar',
@@ -52,13 +53,23 @@ export class NavbarComponent implements OnInit {
     this.cartService.open();
   }
 
-  logout() {
+  async logout() {
+    const result = await optionsWithDetails(
+      'Cerrar sesión',
+      '¿Estás seguro de cerrar sesión?',
+      430,
+      'Si, cerrar', // true
+      'No, cerrar'
+    ); // false
+    if (!result) {
+      return;
+    }
     // Rutas que usaremos para redireccionar
     if (REDIRECTS_ROUTER.includes(this.router.url)) {
       // En el caso de encontrarla marcamos para que redireccione
       localStorage.setItem('route_after_login', this.router.url);
     }
-
     this.authService.resetSession();
+    this.router.navigate(['/']);
   }
 }
