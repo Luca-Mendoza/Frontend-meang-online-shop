@@ -56,8 +56,10 @@
         <option [value]="product.id">{{ product.description }}</option>
         <option [value]="opt.id" *ngFor="let opt of relationalProducts">
           {{ opt.platform.name }}
-        </option></select
-      ><br />
+        </option>
+        </select
+      >
+      <br />
       <button
         (click)="addToCart()"
         class="btn btn-dark mt-3"

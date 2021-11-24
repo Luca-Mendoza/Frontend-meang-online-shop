@@ -95,7 +95,10 @@ export class DetailsComponent implements OnInit {
 
   selectOtherPlatform($event) {
     console.log($event.target.value);
-    this.loadDataValue(+$event.target.value);
+    const id = +$event.target.value;
+    this.loadDataValue(id);
+    this.updateListener(id);
+    window.history.replaceState({}, '', `/#/games/details/${id}`);
   }
   selectImgMain(i: number) {
     this.selectImage = this.screens[i];
