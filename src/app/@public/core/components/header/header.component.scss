@@ -1,14 +1,20 @@
 * {
-    color: rgba(255, 255, 255, .80);
+  color: rgba(255, 255, 255, 0.8);
 }
-.logo__type{
-    width: 25%;
-    text-align: left;
-    margin: 5px 0 5px 10px;
+.logo__type {
+  width: 25%;
+  text-align: left;
+  margin: 5px 0 5px 10px;
 }
 
-.email__type {
+.delivery {
+  position: relative;
+  top: 30%;
+}
 
-    position: relative;
-    top: 25%;
+.nav-link:hover {
+  text-decoration: underline;
+}
+.faq {
+  margin-top: 10px;
 }
