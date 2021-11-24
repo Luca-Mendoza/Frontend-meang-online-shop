@@ -50,6 +50,20 @@ export class DetailsComponent implements OnInit {
 
   updateListener(id: number) {
     console.log('escuchando', id);
+    this.productService.stockUpdateListener(id).subscribe((result) => {
+      this.product.stock = result.stock;
+
+      // Comproba que cantidad seleccionada es mayoque el stock
+      // si se da esta situación, el toope pasara al valor del stock
+      if (this.product.qty > this.product.stock) {
+        this.product.qty = this.product.stock;
+      }
+
+      // si el stock es == 0,  se le asigna un valor de 1
+      if (this.product.stock === 0) {
+        this.product.qty = 1;
+      }
+    });
   }
 
   findProduct(id: number) {
