@@ -8,9 +8,11 @@ import { ApiService } from '@graphql/services/api.service';
 import {
   SHOP_LAST_UNITS_OFFERS,
   SHOP_PRODUCT_BY_PLATFORM,
-  SHOP_PRODUCT_DETAILS,
   SHOP_PRODUCT_RANDOM_ITEMS,
 } from '@graphql/operations/query/shop-product';
+
+import { SUBSCRIPTION_PRODUCT_SELECT_STOCK } from '@graphql/operations/subscription/shop-product';
+
 import { HOME_PAGE } from '@graphql/operations/query/home-page';
 import { DETAILS_PAGE } from '@graphql/operations/query/details-page';
 
@@ -139,5 +141,11 @@ export class ProductsService extends ApiService {
       resulList.push(this.setInObject(shopObject, showDescription));
     });
     return resulList;
+  }
+
+  stockUpdateListener() {
+    return this.subscription(SUBSCRIPTION_PRODUCT_SELECT_STOCK, {
+      id: 1,
+    }).pipe(map((result: any) => result.selectProductStockUpdate));
   }
 }

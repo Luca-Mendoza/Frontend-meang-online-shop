@@ -29,7 +29,7 @@ export class ApiService {
         query,
         variables,
         context,
-        fetchPolicy: (cache) ? 'network-only' : 'no-cache',
+        fetchPolicy: cache ? 'network-only' : 'no-cache',
       })
       .valueChanges.pipe(
         map((result) => {
@@ -48,6 +48,19 @@ export class ApiService {
         mutation,
         variables,
         context,
+      })
+      .pipe(
+        map((result) => {
+          return result.data;
+        })
+      );
+  }
+
+  protected subscription(subscription: DocumentNode, variables: object = {}) {
+    return this.apollo
+      .subscribe({
+        query: subscription,
+        variables,
       })
       .pipe(
         map((result) => {
