@@ -1,4 +1,6 @@
 import { TitleService } from '@admin-core/services/title.service';
+import { AdminService } from '@admin-core/services/admin.service';
+
 import { Component, OnInit } from '@angular/core';
 import { LABEL } from '@admin-core/constants/title.constants';
 
@@ -43,9 +45,15 @@ export class DashboardComponent implements OnInit {
     },
   ];
 
-  constructor(private titleService: TitleService) {}
+  constructor(
+    private titleService: TitleService,
+    private adminService: AdminService
+  ) {}
 
   ngOnInit(): void {
     this.titleService.updateTitle(LABEL.DASHBOARD);
+    this.adminService.getStats().subscribe((data) => {
+      console.log(data);
+    });
   }
 }
