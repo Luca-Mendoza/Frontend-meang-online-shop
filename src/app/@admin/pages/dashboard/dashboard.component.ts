@@ -22,14 +22,24 @@ export class DashboardComponent implements OnInit {
       value: 'ShoProducts',
     },
     {
-      icon: 'fas fa-users',
-      title: 'Usuarioss',
-      value: 'users',
+      icon: 'fas fa-tags',
+      title: 'Tags',
+      value: 'tags',
     },
     {
-      icon: 'fas fa-users',
-      title: 'Usuarioss',
-      value: 'users',
+      icon: 'fas fa-atlas',
+      title: 'Géneros',
+      value: 'genres',
+    },
+    {
+      icon: 'fas fa-gamepad',
+      title: 'Juegos',
+      value: 'gemes',
+    },
+    {
+      icon: 'fab fa-chromecast',
+      title: 'Plataformas',
+      value: 'planforms',
     },
   ];
 
