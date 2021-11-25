@@ -21,9 +21,9 @@ export class AdminService extends ApiService {
           users: result.users,
           platforms: result.platforms,
           genres: result.genres,
-          tangs: result.tangs,
+          tags: result.tags,
           shopProducts: result.shopProducts,
-          products: result.products,
+          games: result.products,
         };
       })
     );

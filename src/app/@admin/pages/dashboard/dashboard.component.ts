@@ -5,6 +5,7 @@ import { Component, OnInit } from '@angular/core';
 import { LABEL } from '@admin-core/constants/title.constants';
 
 import { IGeneralInfo } from '@shared/general-info/interfaces/general-info.interface';
+import { closeAlert, loadData } from '@shared/alerts/alerts';
 
 @Component({
   selector: 'app-dashboard',
@@ -21,7 +22,7 @@ export class DashboardComponent implements OnInit {
     {
       icon: 'fas fa-store-alt',
       title: 'Productos en venta',
-      value: 'ShoProducts',
+      value: 'shopProducts',
     },
     {
       icon: 'fas fa-tags',
@@ -36,14 +37,16 @@ export class DashboardComponent implements OnInit {
     {
       icon: 'fas fa-gamepad',
       title: 'Juegos',
-      value: 'gemes',
+      value: 'games',
     },
     {
       icon: 'fab fa-chromecast',
       title: 'Plataformas',
-      value: 'planforms',
+      value: 'platforms',
     },
   ];
+
+  loading = true;
 
   constructor(
     private titleService: TitleService,
@@ -51,9 +54,16 @@ export class DashboardComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    loadData('Cargando datos', 'Espera mientras se carga las estadisticas');
     this.titleService.updateTitle(LABEL.DASHBOARD);
+    this.loading = true;
     this.adminService.getStats().subscribe((data) => {
-      console.log(data);
+      this.loading = false;
+
+      this.items.map((item) => {
+        item.value = data[item.value];
+        closeAlert();
+      });
     });
   }
 }
