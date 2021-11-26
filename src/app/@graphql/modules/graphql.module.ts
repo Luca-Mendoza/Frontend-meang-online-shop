@@ -28,7 +28,7 @@ export class GraphqlModule {
     });
 
     // Apollo Link para conectar con el servidor
-    const uri = 'http://localhost:2002/graphql';
+    const uri = environment.backend;
     // const uri = 'http://localhost:2002/graphql';
     const urlLink = ApolloLink.from([errorLink, httpLink.create({ uri })]);
 
