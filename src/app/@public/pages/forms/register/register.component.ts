@@ -28,7 +28,6 @@ export class RegisterComponent implements OnInit {
     const data = new Date();
     data.setFullYear(data.getFullYear() - 18);
     this.register.birthday = data.toISOString().substring(0, 10);
-    console.log(this.register);
   }
 
   private formatNumbers(num: number | string) {

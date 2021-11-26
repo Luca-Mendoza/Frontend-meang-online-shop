@@ -92,7 +92,6 @@ export class DetailsComponent implements OnInit {
   }
 
   selectOtherPlatform($event) {
-    console.log($event.target.value);
     const id = +$event.target.value;
     this.loadDataValue(id);
     this.updateListener(id);

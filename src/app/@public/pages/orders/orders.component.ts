@@ -26,7 +26,6 @@ export class OrdersComponent implements OnInit {
       this.meDeta = meDeta;
       // Si tenemos información cargamos con el cliente
       if (this.meDeta.user.stripeCustomer !== '') {
-        console.log(this.meDeta);
         this.loadChargeData();
       }
     });

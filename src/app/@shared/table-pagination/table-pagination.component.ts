@@ -84,14 +84,12 @@ export class TablePaginationComponent implements OnInit {
 
   // tslint:disable-next-line: typedef
   refreshPage() {
-    console.log(this.infoPage.page);
     this.loadData();
   }
 
   // Evento de los botones
   // tslint:disable-next-line:typedef
   manageAction(action: string, data: any) {
-    console.log(action, data);
     this.manageItem.emit([action, data]);
   }
 }
