@@ -20,7 +20,6 @@ export class ChangePasswordComponent implements OnInit {
   constructor(private route: ActivatedRoute, private passwordService: PasswordService, private router: Router) {
     this.route.params.subscribe(params => {
       this.token = params.token;
-      console.log(this.token);
     });
   }
 
@@ -28,7 +27,6 @@ export class ChangePasswordComponent implements OnInit {
   }
 
   reset() {
-    console.log(this.values);
     if (this.values.password !== this.values.passwordTwo) {
       basicAlert(TYPE_ALERT.WARNING, 'Las contraseña no coinciden y no es válido para cambiar la contraseña. Procura asegurarte que las contraseña son iguales');
       return;

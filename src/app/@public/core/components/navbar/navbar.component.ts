@@ -31,7 +31,6 @@ export class NavbarComponent implements OnInit {
     private router: Router
   ) {
     this.authService.accessVar$.subscribe((result) => {
-      console.log(result.status);
       this.session = result;
       this.access = this.session.status;
       this.role = this.session.user?.role;
@@ -49,7 +48,6 @@ export class NavbarComponent implements OnInit {
   }
 
   open() {
-    console.log('Navbar Open Cart');
     this.cartService.open();
   }
 

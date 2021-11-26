@@ -25,10 +25,8 @@ export class ShoppingCartComponent implements OnInit {
     // Traemos la informacion que tenemos guardada en el localstorage
 
     this.cart = this.cartService.initialize();
-    console.log(this.cart);
   }
   proccess() {
-    console.log(this.cart);
     this.router.navigate(['checkout']);
     this.closeNav();
   }

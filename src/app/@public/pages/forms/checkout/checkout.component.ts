@@ -114,8 +114,7 @@ export class CheckoutComponent implements OnInit {
               }) => {
                 if (result.status) {
                   // Procesar el pago
-                  console.log('Ok');
-                  console.log(result.charge);
+
                   await infoEventlert(
                     'Pedido realizado correctamente',
                     'Has efectuado correctamente el pedido. ¡¡Muchas gracias!!',
@@ -127,7 +126,6 @@ export class CheckoutComponent implements OnInit {
                   return;
                 } else {
                   // Mostrar mensaje de error
-                  console.log('Error', result.message);
                   await infoEventlert(
                     'Pedido NO SE HA realizado',
                     'El predido no se a realizado. Inténtelo de nuevo poravor',

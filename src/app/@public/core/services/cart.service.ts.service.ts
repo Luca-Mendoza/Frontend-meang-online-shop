@@ -51,7 +51,6 @@ export class CartService {
     const productTotal = this.cart.products.length;
     // Comprobamos si tenemos productos
     if (productTotal === 0) {
-      console.log('Añadiendo primer producto');
       this.cart.products.push(product);
     } else {
       // Si tenemos productos hacer lo siguiente
@@ -59,7 +58,6 @@ export class CartService {
       for (let i = 0; i < productTotal; i++) {
         // Comprobar que coincide el producto con alguno de la lista
         if (product.id === this.cart.products[i].id) {
-          console.log('Producto existente y vamos a gestionarlo');
           if (product.qty === 0) {
             console.log('Borrar item seleccionado');
             // Quitar elemento
@@ -92,6 +90,8 @@ export class CartService {
     this.setInfo();
   }
 
+  //Hemos borrado la información del carrito
+
   clear() {
     this.products = [];
     this.cart = {
@@ -100,7 +100,6 @@ export class CartService {
       products: this.products,
     };
     this.setInfo();
-    console.log('Hemos borrado la información');
     return this.cart;
   }
   /** Añadir información sea para vaciar carrito o almacene los productos que añadimos al carrito */
@@ -111,7 +110,6 @@ export class CartService {
 
   /** Abrir modal del carrito de compra */
   open() {
-    console.log('openNav');
     document.getElementById('mySidenav').style.width = '600px';
     document.getElementById('overlay').style.display = 'block';
     document.getElementById('app').style.overflow = 'hidden';
@@ -119,7 +117,6 @@ export class CartService {
   }
   /** Cerrar modal del carrito de compra */
   close() {
-    console.log('closeNav');
     document.getElementById('mySidenav').style.width = '0';
     document.getElementById('overlay').style.display = 'none';
     document.getElementById('app').style.overflow = 'auto';

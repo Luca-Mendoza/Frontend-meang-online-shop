@@ -7,22 +7,18 @@ import { TYPE_ALERT } from '@shared/alerts/values.config';
 @Component({
   selector: 'app-forgot',
   templateUrl: './forgot.component.html',
-  styleUrls: ['./forgot.component.scss']
+  styleUrls: ['./forgot.component.scss'],
 })
 export class ForgotComponent implements OnInit {
   emailValue: string;
   pattern = EMAIL_PATTERN;
 
+  constructor(private passwordService: PasswordService) {}
 
-  constructor(private passwordService: PasswordService) { }
-
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   reset() {
-    console.log('reseteando');
-    this.passwordService.reset(this.emailValue).subscribe(result => {
-      console.log(result);
+    this.passwordService.reset(this.emailValue).subscribe((result) => {
       if (result.status) {
         basicAlert(TYPE_ALERT.SUCCESS, result.message);
         return;
@@ -30,5 +26,4 @@ export class ForgotComponent implements OnInit {
       basicAlert(TYPE_ALERT.WARNING, result.message);
     });
   }
-
 }

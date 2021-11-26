@@ -9,6 +9,7 @@ import { InMemoryCache } from 'apollo-cache-inmemory';
 import { HttpLink, HttpLinkModule } from 'apollo-angular-link-http';
 import { WebSocketLink } from 'apollo-link-ws';
 import { getMainDefinition } from 'apollo-utilities';
+import { environment } from 'src/environments/environment';
 
 @NgModule({
   imports: [HttpClientModule, ApolloModule, HttpLinkModule],
@@ -33,7 +34,7 @@ export class GraphqlModule {
 
     // Apollo Link para conectar con el servidor subscriptionLink
     const subscriptionLink = new WebSocketLink({
-      uri: `ws://localhost:2002/graphql`,
+      uri: environment.backendWs,
       options: {
         reconnect: true,
       },

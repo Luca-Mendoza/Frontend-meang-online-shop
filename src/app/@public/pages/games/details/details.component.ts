@@ -32,7 +32,6 @@ export class DetailsComponent implements OnInit {
   ngOnInit(): void {
     // consumir los detallles del producto por item
     this.activatedRouter.params.subscribe((params) => {
-      console.log('parametros detalles', +params.id);
       this.loading = true;
       loadData('Cargando datos', 'Espera mientra carga la información');
       this.loadDataValue(+params.id);
@@ -47,9 +46,8 @@ export class DetailsComponent implements OnInit {
       this.product.qty = this.findProduct(+this.product.id).qty;
     });
   }
-
+  // escuchando los cambios en el carrito
   updateListener(id: number) {
-    console.log('escuchando', id);
     this.productService.stockUpdateListener(id).subscribe((result) => {
       this.product.stock = result.stock;
 
@@ -88,8 +86,8 @@ export class DetailsComponent implements OnInit {
     });
   }
 
+  //  qty = 1;
   changeValue(qty: number) {
-    console.log(qty);
     this.product.qty = qty;
   }
 

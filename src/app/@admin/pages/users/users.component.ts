@@ -153,7 +153,6 @@ export class UsersComponent implements OnInit {
   // ================ Funciones 'Añadir', 'Bloquear', 'Informacion' ===================== //
   private async addForm(html: string) {
     const result = await userFormBasicDialog('Añadir usuario', html);
-    console.log(result);
     this.addUser(result);
   }
 
@@ -181,7 +180,6 @@ export class UsersComponent implements OnInit {
 
   private async updateForm(html: string, user: any) {
     const result = await userFormBasicDialog('Modificar usuario', html);
-    console.log(result);
     this.updateUser(result, user.id);
   }
 
@@ -189,7 +187,6 @@ export class UsersComponent implements OnInit {
     if (result.value) {
       const user = result.value;
       user.id = id;
-      console.log(user);
       this.service.update(result.value).subscribe((res: any) => {
         if (res.status) {
           basicAlert(TYPE_ALERT.SUCCESS, res.message);

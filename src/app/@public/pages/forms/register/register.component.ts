@@ -10,7 +10,7 @@ import { TYPE_ALERT } from '@shared/alerts/values.config';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss']
+  styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent implements OnInit {
   emailPattern = EMAIL_PATTERN;
@@ -20,35 +20,32 @@ export class RegisterComponent implements OnInit {
     email: '',
     birthday: '',
     password: '',
-
   };
-  
-  constructor(
-    private api: UsersService,
-    private router: Router) { }
+
+  constructor(private api: UsersService, private router: Router) {}
 
   ngOnInit(): void {
-
     const data = new Date();
     data.setFullYear(data.getFullYear() - 18);
-    this.register.birthday = (data.toISOString()).substring(0, 10);
+    this.register.birthday = data.toISOString().substring(0, 10);
     console.log(this.register);
   }
 
   private formatNumbers(num: number | string) {
-    return (+num < 10) ? `0${num}` : num;
+    return +num < 10 ? `0${num}` : num;
   }
 
+  // Cogiendo datos del formulario
   dataAsign($event) {
-    console.log('Cogiendo datos', $event);
-    const fecha = `${$event.year}-${this.formatNumbers($event.month)}-${this.formatNumbers($event.day)}`;
+    const fecha = `${$event.year}-${this.formatNumbers(
+      $event.month
+    )}-${this.formatNumbers($event.day)}`;
     this.register.birthday = fecha;
   }
 
+  // Enviando datos al servidor
   add() {
-    console.log('Enviando datos', this.register);
     this.api.register(this.register).subscribe((result: IResultRegister) => {
-      console.log('Result', result);
       if (!result.status) {
         basicAlert(TYPE_ALERT.WARNING, result.message);
         return;
@@ -57,5 +54,4 @@ export class RegisterComponent implements OnInit {
       this.router.navigate(['/login']);
     });
   }
-
 }
