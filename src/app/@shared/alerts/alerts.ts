@@ -90,7 +90,7 @@ export async function optionsWithDetails(
     confirmButtonText,
     cancelButtonText,
   }).then((result) => {
-    console.log(result);
+    // console.log(result);
     if (result.value) {
       return true;
     } else if (result.dismiss.toString() === 'cancel') {

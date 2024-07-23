@@ -86,7 +86,7 @@ export class CartService {
     });
     this.cart.total = total;
     this.cart.subtotal = subtotal;
-    console.log(this.cart, 'calcular');
+    // console.log(this.cart, 'calcular');
     this.setInfo();
   }
 
