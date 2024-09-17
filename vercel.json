@@ -1,18 +1,17 @@
 {
-  "version": 2,
   "builds": [
     {
-      "src": "dist/meang-frontend/**/*",
-      "use": "@vercel/static-build"
+      "src": "package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "dist/meang-frontend"
+      }
     }
   ],
   "routes": [
-    { "handle": "filesystem" },
-    { "src": "/assets/(.*)", "dest": "/assets/$1" },
     {
-      "src": "/(.*).(js|css|ico|jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|ani)",
-      "dest": "/$1.$2"
-    },
-    { "src": "/(.*)", "dest": "/index.html" }
+      "src": "/(.*)",
+      "dest": "/index.html"
+    }
   ]
 }
