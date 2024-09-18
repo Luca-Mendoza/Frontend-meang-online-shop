@@ -11,9 +11,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "vercel-build": "ng build --prod",
-    "start:legacy": "NODE_OPTIONS=--openssl-legacy-provider ng serve",
-    "build:legacy": "NODE_OPTIONS=--openssl-legacy-provider ng build --prod"
+    "vercel-build": "ng build --prod"
   },
   "private": true,
   "dependencies": {
