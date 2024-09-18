@@ -10,6 +10,14 @@
   ],
   "routes": [
     {
+      "src": "/graphql",
+      "dest": "https://backend-meang-online-shop.vercel.app/graphql"
+    },
+    {
+      "src": "/api/(.*)",
+      "dest": "https://backend-meang-online-shop.vercel.app/api/$1"
+    },
+    {
       "src": "/(.*)",
       "dest": "/index.html"
     }
