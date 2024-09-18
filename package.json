@@ -1,9 +1,9 @@
 {
   "name": "gamezonia",
   "version": "0.16.0",
-  "engines": {
-    "node": "12.18.3"
-  },
+"engines": {
+    "node": "20.x"
+},
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
