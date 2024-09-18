@@ -4,11 +4,11 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build --prod",
+    "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "vercel-build": "ng build --prod"
+    "vercel-build": "ng build"
   },
   "private": true,
   "dependencies": {
