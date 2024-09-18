@@ -1,7 +1,8 @@
 {
+  "version": 2,
   "builds": [
     {
-      "src": "package.json",
+      "src": "angular.json",
       "use": "@vercel/static-build",
       "config": {
         "distDir": "dist/gamezonia"
@@ -9,14 +10,6 @@
     }
   ],
   "routes": [
-    {
-      "src": "/graphql",
-      "dest": "https://backend-meang-online-shop.vercel.app/graphql"
-    },
-    {
-      "src": "/api/(.*)",
-      "dest": "https://backend-meang-online-shop.vercel.app/api/$1"
-    },
     {
       "src": "/(.*)",
       "dest": "/index.html"
