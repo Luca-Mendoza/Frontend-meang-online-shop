@@ -11,11 +11,8 @@
   ],
   "routes": [
     {
-      "handle": "filesystem"
-    },
-    {
       "src": "/(.*)",
-      "dest": "/index.html"
+      "dest": "build/meang-frontend/index.html"
     }
   ]
 }
