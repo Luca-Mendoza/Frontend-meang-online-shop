@@ -2,14 +2,17 @@
   "version": 2,
   "builds": [
     {
-      "src": "dist/meang-frontend/**",
-      "use": "@vercel/static-build"
+      "src": "package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "dist/meang-frontend"
+      }
     }
   ],
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "/dist/meang-frontend/index.html"
+      "dest": "/index.html"
     }
   ]
 }
