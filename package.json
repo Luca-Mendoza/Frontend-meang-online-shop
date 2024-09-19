@@ -2,7 +2,7 @@
   "name": "gamezonia",
   "version": "0.16.0",
   "engines": {
-    "node": "18.x"
+    "node": "12.x"
   },
   "scripts": {
     "ng": "ng",
