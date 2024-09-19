@@ -1,17 +1,14 @@
 {
   "name": "gamezonia",
   "version": "0.16.0",
-  "engines": {
-    "node": "12.x"
-  },
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build --prod",
+    "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "vercel-build": "ng build --prod"
+    "vercel-build": "ng build"
   },
   "private": true,
   "dependencies": {
@@ -51,7 +48,7 @@
     "zone.js": "~0.10.3"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "~0.1000.7",
+    "@angular-devkit/build-angular": "^0.1000.8",
     "@angular/cli": "^10.0.8",
     "@angular/compiler-cli": "~10.0.11",
     "@types/jasmine": "~3.5.0",
