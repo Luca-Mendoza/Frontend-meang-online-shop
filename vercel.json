@@ -6,7 +6,7 @@
       "use": "@vercel/static-build",
       "config": {
         "distDir": "dist/meang-frontend",
-        "installCommand": "npm install --force"
+        "installCommand": "npm install --legacy-peer-deps"
       }
     }
   ],
