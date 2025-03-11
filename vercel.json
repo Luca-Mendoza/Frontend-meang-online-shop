@@ -6,7 +6,7 @@
       "use": "@vercel/static-build",
       "config": {
         "distDir": "dist/meang-frontend",
-        "installCommand": "npm install --legacy-peer-deps"
+        "installCommand": "npm install --force"
       }
     }
   ],
@@ -17,7 +17,6 @@
     }
   ],
   "env": {
-    "NODE_OPTIONS": "--openssl-legacy-provider",
-    "NPM_FLAGS": "--legacy-peer-deps"
+    "NODE_OPTIONS": "--openssl-legacy-provider"
   }
 }
