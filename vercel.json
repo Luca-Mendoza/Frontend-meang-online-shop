@@ -16,6 +16,8 @@
     }
   ],
   "env": {
-    "NODE_OPTIONS": "--openssl-legacy-provider"
+    "NODE_OPTIONS": "--openssl-legacy-provider",
+    "NPM_FLAGS": "--legacy-peer-deps"
+
   }
 }

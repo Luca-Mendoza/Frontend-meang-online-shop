@@ -11,6 +11,9 @@
     "vercel-build": "ng build"
   },
   "private": true,
+  "engines": {
+    "node": "16.x"
+  },
   "dependencies": {
     "@angular/animations": "~10.0.11",
     "@angular/cdk": "^10.2.0",
