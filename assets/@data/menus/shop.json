@@ -1,0 +1,37 @@
+[
+  {
+    "url": "/home",
+    "label": "Inicio",
+    "icon": ""
+  },
+  {
+    "url": "/games/platforms/sony",
+    "label": "Juegos Sony",
+    "icon": ""
+  },
+  {
+    "url": "/games/platforms/microsoft",
+    "label": "Juegos Microsoft",
+    "icon": ""
+  },
+  {
+    "url": "/games/platforms/nintendo",
+    "label": "Juegos Nintendo",
+    "icon": ""
+  },
+  {
+    "url": "/games/promotions/last-units",
+    "label": "Últimas Novedades",
+    "icon": ""
+  },
+  {
+    "url": "/games/promotions/offers",
+    "label": "En Liquidación",
+    "icon": ""
+  },
+  {
+    "url": "/contact",
+    "label": "Contacto",
+    "icon": ""
+  }
+]
