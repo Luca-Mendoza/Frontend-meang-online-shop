@@ -1,26 +1,32 @@
-<div class="container-fluid bg-dark navbar-dark">
-  <div class="d-flex justify-content-between">
-    <div class="">
+<div class="top-bar">
+  <div class="container-fluid px-4 d-flex justify-content-between align-items-center py-2">
+    <!-- Brand / Tagline -->
+    <div class="d-flex align-items-center">
       <img
-        class="logo__type"
-        src="../../../../../assets/img//logos/gamezonia.png"
-        alt="Logotipo de la Tienda"
+        class="logo__type mr-3"
+        src="../../../../../assets/img/logos/gamezonia.png"
+        alt="Gamezonia Store Logo"
       />
-    </div>
-    <div class="flex-fill ">
-      <span class="delivery"
-        ><i class="fas fa-truck"></i>&nbsp;&nbsp; Gastos de envio
-        <b>GRATUITOS</b> en todos los productos
+      <span class="brand-badge d-none d-md-inline-block">
+        <i class="fas fa-bolt text-warning mr-1"></i> TIENDA OFICIAL
       </span>
     </div>
-    <div class="d-flex flex-fill">
-      <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-        <li class="nav-item faq">
-          <a class="nav-link" [routerLink]="'/faq'" routerLinkActive="active"
-            >Ayuda - Preguntas Frecuentes</a
-          >
-        </li>
-      </ul>
+
+    <!-- Free Delivery Highlight Banner -->
+    <div class="delivery-banner text-center d-none d-lg-flex align-items-center">
+      <i class="fas fa-shipping-fast banner-icon mr-2"></i>
+      <span>Envío <b>GRATIS</b> en digital y físico a partir de 25€</span>
+    </div>
+
+    <!-- Quick Utilities -->
+    <div class="d-flex align-items-center">
+      <a class="top-link mr-3" [routerLink]="'/faq'" routerLinkActive="active">
+        <i class="far fa-question-circle mr-1"></i> Ayuda
+      </a>
+      <span class="top-divider d-none d-sm-inline-block">|</span>
+      <span class="top-support ml-3 d-none d-sm-inline-block">
+        <i class="fas fa-headset text-indigo mr-1"></i> Soporte 24/7
+      </span>
     </div>
   </div>
 </div>

@@ -1,5 +1,80 @@
-
-/* You can add global styles to this file, and also import other style files */
 @import "https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css";
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 
+:root {
+  --gz-bg-dark: #0f1117;
+  --gz-bg-card: #181b24;
+  --gz-accent: #6366f1;
+  --gz-accent-gradient: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+  --gz-cyan-gradient: linear-gradient(135deg, #06b6d4 0%, #3b82f6 100%);
+  --gz-text-main: #f3f4f6;
+  --gz-text-muted: #9ca3af;
+  --gz-border: rgba(255, 255, 255, 0.08);
+}
 
+body {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  background-color: var(--gz-bg-dark);
+  color: var(--gz-text-main);
+  overflow-x: hidden;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #0b0c10;
+}
+::-webkit-scrollbar-thumb {
+  background: #2a2e3d;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #6366f1;
+}
+
+/* Modern Card Styling Global */
+.card {
+  background-color: var(--gz-bg-card) !important;
+  border: 1px solid var(--gz-border) !important;
+  border-radius: 16px !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3) !important;
+}
+
+.card:hover {
+  transform: translateY(-6px) scale(1.01) !important;
+  box-shadow: 0 12px 30px rgba(99, 102, 241, 0.25) !important;
+  border-color: rgba(99, 102, 241, 0.4) !important;
+}
+
+/* Typography & Headings */
+h1, h2, h3, h4, h5, h6 {
+  color: #ffffff;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.section-title {
+  position: relative;
+  display: inline-block;
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 45px;
+  height: 4px;
+  background: var(--gz-accent-gradient);
+  border-radius: 2px;
+}

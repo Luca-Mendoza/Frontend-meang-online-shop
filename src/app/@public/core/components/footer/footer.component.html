@@ -1,33 +1,141 @@
-<footer>
-  <div class="container text-center">
-    <address>
-      <p>Gamezonia 2020 - ¡¡Videojuegos al mejor precio!!</p>
-      <p>Gila zuba, 7000 - Argentina ( Tandil )</p>
-      <p>Tel: 02494-552823.</p>
-      <p>Contacto: videojuego@gmai.com.</p>
-      <a
-        class="nav-link"
-        [routerLink]="['/contact']"
-        routerLinkActive="router-link-active"
-        >Contacta con nosotros</a
-      >
-    </address>
-    <ul class="nav justify-content-center">
-        <li>
-            <a  href="http://youtube.com/mugan86" target="_blank">
-                <img class="social__img" src="/assets/img/icons/youtube.png" alt="Canal de Youtube">
+<footer class="site-footer">
+  <!-- Features / Value Proposition Banner -->
+  <div class="footer-features py-4">
+    <div class="container">
+      <div class="row text-center text-md-left">
+        <div class="col-md-3 col-6 mb-3 mb-md-0">
+          <div class="feature-card d-flex align-items-center">
+            <div class="feature-icon mr-3">
+              <i class="fas fa-bolt"></i>
+            </div>
+            <div>
+              <h6 class="mb-0">Entrega Instantánea</h6>
+              <small class="text-muted">Códigos digitales al momento</small>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-3 col-6 mb-3 mb-md-0">
+          <div class="feature-card d-flex align-items-center">
+            <div class="feature-icon mr-3">
+              <i class="fas fa-shield-alt"></i>
+            </div>
+            <div>
+              <h6 class="mb-0">Pago 100% Seguro</h6>
+              <small class="text-muted">Encriptación SSL & Stripe</small>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-3 col-6 mb-3 mb-md-0">
+          <div class="feature-card d-flex align-items-center">
+            <div class="feature-icon mr-3">
+              <i class="fas fa-tags"></i>
+            </div>
+            <div>
+              <h6 class="mb-0">Mejores Ofertas</h6>
+              <small class="text-muted">Precios competitivos diario</small>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-3 col-6">
+          <div class="feature-card d-flex align-items-center">
+            <div class="feature-icon mr-3">
+              <i class="fas fa-headset"></i>
+            </div>
+            <div>
+              <h6 class="mb-0">Soporte Gamer</h6>
+              <small class="text-muted">Atención personalizada 24/7</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Footer Content -->
+  <div class="footer-main py-5">
+    <div class="container">
+      <div class="row">
+        <!-- Column 1: Brand Info -->
+        <div class="col-lg-4 mb-4 mb-lg-0">
+          <div class="footer-brand mb-3">
+            <img src="/assets/img/logos/gamezonia.png" alt="Gamezonia Logo" class="footer-logo mb-2">
+            <p class="brand-tagline">Tu tienda digital de confianza para adquirir las últimas novedades de PC, PS5, Xbox y Switch al mejor precio del mercado.</p>
+          </div>
+          <div class="contact-info">
+            <p class="mb-1"><i class="fas fa-map-marker-alt text-indigo mr-2"></i> Gila Zuba, 7000 - Tandil, Argentina</p>
+            <p class="mb-1"><i class="fas fa-phone-alt text-indigo mr-2"></i> +54 (0249) 455-2823</p>
+            <p class="mb-1"><i class="fas fa-envelope text-indigo mr-2"></i> contacto@gamezonia.com</p>
+          </div>
+        </div>
+
+        <!-- Column 2: Navigation Links -->
+        <div class="col-lg-2 col-md-4 col-6 mb-4 mb-md-0">
+          <h5 class="footer-title mb-3">Explorar</h5>
+          <ul class="list-unstyled footer-links">
+            <li><a [routerLink]="['/']"><i class="fas fa-angle-right mr-1"></i> Inicio</a></li>
+            <li><a [routerLink]="['/games']"><i class="fas fa-angle-right mr-1"></i> Catálogo Completo</a></li>
+            <li><a [routerLink]="['/faq']"><i class="fas fa-angle-right mr-1"></i> Preguntas Frecuentes</a></li>
+            <li><a [routerLink]="['/contact']"><i class="fas fa-angle-right mr-1"></i> Formulario Contacto</a></li>
+          </ul>
+        </div>
+
+        <!-- Column 3: Platform Categories -->
+        <div class="col-lg-3 col-md-4 col-6 mb-4 mb-md-0">
+          <h5 class="footer-title mb-3">Plataformas</h5>
+          <ul class="list-unstyled footer-links">
+            <li><a [routerLink]="['/games/1/1']"><i class="fab fa-playstation mr-1"></i> Juegos PlayStation 4</a></li>
+            <li><a [routerLink]="['/games/1/2']"><i class="fab fa-playstation mr-1"></i> Juegos PlayStation 5</a></li>
+            <li><a [routerLink]="['/games/1/3']"><i class="fas fa-desktop mr-1"></i> Juegos PC Gamer</a></li>
+            <li><a [routerLink]="['/games/1/5']"><i class="fas fa-gamepad mr-1"></i> Nintendo Switch</a></li>
+          </ul>
+        </div>
+
+        <!-- Column 4: Newsletter & Social -->
+        <div class="col-lg-3 col-md-4 mb-4 mb-md-0">
+          <h5 class="footer-title mb-3">Únete a la Comunidad</h5>
+          <p class="text-muted small mb-3">Recibe ofertas exclusivas y cupones de descuento directo en tu e-mail.</p>
+
+          <div class="newsletter-box input-group mb-3">
+            <input type="email" class="form-control form-control-sm" placeholder="Tu e-mail gamer...">
+            <div class="input-group-append">
+              <button class="btn btn-indigo btn-sm" type="button"><i class="fas fa-paper-plane"></i></button>
+            </div>
+          </div>
+
+          <div class="social-links d-flex">
+            <a href="https://youtube.com/mugan86" target="_blank" class="social-btn youtube" title="YouTube">
+              <i class="fab fa-youtube"></i>
             </a>
-        </li>
-        <li>
-            <a  href="http://youtube.com/mugan86" target="_blank">
-                <img class="social__img" src="/assets/img/icons/twitter.png" alt="Canal de Twitter">
+            <a href="https://twitter.com/mugan86" target="_blank" class="social-btn twitter" title="Twitter">
+              <i class="fab fa-twitter"></i>
             </a>
-        </li>
-        <li>
-            <a  href="http://youtube.com/mugan86" target="_blank">
-                <img class="social__img" src="/assets/img/icons/facebook.png" alt="Canal de Facebook">
+            <a href="https://facebook.com/mugan86" target="_blank" class="social-btn facebook" title="Facebook">
+              <i class="fab fa-facebook-f"></i>
             </a>
-        </li>
-    </ul>
+            <a href="https://instagram.com" target="_blank" class="social-btn instagram" title="Instagram">
+              <i class="fab fa-instagram"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom Bar & Copyright -->
+  <div class="footer-bottom py-3">
+    <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center">
+      <p class="mb-2 mb-md-0 copyright-text">
+        &copy; 2026 <b>Gamezonia Store</b>. Todos los derechos reservados. Desarrollado con MEAN+G Stack.
+      </p>
+      <div class="payment-methods d-flex align-items-center">
+        <span class="mr-2 text-muted small">Pagos Aceptados:</span>
+        <i class="fab fa-cc-visa fa-lg mr-2 text-light"></i>
+        <i class="fab fa-cc-mastercard fa-lg mr-2 text-light"></i>
+        <i class="fab fa-cc-stripe fa-lg text-light"></i>
+      </div>
+    </div>
   </div>
 </footer>

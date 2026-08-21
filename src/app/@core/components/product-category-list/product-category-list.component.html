@@ -1,19 +1,27 @@
-<section class="container">
-  <h2 class="text-center">{{ title }}</h2>
-  <hr />
-  <p *ngIf="description != ''">{{ description }}</p>
+<section class="category-section py-4">
+  <div class="d-flex align-items-center justify-content-between mb-4">
+    <div>
+      <h3 class="section-title mb-1">{{ title }}</h3>
+      <p *ngIf="description != ''" class="text-muted small mb-0">{{ description }}</p>
+    </div>
+    <a [routerLink]="['/games']" class="view-all-link">
+      Ver todos <i class="fas fa-arrow-right ml-1"></i>
+    </a>
+  </div>
+
   <div class="row">
     <div
-      class="col-lg-3"
+      class="col-xl-3 col-lg-4 col-md-6 col-12 mb-4"
       *ngFor="let p of productsList"
-      style="margin-bottom: 12px"
     >
-      <shop-product-item
-        [showDesc]="p.description != '' && showDesc"
-        [product]="p"
-        (add)="addToCart($event)"
-        (itemDetails)="showProductDetails($event)"
-      ></shop-product-item>
+      <div class="product-card-wrapper h-100">
+        <shop-product-item
+          [showDesc]="p.description != '' && showDesc"
+          [product]="p"
+          (add)="addToCart($event)"
+          (itemDetails)="showProductDetails($event)"
+        ></shop-product-item>
+      </div>
     </div>
   </div>
 </section>

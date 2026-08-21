@@ -1,0 +1,21 @@
+.category-section {
+  position: relative;
+}
+
+.view-all-link {
+  color: #818cf8;
+  font-weight: 700;
+  font-size: 0.9rem;
+  text-decoration: none;
+  transition: all 0.2s ease;
+
+  &:hover {
+    color: #a5b4fc;
+    text-decoration: none;
+    transform: translateX(3px);
+  }
+}
+
+.product-card-wrapper {
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}

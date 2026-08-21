@@ -1,24 +1,76 @@
-<div class="container-fluid" *ngIf="!loading">
-  <shop-carousel-items [items]="items"></shop-carousel-items>
+<div class="home-wrapper pb-5" *ngIf="!loading">
+  <!-- Top Hero Carousel Container -->
+  <div class="carousel-hero-container mb-5">
+    <div class="container-fluid px-lg-5">
+      <div class="carousel-card-wrapper">
+        <shop-carousel-items [items]="items"></shop-carousel-items>
+      </div>
+    </div>
+  </div>
 
-  <app-product-category-list
-    *ngIf="listOne"
-    [title]="'Juego de PC'"
-    [productsList]="listOne"
-    [showDesc]="false"
-  ></app-product-category-list>
+  <!-- Trust Badges Banner -->
+  <div class="container px-lg-4 mb-5">
+    <div class="trust-banner p-4 rounded-24">
+      <div class="row align-items-center text-center text-md-left">
+        <div class="col-md-4 mb-3 mb-md-0 d-flex align-items-center justify-content-center justify-content-md-start">
+          <div class="trust-icon mr-3">
+            <i class="fas fa-key"></i>
+          </div>
+          <div>
+            <h6 class="mb-0 text-white font-weight-bold">Licencias 100% Oficiales</h6>
+            <small class="text-muted">Garantía de activación inmediata</small>
+          </div>
+        </div>
+        <div class="col-md-4 mb-3 mb-md-0 d-flex align-items-center justify-content-center">
+          <div class="trust-icon mr-3">
+            <i class="fas fa-percentage"></i>
+          </div>
+          <div>
+            <h6 class="mb-0 text-white font-weight-bold">Hasta 70% de Descuento</h6>
+            <small class="text-muted">Ofertas renovadas cada 24hs</small>
+          </div>
+        </div>
+        <div class="col-md-4 d-flex align-items-center justify-content-center justify-content-md-end">
+          <div class="trust-icon mr-3">
+            <i class="fas fa-shield-virus"></i>
+          </div>
+          <div>
+            <h6 class="mb-0 text-white font-weight-bold">Compra Protegida</h6>
+            <small class="text-muted">Soporte directo ante cualquier duda</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-  <app-product-category-list
-    *ngIf="listTwo"
-    [title]="'Juegos más económicos'"
-    [productsList]="listTwo"
-    [showDesc]="true"
-  ></app-product-category-list>
+  <!-- Main Content Categories -->
+  <div class="container px-lg-4">
+    <app-product-category-list
+      *ngIf="listOne"
+      [title]="'Juegos de PC Gamer'"
+      [description]="'Los títulos más populares para dominar en ordenador'"
+      [productsList]="listOne"
+      [showDesc]="false"
+    ></app-product-category-list>
 
-  <app-product-category-list
-    *ngIf="listThree"
-    [title]="'Juegos de PS4'"
-    [productsList]="listThree"
-    [showDesc]="false"
-  ></app-product-category-list>
+    <div class="my-5 custom-divider"></div>
+
+    <app-product-category-list
+      *ngIf="listTwo"
+      [title]="'Juegos Más Económicos'"
+      [description]="'Aprovecha los mejores precios sin comprometer la diversión'"
+      [productsList]="listTwo"
+      [showDesc]="true"
+    ></app-product-category-list>
+
+    <div class="my-5 custom-divider"></div>
+
+    <app-product-category-list
+      *ngIf="listThree"
+      [title]="'Juegos de PlayStation'"
+      [description]="'Aventuras épicas seleccionadas para consola'"
+      [productsList]="listThree"
+      [showDesc]="false"
+    ></app-product-category-list>
+  </div>
 </div>
