@@ -1,67 +1,78 @@
-<div id="mySidenav" class="sidenav">
-  <a href="javascript:void(0)" class="closebtn" (click)="closeNav()">&times;</a>
-  <h5 class="shop_title text-center text-dark">Carrito de compra</h5>
-  <hr />
-  <div class="card product" *ngIf="cart.total === 0">
-    No tienes elementos guardados en el carrito de compra. Añadiendo desde los
-    productos con la Opción de añadir a la cesta
+<div id="mySidenav" class="sidenav p-3 p-md-4">
+  <div class="d-flex align-items-center justify-content-between mb-3 pb-2 border-bottom-dark">
+    <h5 class="shop_title font-weight-bold text-white mb-0">
+      <i class="fas fa-shopping-bag text-accent mr-2"></i>Carrito de compra
+    </h5>
+    <a href="javascript:void(0)" class="closebtn text-muted" (click)="closeNav()">&times;</a>
   </div>
-  <div class="card product" *ngFor="let product of cart.products">
-    <div class="row">
-      <div class="col-lg-2">
-        <img class="img-fluid" [src]="product.img" [alt]="product.name" />
-        <button (click)="clearItem(product)" class="btn btn-sm btn-danger mt-2">
-          <i class="fas fa-times"></i>
-        </button>
-      </div>
-      <div class="col-lg">
-        <div class="row">
-          <div class="col-lg-8">
-            <h6>{{ product.name }} ({{ product.description }})</h6>
-            <shop-qty-selector
-              [qty]="product.qty"
-              [stock]="product.stock"
-              (updateValue)="changeValue($event, product)"
-            ></shop-qty-selector>
-          </div>
 
-          <div class="col-lg-4">
+  <!-- Empty Cart State -->
+  <div class="cart-empty-card p-4 text-center rounded-8 my-4" *ngIf="cart.total === 0">
+    <div class="empty-icon-box mb-3 mx-auto">
+      <i class="fas fa-shopping-basket text-accent"></i>
+    </div>
+    <h6 class="text-white font-weight-bold mb-2">Tu carrito está vacío</h6>
+    <p class="text-muted small mb-0">
+      Agrega productos o claves digitales desde nuestro catálogo para comenzar tu compra.
+    </p>
+  </div>
+
+  <!-- Cart Items List -->
+  <div class="cart-items-wrapper">
+    <div class="card product-cart-item p-3 mb-3" *ngFor="let product of cart.products">
+      <div class="row align-items-center no-gutters">
+        <div class="col-3 col-sm-2 text-center">
+          <img class="img-fluid rounded-6 product-thumb" [src]="product.img" [alt]="product.name" />
+        </div>
+        <div class="col-7 col-sm-8 px-2">
+          <h6 class="product-title text-white font-weight-bold mb-1">{{ product.name }}</h6>
+          <small class="text-muted d-block mb-2">{{ product.description }}</small>
+
+          <shop-qty-selector
+            [qty]="product.qty"
+            [stock]="product.stock"
+            (updateValue)="changeValue($event, product)"
+          ></shop-qty-selector>
+        </div>
+
+        <div class="col-2 col-sm-2 text-right">
+          <div class="price-container mb-2">
             <ng-template #noDiscount>
-              <div class="price">{{ currencySelect }} {{ product.price }}</div>
+              <span class="price-main">{{ currencySelect }}{{ product.price }}</span>
             </ng-template>
-            <div class="price" *ngIf="product.discount; else noDiscount">
-              {{ currencySelect }} {{ product.priceDiscount | number }}<br />
-              <span class="price_span">
-                {{ currencySelect }} {{ product.price | number }}
-              </span>
-              <span class="price_span discount-percentage">
-                ({{ product.discount }}%)
-              </span>
+            <div *ngIf="product.discount; else noDiscount">
+              <span class="price-main">{{ currencySelect }}{{ product.priceDiscount | number }}</span>
+              <small class="price-old d-block">{{ currencySelect }}{{ product.price | number }}</small>
             </div>
           </div>
+
+          <button (click)="clearItem(product)" class="btn btn-icon-delete" title="Eliminar ítem">
+            <i class="fas fa-trash-alt"></i>
+          </button>
         </div>
       </div>
     </div>
   </div>
-  <div *ngIf="cart.total > 0">
-    <div class="row product">
-      <div class="col-lg-5">Subtotal ({{ cart.subtotal }})</div>
-      <div class="col-lg">
-        Total a pagar:
-        <span class="text-primary float-right price-total"
-          >{{ currencySelect }} {{ cart.total | number }}</span
-        >
-      </div>
+
+  <!-- Footer Order Checkout Area -->
+  <div class="cart-footer pt-3 border-top-dark mt-auto" *ngIf="cart.total > 0">
+    <div class="d-flex align-items-center justify-content-between mb-2">
+      <span class="text-muted small">Ítems en carrito:</span>
+      <span class="text-white font-weight-bold">{{ cart.subtotal }}</span>
     </div>
-    <hr />
-    <button class="btn btn-success float-right mr-2 mb-5" (click)="proccess()">
-      Tramitar Pedido
-    </button>
-    <button class="btn btn-danger float-right mr-2 mb-5" (click)="clear()">
-      <i class="fas fa-trash-alt"></i>&nbsp;Vaciar carrito
-    </button>
+    <div class="d-flex align-items-center justify-content-between mb-4">
+      <span class="text-white font-weight-bold">Total a pagar:</span>
+      <span class="price-total-badge">{{ currencySelect }}{{ cart.total | number }}</span>
+    </div>
+
+    <div class="d-flex flex-column gap-2">
+      <button class="btn btn-checkout font-weight-bold mb-2 py-2" (click)="proccess()">
+        <i class="fas fa-lock mr-2"></i> Tramitar Pedido
+      </button>
+      <button class="btn btn-ghost-danger btn-sm text-danger" (click)="clear()">
+        <i class="fas fa-trash-alt mr-1"></i> Vaciar carrito
+      </button>
+    </div>
   </div>
 </div>
-<div id="overlay"></div>
-
-<!-- Use any element to open the sidenav -->
+<div id="overlay" (click)="closeNav()"></div>

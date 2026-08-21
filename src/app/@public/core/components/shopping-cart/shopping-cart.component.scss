@@ -1,81 +1,158 @@
-/** Estilos de los precios**/
 @import "./../../../../../assets/styles/prices.scss";
-/* The side navigation menu */
+
 .sidenav {
-  height: 100%; /* 100% Full-height */
-  width: 0; /* 0 width - change this with JavaScript */
-  position: fixed; /* Stay in place */
-  z-index: 1024; /* Stay on top */
-  top: 0; /* Stay at the top */
-  right: 0;
-  background-color: #f5f5f5; /* Black*/
-  overflow-x: hidden; /* Disable horizontal scroll */
-  padding-top: 60px; /* Place content 60px from the top */
-  transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
-}
-
-/* The navigation menu links */
-.sidenav a {
-  padding: 8px 8px 8px 32px;
-  text-decoration: none;
-  font-size: 25px;
-  color: #818181;
-  display: block;
-  transition: 0.3s;
-}
-
-/* When you mouse over the navigation links, change their color */
-.sidenav a:hover {
-  color: #1a1919;
-  cursor: pointer;
-}
-
-/* Position and style the close button (top right corner) */
-.sidenav .closebtn {
-  position: absolute;
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1050;
   top: 0;
-  right: 25px;
-  font-size: 36px;
-  margin-left: 50px;
+  right: 0;
+  background-color: #12141d;
+  border-left: 1px solid rgba(255, 255, 255, 0.08);
+  overflow-y: auto;
+  overflow-x: hidden;
+  transition: width 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: -10px 0 30px rgba(0, 0, 0, 0.6);
+  display: flex;
+  flex-direction: column;
 }
-/**/
+
+.border-bottom-dark {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.border-top-dark {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.shop_title {
+  font-size: 1.15rem;
+  letter-spacing: -0.02em;
+}
+
+.closebtn {
+  font-size: 1.8rem;
+  line-height: 1;
+  text-decoration: none !important;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: #ffffff !important;
+  }
+}
+
+/* Empty Cart State */
+.cart-empty-card {
+  background: #181b24;
+  border: 1px dashed rgba(255, 255, 255, 0.12);
+
+  .empty-icon-box {
+    width: 54px;
+    height: 54px;
+    background: rgba(99, 102, 241, 0.12);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+  }
+}
+
+/* Cart Product Items */
+.product-cart-item {
+  background: #181b24 !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-radius: 8px !important;
+  box-shadow: none !important;
+  transform: none !important;
+
+  &:hover {
+    transform: none !important;
+    border-color: rgba(99, 102, 241, 0.3) !important;
+  }
+
+  .product-thumb {
+    max-height: 55px;
+    object-fit: cover;
+  }
+
+  .product-title {
+    font-size: 0.88rem;
+    line-height: 1.25;
+  }
+}
+
+.price-main {
+  color: #818cf8;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.price-old {
+  color: #6b7280;
+  text-decoration: line-through;
+  font-size: 0.75rem;
+}
+
+.btn-icon-delete {
+  background: transparent;
+  border: none;
+  color: #ef4444;
+  opacity: 0.7;
+  padding: 4px;
+  font-size: 0.85rem;
+  transition: all 0.2s ease;
+
+  &:hover {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+}
+
+/* Price Total Badge */
+.price-total-badge {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #ffffff;
+  background: rgba(99, 102, 241, 0.15);
+  padding: 4px 12px;
+  border-radius: 6px;
+  border: 1px solid rgba(99, 102, 241, 0.3);
+}
+
+.btn-checkout {
+  background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  box-shadow: 0 4px 16px rgba(99, 102, 241, 0.35);
+  transition: all 0.2s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(99, 102, 241, 0.55);
+    color: #ffffff;
+  }
+}
+
+.btn-ghost-danger {
+  background: transparent;
+  border: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
 #overlay {
-  z-index: 1021;
+  z-index: 1040;
   position: fixed;
   display: none;
   width: 100%;
   height: 100%;
   top: 0;
   left: 0;
-  bottom: 0;
-  right: 0;
-  background-color: rgba($color: #000000, $alpha: 0.5);
-  cursor: not-allowed;
-}
-/* Title */
-.shop_title {
-  margin-top: -35px;
-}
-// Productos Items
-
-.product {
-  margin: 10px 5px;
-  padding: 5px;
-  border-radius: 8px;
-}
-.price {
-  font-size: 16px;
-}
-.h6,
-h6 {
-  font-size: 0.7rem;
-}
-/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
-@media screen and (max-height: 450px) {
-  .sidenav {
-    padding-top: 15px;
-  }
-  .sidenav a {
-    font-size: 18px;
-  }
+  background-color: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(4px);
+  cursor: pointer;
 }
