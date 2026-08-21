@@ -1,29 +1,104 @@
-<div class="container">
-  <h1>FAQ - Preguntas frecuentes</h1>
-  <p>
-    A continuacion preguntas mas frecuentes realizado porlos clientes y sus
-    correspondientes respuestas.
-  </p>
-  <ngb-accordion [closeOthers]="true" activeIds="static-1">
-    <ngb-panel id="static-1" title="¿Qué método de pago estan disponibles?">
-      <ng-template ngbPanelContent>
-        <P>Los pagos se realizan mediante tarjeta de crédito.</P>
-      </ng-template>
-    </ngb-panel>
-    <ngb-panel id="static-2" title="¿En qué plataformas se ejecuta GAMEZONIA?">
-      <ng-template ngbPanelContent>
-        <P
-          >La aplicación solo está disponible para Windows. Las versiones de
-          Linux y macOS están actualmente en proceso.</P
-        >
-      </ng-template>
-    </ngb-panel>
+<div class="faq-page-wrapper py-5">
+  <div class="container">
+    <!-- Header Section -->
+    <div class="text-center mb-5">
+      <span class="badge badge-accent px-3 py-2 mb-2">CENTRO DE AYUDA</span>
+      <h1 class="display-4 font-weight-bold text-white mb-3">Preguntas Frecuentes</h1>
+      <p class="lead text-muted mx-auto style-subtitle">
+        Encuentra respuestas rápidas sobre licencias digitales, métodos de pago, activación de claves y soporte en Gamezonia.
+      </p>
+    </div>
 
-    <ngb-panel id="static-3" title="¿Dónde está mi contraseña?">
-      <ng-template ngbPanelContent>
-        Si perdió su contraseña, puede Recuperarla haciendo clic en el enlace
-        "Olvidé su contraseña".
-      </ng-template>
-    </ngb-panel>
-  </ngb-accordion>
+    <div class="row justify-content-center">
+      <div class="col-lg-10">
+        <!-- Accordion Container -->
+        <ngb-accordion [closeOthers]="true" activeIds="faq-1" class="custom-faq-accordion">
+          <!-- Item 1: Métodos de Pago -->
+          <ngb-panel id="faq-1">
+            <ng-template ngbPanelTitle>
+              <div class="d-flex align-items-center w-100 py-2">
+                <i class="fas fa-credit-card faq-icon mr-3"></i>
+                <span class="faq-question">¿Qué métodos de pago están disponibles?</span>
+              </div>
+            </ng-template>
+            <ng-template ngbPanelContent>
+              <p class="faq-answer mb-0">
+                Aceptamos tarjetas de crédito y débito (Visa, Mastercard, American Express) procesadas de forma 100% segura a través de <strong>Stripe</strong>. También ofrecemos integración con métodos de pago digital directo con encriptación SSL de 256 bits.
+              </p>
+            </ng-template>
+          </ngb-panel>
+
+          <!-- Item 2: Entrega de Licencias -->
+          <ngb-panel id="faq-2">
+            <ng-template ngbPanelTitle>
+              <div class="d-flex align-items-center w-100 py-2">
+                <i class="fas fa-bolt faq-icon mr-3"></i>
+                <span class="faq-question">¿Cómo y cuándo recibo mi código de juego?</span>
+              </div>
+            </ng-template>
+            <ng-template ngbPanelContent>
+              <p class="faq-answer mb-0">
+                La entrega es <strong>instantánea e inmediata</strong>. Una vez confirmado el pago, el código de activación oficial de tu juego o suscripción aparecerá directamente en tu pantalla y será enviado a tu correo electrónico registrado.
+              </p>
+            </ng-template>
+          </ngb-panel>
+
+          <!-- Item 3: Compatibilidad y Plataformas -->
+          <ngb-panel id="faq-3">
+            <ng-template ngbPanelTitle>
+              <div class="d-flex align-items-center w-100 py-2">
+                <i class="fas fa-gamepad faq-icon mr-3"></i>
+                <span class="faq-question">¿Para qué plataformas están disponibles las licencias?</span>
+              </div>
+            </ng-template>
+            <ng-template ngbPanelContent>
+              <p class="faq-answer mb-0">
+                Disponemos de claves oficiales para PC (Steam, Epic Games, Origin, Ubisoft Connect), PlayStation (PS4/PS5), Xbox y Nintendo Switch. Cada producto especifica claramente la plataforma correspondiente antes de realizar la compra.
+              </p>
+            </ng-template>
+          </ngb-panel>
+
+          <!-- Item 4: Recuperación de Cuenta -->
+          <ngb-panel id="faq-4">
+            <ng-template ngbPanelTitle>
+              <div class="d-flex align-items-center w-100 py-2">
+                <i class="fas fa-key faq-icon mr-3"></i>
+                <span class="faq-question">¿Cómo puedo recuperar o cambiar mi contraseña?</span>
+              </div>
+            </ng-template>
+            <ng-template ngbPanelContent>
+              <p class="faq-answer mb-0">
+                Si no recuerdas tu contraseña, haz clic en el enlace 
+                <a [routerLink]="['/forgot']" class="text-accent font-weight-bold">¿Olvidaste tu contraseña?</a> en la pantalla de inicio de sesión. Te enviaremos un correo para reestablecer tus credenciales de forma segura.
+              </p>
+            </ng-template>
+          </ngb-panel>
+
+          <!-- Item 5: Garantía de Reembolso -->
+          <ngb-panel id="faq-5">
+            <ng-template ngbPanelTitle>
+              <div class="d-flex align-items-center w-100 py-2">
+                <i class="fas fa-shield-alt faq-icon mr-3"></i>
+                <span class="faq-question">¿Tienen garantía o política de devoluciones?</span>
+              </div>
+            </ng-template>
+            <ng-template ngbPanelContent>
+              <p class="faq-answer mb-0">
+                Garantizamos la validez y activación de todas nuestras claves 100% oficiales. Si encuentras algún inconveniente con una clave sin canjear, nuestro equipo de soporte solucionará o reembolsará la compra de forma inmediata.
+              </p>
+            </ng-template>
+          </ngb-panel>
+        </ngb-accordion>
+
+        <!-- Need Help Support Box -->
+        <div class="support-cta-card mt-5 p-4 text-center rounded-12">
+          <h5 class="text-white font-weight-bold mb-2">¿No encuentras la respuesta que buscas?</h5>
+          <p class="text-muted mb-3">Nuestro equipo de soporte técnico gamer está disponible 24/7 para asistirte.</p>
+          <a [routerLink]="['/contact']" class="btn btn-indigo px-4 py-2 font-weight-bold">
+            <i class="fas fa-headset mr-2"></i> Contactar a Soporte
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

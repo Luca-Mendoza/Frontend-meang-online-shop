@@ -1,0 +1,108 @@
+.faq-page-wrapper {
+  background-color: #0f1117;
+  min-height: calc(100vh - 280px);
+}
+
+.style-subtitle {
+  max-width: 680px;
+  font-size: 1rem;
+}
+
+.badge-accent {
+  background: rgba(99, 102, 241, 0.15);
+  color: #818cf8;
+  border: 1px solid rgba(99, 102, 241, 0.3);
+  letter-spacing: 1px;
+  font-weight: 700;
+  border-radius: 4px;
+}
+
+/* Custom Accordion Styling */
+::ng-deep .custom-faq-accordion {
+  .card {
+    background-color: #181b24 !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    border-radius: 8px !important;
+    margin-bottom: 1rem;
+    overflow: hidden;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+
+    &:hover {
+      border-color: rgba(99, 102, 241, 0.3) !important;
+    }
+  }
+
+  .card-header {
+    background-color: transparent !important;
+    border-bottom: none !important;
+    padding: 0 !important;
+
+    .btn-link {
+      color: #ffffff !important;
+      text-decoration: none !important;
+      width: 100%;
+      padding: 1.25rem 1.5rem;
+      text-align: left;
+      font-weight: 700;
+      transition: background 0.2s ease;
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.03);
+      }
+
+      &:focus {
+        box-shadow: none;
+      }
+    }
+  }
+
+  .card-body {
+    background-color: rgba(15, 17, 23, 0.6);
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    padding: 1.25rem 1.5rem;
+  }
+}
+
+.faq-icon {
+  color: #818cf8;
+  font-size: 1.1rem;
+  width: 24px;
+  text-align: center;
+}
+
+.faq-question {
+  font-size: 1.05rem;
+  color: #f3f4f6;
+  font-weight: 700;
+}
+
+.faq-answer {
+  color: #9ca3af;
+  font-size: 0.93rem;
+  line-height: 1.6;
+}
+
+.text-accent {
+  color: #818cf8;
+}
+
+/* Support Box CTA */
+.support-cta-card {
+  background: linear-gradient(135deg, rgba(24, 27, 36, 0.9) 0%, rgba(15, 17, 23, 0.95) 100%);
+  border: 1px solid rgba(99, 102, 241, 0.3);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+
+  .btn-indigo {
+    background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+    color: #ffffff;
+    border: none;
+    border-radius: 6px;
+    box-shadow: 0 4px 16px rgba(99, 102, 241, 0.35);
+    transition: all 0.25s ease;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 22px rgba(99, 102, 241, 0.55);
+    }
+  }
+}
