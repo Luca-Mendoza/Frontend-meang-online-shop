@@ -3,6 +3,7 @@
   "extends": "./tsconfig.base.json",
   "compilerOptions": {
     "outDir": "./out-tsc/app",
+    "skipLibCheck": true,
     "types": [],
     "paths": {
       "@shop/*": ["src/app/@public/*"],

@@ -129,7 +129,6 @@
       }
     }
   },
-  "defaultProject": "meang-frontend",
   "cli": {
     "analytics": false
   }

@@ -19,6 +19,7 @@
       "dom"
     ],
     "resolveJsonModule": true,
+    "skipLibCheck": true,
     "esModuleInterop": true
   },
   "angularCompilerOptions": {
