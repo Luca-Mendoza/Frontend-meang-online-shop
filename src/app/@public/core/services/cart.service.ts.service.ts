@@ -111,7 +111,11 @@ export class CartService {
   /** Abrir modal del carrito de compra */
   open() {
     const width = window.innerWidth < 640 ? '100%' : '500px';
-    document.getElementById('mySidenav').style.width = width;
+    const sidenav = document.getElementById('mySidenav');
+    if (sidenav) {
+      sidenav.style.width = width;
+      sidenav.classList.add('active');
+    }
     document.getElementById('overlay').style.display = 'block';
     const appEl = document.getElementById('app');
     if (appEl) {
@@ -120,7 +124,11 @@ export class CartService {
   }
   /** Cerrar modal del carrito de compra */
   close() {
-    document.getElementById('mySidenav').style.width = '0';
+    const sidenav = document.getElementById('mySidenav');
+    if (sidenav) {
+      sidenav.style.width = '0';
+      sidenav.classList.remove('active');
+    }
     document.getElementById('overlay').style.display = 'none';
     const appEl = document.getElementById('app');
     if (appEl) {
