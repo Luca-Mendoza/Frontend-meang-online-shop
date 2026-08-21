@@ -33,7 +33,6 @@ export class GamesComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRouter.params.subscribe((params) => {
       this.loading = true;
-      loadData('Cargando datos', 'Espera mientra carga la información');
       const keyPage = `${params.type}/${params.filter}`;
       this.gamesPageInfo = GAMES_PAGES_INFO[keyPage];
       this.typeData = params.type;
@@ -81,7 +80,6 @@ export class GamesComponent implements OnInit {
   private asignResult(data) {
     this.productsList = data.result;
     this.infoPage = data.info;
-    closeAlert();
     this.loading = false;
   }
 }

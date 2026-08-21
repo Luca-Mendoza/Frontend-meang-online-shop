@@ -33,7 +33,6 @@ export class DetailsComponent implements OnInit {
     // consumir los detallles del producto por item
     this.activatedRouter.params.subscribe((params) => {
       this.loading = true;
-      loadData('Cargando datos', 'Espera mientra carga la información');
       this.loadDataValue(+params.id);
 
       this.updateListener(+params.id);
@@ -82,7 +81,6 @@ export class DetailsComponent implements OnInit {
       this.randomItems = result.random;
 
       this.loading = false;
-      closeAlert();
     });
   }
 

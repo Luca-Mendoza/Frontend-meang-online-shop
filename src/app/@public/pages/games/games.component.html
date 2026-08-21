@@ -1,3 +1,24 @@
+<!-- Skeleton Loading Grid -->
+<div class="games-page-wrapper py-4" *ngIf="loading">
+  <div class="container px-lg-4">
+    <div class="mb-4">
+      <div class="skeleton-box mb-2" style="width: 240px; height: 32px;"></div>
+      <div class="skeleton-box" style="width: 60%; height: 16px;"></div>
+    </div>
+    <div class="row">
+      <div class="col-lg-3 col-md-4 col-sm-6 mb-4" *ngFor="let item of [1,2,3,4,5,6,7,8]">
+        <div class="skeleton-card">
+          <div class="skeleton-box skeleton-img"></div>
+          <div class="skeleton-box skeleton-title"></div>
+          <div class="skeleton-box skeleton-text"></div>
+          <div class="skeleton-box skeleton-price"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Main Loaded Content -->
 <div class="games-page-wrapper py-4" *ngIf="infoPage && !loading">
   <div class="container px-lg-4">
     <!-- Category Header and Products -->

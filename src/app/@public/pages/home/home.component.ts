@@ -22,14 +22,12 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.loading = true;
-    loadData('Cargando datos', 'Espera mientra carga la información');
     this.product.getHomePage().subscribe((data) => {
       // console.log(data);
       this.listOne = data.pc;
       this.listTwo = data.topPrice35;
       this.listThree = data.ps4;
       this.items = this.manageCarousel(data.carousel);
-      closeAlert();
       this.loading = false;
     });
   }
