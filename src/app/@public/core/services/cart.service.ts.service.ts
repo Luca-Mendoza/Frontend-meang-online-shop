@@ -110,16 +110,21 @@ export class CartService {
 
   /** Abrir modal del carrito de compra */
   open() {
-    document.getElementById('mySidenav').style.width = '600px';
+    const width = window.innerWidth < 640 ? '100%' : '500px';
+    document.getElementById('mySidenav').style.width = width;
     document.getElementById('overlay').style.display = 'block';
-    document.getElementById('app').style.overflow = 'hidden';
-    document.getElementById('mySidenav').style.transition = '0.5s';
+    const appEl = document.getElementById('app');
+    if (appEl) {
+      appEl.style.overflow = 'hidden';
+    }
   }
   /** Cerrar modal del carrito de compra */
   close() {
     document.getElementById('mySidenav').style.width = '0';
     document.getElementById('overlay').style.display = 'none';
-    document.getElementById('app').style.overflow = 'auto';
-    document.getElementById('mySidenav').style.transition = '0s';
+    const appEl = document.getElementById('app');
+    if (appEl) {
+      appEl.style.overflow = 'auto';
+    }
   }
 }
