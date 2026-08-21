@@ -13,7 +13,7 @@
   font-weight: 600;
   font-size: 0.9rem;
   padding: 0.5rem 0.9rem !important;
-  border-radius: 8px;
+  border-radius: 6px;
   transition: all 0.2s ease;
   letter-spacing: -0.01em;
 
@@ -37,6 +37,7 @@
   border: none;
   box-shadow: 0 4px 14px rgba(99, 102, 241, 0.4);
   transition: all 0.25s ease;
+  border-radius: 6px !important;
 
   &:hover {
     transform: translateY(-2px);
@@ -50,7 +51,7 @@
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.1);
   padding: 0.4rem 0.85rem;
-  border-radius: 20px;
+  border-radius: 6px;
 }
 
 .text-accent {
@@ -60,7 +61,7 @@
 .custom-dropdown {
   background-color: #181b24;
   border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 12px;
+  border-radius: 8px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
   padding: 8px;
   margin-top: 8px;
@@ -70,7 +71,7 @@
     font-size: 0.88rem;
     font-weight: 500;
     padding: 8px 14px;
-    border-radius: 6px;
+    border-radius: 4px;
 
     &:hover {
       background-color: rgba(255, 255, 255, 0.06);
@@ -88,7 +89,7 @@
   border: none;
   color: #ffffff;
   padding: 6px 14px;
-  border-radius: 30px;
+  border-radius: 8px;
   cursor: pointer;
   box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35);
   transition: all 0.25s ease;

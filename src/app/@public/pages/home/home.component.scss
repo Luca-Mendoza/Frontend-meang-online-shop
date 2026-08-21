@@ -6,7 +6,7 @@
   padding-top: 1.5rem;
 
   .carousel-card-wrapper {
-    border-radius: 24px;
+    border-radius: 10px;
     overflow: hidden;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
     border: 1px solid rgba(255, 255, 255, 0.08);
@@ -16,7 +16,7 @@
 .trust-banner {
   background: linear-gradient(135deg, rgba(24, 27, 36, 0.9) 0%, rgba(15, 17, 23, 0.95) 100%);
   border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 20px;
+  border-radius: 10px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 
   .trust-icon {
@@ -24,7 +24,7 @@
     height: 44px;
     background: rgba(99, 102, 241, 0.15);
     color: #818cf8;
-    border-radius: 12px;
+    border-radius: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
