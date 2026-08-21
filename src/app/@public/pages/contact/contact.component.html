@@ -1,1 +1,87 @@
-<p>contact works!</p>
+<div class="contact-page-wrapper py-5">
+  <div class="container px-lg-4">
+    <!-- Header Section -->
+    <div class="text-center mb-5">
+      <span class="badge badge-accent px-3 py-2 mb-2">ATENCIÓN AL CLIENTE</span>
+      <h1 class="display-4 font-weight-bold text-white mb-3">Contacto & Soporte Gamer</h1>
+      <p class="lead text-muted mx-auto style-subtitle">
+        ¿Tienes alguna duda con la activación de tu licencia o una consulta de compra? Escríbenos y te responderemos a la brevedad.
+      </p>
+    </div>
+
+    <div class="row justify-content-center">
+      <!-- Left Column: Contact Cards -->
+      <div class="col-lg-5 mb-4 mb-lg-0">
+        <div class="contact-info-card p-4 rounded-12 mb-3 d-flex align-items-center">
+          <div class="info-icon-box mr-3">
+            <i class="fas fa-headset"></i>
+          </div>
+          <div>
+            <h6 class="text-white mb-1 font-weight-bold">Soporte Técnico Directo</h6>
+            <p class="text-muted small mb-0">soporte@gamezonia.com</p>
+            <small class="text-accent">Atención 24 horas / 7 días</small>
+          </div>
+        </div>
+
+        <div class="contact-info-card p-4 rounded-12 mb-3 d-flex align-items-center">
+          <div class="info-icon-box mr-3">
+            <i class="fas fa-shield-alt"></i>
+          </div>
+          <div>
+            <h6 class="text-white mb-1 font-weight-bold">Garantía de Licencias</h6>
+            <p class="text-muted small mb-0">Activación 100% garantizada</p>
+            <small class="text-accent">Reemplazo o soporte inmediato</small>
+          </div>
+        </div>
+
+        <div class="contact-info-card p-4 rounded-12 d-flex align-items-center">
+          <div class="info-icon-box mr-3">
+            <i class="fas fa-map-marker-alt"></i>
+          </div>
+          <div>
+            <h6 class="text-white mb-1 font-weight-bold">Oficina Central</h6>
+            <p class="text-muted small mb-0">Gamezonia Digital Store HQ</p>
+            <small class="text-muted">Madrid, España</small>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: Interactive Form -->
+      <div class="col-lg-7">
+        <form class="contact-form p-4 p-md-5 rounded-12 m-0">
+          <h4 class="text-white font-weight-bold mb-4">Envíanos un mensaje</h4>
+          
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="contactName">Nombre completo</label>
+              <input type="text" id="contactName" class="form-control" placeholder="Tu nombre" required />
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="contactEmail">Correo electrónico</label>
+              <input type="email" id="contactEmail" class="form-control" placeholder="nombre@ejemplo.com" required />
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="contactSubject">Asunto o Tipo de Consulta</label>
+            <select id="contactSubject" class="form-control">
+              <option value="activation">Problema con activación de clave</option>
+              <option value="billing">Consulta de pago o facturación</option>
+              <option value="info">Información general sobre un juego</option>
+              <option value="other">Otro asunto</option>
+            </select>
+          </div>
+
+          <div class="mb-4">
+            <label for="contactMessage">Mensaje</label>
+            <textarea id="contactMessage" rows="5" class="form-control" placeholder="Describe detalladamente tu consulta..." required></textarea>
+          </div>
+
+          <button type="submit" class="btn signup-btn font-weight-bold py-3">
+            <i class="fas fa-paper-plane mr-2"></i> Enviar Mensaje
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

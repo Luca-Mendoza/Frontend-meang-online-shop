@@ -1,0 +1,54 @@
+.contact-page-wrapper {
+  background-color: #0f1117;
+  min-height: calc(100vh - 280px);
+}
+
+.style-subtitle {
+  max-width: 680px;
+  font-size: 1rem;
+}
+
+.badge-accent {
+  background: rgba(99, 102, 241, 0.15);
+  color: #818cf8;
+  border: 1px solid rgba(99, 102, 241, 0.3);
+  letter-spacing: 1px;
+  font-weight: 700;
+  border-radius: 4px;
+}
+
+.contact-info-card {
+  background: #181b24;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s ease, border-color 0.2s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    border-color: rgba(99, 102, 241, 0.3);
+  }
+}
+
+.info-icon-box {
+  width: 48px;
+  height: 48px;
+  background: rgba(99, 102, 241, 0.12);
+  color: #818cf8;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  border: 1px solid rgba(99, 102, 241, 0.25);
+}
+
+.contact-form {
+  background: #181b24;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+}
+
+.text-accent {
+  color: #818cf8;
+  font-weight: 600;
+}
