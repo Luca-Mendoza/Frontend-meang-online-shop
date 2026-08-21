@@ -97,6 +97,25 @@ select,
   }
 }
 
+select.form-control,
+select {
+  padding-right: 2.75rem !important;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml;utf8,<svg fill='%23818cf8' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>") !important;
+  background-repeat: no-repeat !important;
+  background-position: right 1rem center !important;
+  background-size: 1.25rem !important;
+  cursor: pointer;
+
+  option {
+    background-color: #181b24;
+    color: #ffffff;
+    padding: 10px;
+  }
+}
+
 textarea.form-control {
   height: auto;
 }
