@@ -1,3 +1,5 @@
+@import "./../../../../assets/styles/forms.scss";
+
 .contact-page-wrapper {
   background-color: #0f1117;
   min-height: calc(100vh - 280px);
@@ -46,6 +48,7 @@
   background: #181b24;
   border: 1px solid rgba(255, 255, 255, 0.08) !important;
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+  border-radius: 12px;
 }
 
 .text-accent {
