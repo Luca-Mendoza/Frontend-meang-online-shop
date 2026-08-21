@@ -32,7 +32,7 @@
         <!-- Admin link if applicable -->
         <li class="nav-item mr-2" *ngIf="access && role == 'ADMIN'">
           <a
-            class="btn btn-sm btn-outline-warning rounded-pill px-3 font-weight-bold"
+            class="btn nav-action-btn btn-outline-warning"
             [routerLink]="['/admin']"
             routerLinkActive="active"
           >
@@ -43,7 +43,7 @@
         <!-- Guest Links -->
         <li class="nav-item" *ngIf="!access">
           <a
-            class="nav-link custom-nav-item mr-2"
+            class="btn nav-action-btn btn-ghost mr-2"
             [routerLink]="['/login']"
             routerLinkActive="active-nav-link"
           >
@@ -52,7 +52,7 @@
         </li>
         <li class="nav-item" *ngIf="!access">
           <a
-            class="btn btn-sm btn-accent rounded-pill px-3 mr-3"
+            class="btn nav-action-btn btn-accent mr-3"
             [routerLink]="['/register']"
             routerLinkActive="active"
           >
@@ -63,7 +63,7 @@
         <!-- Logged-in User Dropdown -->
         <li class="nav-item dropdown mr-3" *ngIf="access">
           <a
-            class="nav-link dropdown-toggle user-pill"
+            class="nav-link dropdown-toggle user-pill nav-action-btn"
             href="#"
             id="navbarDropdown"
             role="button"
@@ -97,7 +97,7 @@
         <!-- Floating Cart Trigger -->
         <li class="nav-item">
           <button
-            class="cart-btn d-flex align-items-center"
+            class="btn nav-action-btn cart-btn d-flex align-items-center justify-content-center"
             (click)="open()"
             title="Ver mi carrito"
           >

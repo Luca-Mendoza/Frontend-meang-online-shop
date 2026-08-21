@@ -5,6 +5,15 @@
   color: #9ca3af;
 }
 
+.logo-link {
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+  &:hover {
+    opacity: 0.85;
+    text-decoration: none;
+  }
+}
+
 .logo__type {
   height: 38px;
   width: auto;

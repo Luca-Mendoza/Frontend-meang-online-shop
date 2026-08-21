@@ -2,11 +2,13 @@
   <div class="container-fluid px-4 d-flex justify-content-between align-items-center py-2">
     <!-- Brand / Tagline -->
     <div class="d-flex align-items-center">
-      <img
-        class="logo__type mr-3"
-        src="../../../../../assets/img/logos/gamezonia.png"
-        alt="Gamezonia Store Logo"
-      />
+      <a [routerLink]="['/']" class="d-inline-flex align-items-center logo-link">
+        <img
+          class="logo__type mr-3"
+          src="../../../../../assets/img/logos/gamezonia.png"
+          alt="Gamezonia Store Logo"
+        />
+      </a>
       <span class="brand-badge d-none d-md-inline-block">
         <i class="fas fa-bolt text-warning mr-1"></i> TIENDA OFICIAL
       </span>
