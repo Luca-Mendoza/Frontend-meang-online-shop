@@ -78,3 +78,45 @@ h1, h2, h3, h4, h5, h6 {
   background: var(--gz-accent-gradient);
   border-radius: 2px;
 }
+
+/* Modern Dark Theme Pagination (NgbPagination) */
+.pagination {
+  gap: 6px;
+
+  .page-item {
+    .page-link {
+      background-color: #181b24 !important;
+      border: 1px solid rgba(255, 255, 255, 0.1) !important;
+      color: #9ca3af !important;
+      border-radius: 6px !important;
+      padding: 0.5rem 0.85rem;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: all 0.2s ease;
+
+      &:hover {
+        background-color: rgba(99, 102, 241, 0.15) !important;
+        border-color: rgba(99, 102, 241, 0.3) !important;
+        color: #ffffff !important;
+      }
+
+      &:focus {
+        box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.25) !important;
+      }
+    }
+
+    &.active .page-link {
+      background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%) !important;
+      border-color: transparent !important;
+      color: #ffffff !important;
+      box-shadow: 0 4px 14px rgba(99, 102, 241, 0.4) !important;
+    }
+
+    &.disabled .page-link {
+      background-color: rgba(24, 27, 36, 0.5) !important;
+      border-color: rgba(255, 255, 255, 0.05) !important;
+      color: #4b5563 !important;
+      cursor: not-allowed;
+    }
+  }
+}

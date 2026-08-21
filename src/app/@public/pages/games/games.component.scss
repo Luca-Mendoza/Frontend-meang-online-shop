@@ -1,0 +1,16 @@
+.games-page-wrapper {
+  background-color: #0f1117;
+  min-height: calc(100vh - 280px);
+}
+
+.pagination-toolbar {
+  background: #181b24;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.pagination-info {
+  font-size: 0.88rem;
+  letter-spacing: 0.3px;
+}
