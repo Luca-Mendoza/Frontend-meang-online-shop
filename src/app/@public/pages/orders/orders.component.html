@@ -119,31 +119,65 @@
             <a routerLink="/games" class="btn btn-primary mt-2">Explorar Tienda</a>
           </div>
 
-          <div *ngIf="charges.length > 0" class="table-responsive">
-            <table class="table table-dark-custom">
-              <thead>
-                <tr>
-                  <th scope="col">Descripción</th>
-                  <th scope="col">Monto ({{ currencySymbol }})</th>
-                  <th scope="col">Fecha</th>
-                  <th scope="col" class="text-right">Comprobante</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let data of charges">
-                  <td class="font-weight-medium text-white">
-                    <i class="fas fa-gamepad mr-2 text-accent"></i> {{ data.description }}
-                  </td>
-                  <td class="text-accent font-weight-bold">{{ data.amount | currency: 'EUR' }}</td>
-                  <td class="text-muted">{{ data.created | date: "yyyy-MM-dd HH:mm:ss" }}</td>
-                  <td class="text-right">
-                    <a [href]="data.receiptUrl" target="_blank" rel="noopener noreferrer" class="btn-receipt">
-                      <span>📄 Ver Factura</span>
-                    </a>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+          <div *ngIf="charges.length > 0">
+            <!-- Desktop & Tablet Table View -->
+            <div class="table-responsive d-none d-md-block w-100">
+              <table class="table table-dark-custom w-100">
+                <thead>
+                  <tr>
+                    <th scope="col" style="width: 45%;">Descripción</th>
+                    <th scope="col" class="text-center" style="width: 15%;">Monto ({{ currencySymbol }})</th>
+                    <th scope="col" class="text-center" style="width: 20%;">Fecha</th>
+                    <th scope="col" class="text-right" style="width: 20%;">Comprobante</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let data of charges">
+                    <td class="font-weight-medium text-white align-middle">
+                      <div class="d-flex align-items-center">
+                        <div class="order-icon-box mr-3">
+                          <i class="fas fa-gamepad text-accent"></i>
+                        </div>
+                        <span class="order-desc-text">{{ data.description }}</span>
+                      </div>
+                    </td>
+                    <td class="text-accent font-weight-bold text-center align-middle h5 mb-0">{{ data.amount | currency: 'EUR' }}</td>
+                    <td class="text-muted text-center align-middle">
+                      <div class="date-badge">
+                        <i class="far fa-clock mr-1"></i> {{ data.created | date: "yyyy-MM-dd HH:mm" }}
+                      </div>
+                    </td>
+                    <td class="text-right align-middle">
+                      <a [href]="data.receiptUrl" target="_blank" rel="noopener noreferrer" class="btn-receipt">
+                        <i class="fas fa-file-invoice mr-1"></i> <span>Ver Factura</span>
+                      </a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Mobile Compact Cards View -->
+            <div class="mobile-orders-list d-md-none">
+              <div class="mobile-order-card mb-3 p-3 rounded-12" *ngFor="let data of charges">
+                <div class="d-flex justify-content-between align-items-start mb-2">
+                  <div class="mobile-order-title font-weight-bold text-white pr-2">
+                    <i class="fas fa-gamepad text-accent mr-1"></i> {{ data.description }}
+                  </div>
+                  <div class="mobile-order-amount text-accent font-weight-bold h6 mb-0 text-nowrap">
+                    {{ data.amount | currency: 'EUR' }}
+                  </div>
+                </div>
+                <div class="d-flex justify-content-between align-items-center mt-3 pt-2 border-top-custom-subtle">
+                  <span class="small text-muted">
+                    <i class="far fa-clock mr-1"></i> {{ data.created | date: "dd/MM/yyyy HH:mm" }}
+                  </span>
+                  <a [href]="data.receiptUrl" target="_blank" rel="noopener noreferrer" class="btn-receipt btn-receipt-sm">
+                    <i class="fas fa-file-invoice mr-1"></i> Factura
+                  </a>
+                </div>
+              </div>
+            </div>
           </div>
 
           <div class="row mt-4" *ngIf="loadMoreBtn">

@@ -116,6 +116,8 @@ export const loadData = (title: string, html: string) => {
   Swal.fire({
     title,
     html,
+    showConfirmButton: false,
+    allowOutsideClick: false,
     onBeforeOpen: () => {
       Swal.showLoading();
     },
@@ -135,6 +137,13 @@ export const infoEventlert = async (
     title,
     html,
     icon: typeAlert,
+    customClass: {
+      popup: 'custom-gz-swal-popup',
+      title: 'custom-gz-swal-title',
+      htmlContainer: 'custom-gz-swal-html',
+      confirmButton: 'custom-gz-swal-confirm-btn',
+      cancelButton: 'custom-gz-swal-cancel-btn',
+    },
     preConfirm: () => {
       return true;
     },

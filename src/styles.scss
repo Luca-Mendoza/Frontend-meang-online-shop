@@ -241,25 +241,99 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
-/* Custom Gamer Dark SweetAlert2 Dialog */
-.swal2-popup.custom-gz-swal-popup {
-  background-color: #181b24 !important;
-  border: 1px solid rgba(255, 255, 255, 0.12) !important;
-  border-radius: 16px !important;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6) !important;
-  color: #f3f4f6 !important;
-  padding: 1.75rem !important;
+/* Custom Gamer Dark SweetAlert2 Dialog (Global Overrides) */
+.swal2-container {
+  .swal2-popup {
+    background-color: #181b24 !important;
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    border-radius: 16px !important;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7) !important;
+    color: #f3f4f6 !important;
+    padding: 1.75rem !important;
 
-  .swal2-input, .swal2-select, select, input {
-    background-color: rgba(255, 255, 255, 0.05) !important;
-    border: 1px solid rgba(255, 255, 255, 0.15) !important;
-    color: #ffffff !important;
-    border-radius: 8px !important;
-    padding: 0.65rem 1rem !important;
+    .swal2-title {
+      color: #ffffff !important;
+      font-weight: 800 !important;
+      font-size: 1.35rem !important;
+    }
 
-    &:focus {
-      border-color: #6366f1 !important;
-      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.25) !important;
+    .swal2-content, .swal2-html-container {
+      color: #9ca3af !important;
+      font-size: 0.95rem !important;
+    }
+
+    .swal2-input, .swal2-select, select, input {
+      background-color: rgba(255, 255, 255, 0.05) !important;
+      border: 1px solid rgba(255, 255, 255, 0.15) !important;
+      color: #ffffff !important;
+      border-radius: 8px !important;
+      padding: 0.65rem 1rem !important;
+
+      &:focus {
+        border-color: #6366f1 !important;
+        box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.25) !important;
+      }
+    }
+
+    .swal2-actions {
+      margin-top: 1.25rem !important;
+    }
+
+    .swal2-styled.swal2-confirm, button.swal2-confirm {
+      background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%) !important;
+      border: none !important;
+      border-radius: 8px !important;
+      font-weight: 700 !important;
+      padding: 0.6rem 1.6rem !important;
+      box-shadow: 0 4px 14px rgba(99, 102, 241, 0.4) !important;
+      color: #ffffff !important;
+
+      &:hover {
+        box-shadow: 0 6px 20px rgba(99, 102, 241, 0.6) !important;
+      }
+    }
+
+    .swal2-styled.swal2-cancel, button.swal2-cancel {
+      background-color: rgba(255, 255, 255, 0.08) !important;
+      color: #d1d5db !important;
+      border-radius: 8px !important;
+      font-weight: 600 !important;
+      padding: 0.6rem 1.25rem !important;
+      border: 1px solid rgba(255, 255, 255, 0.1) !important;
+
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.15) !important;
+        color: #ffffff !important;
+      }
+    }
+
+    /* Icon adjustments for dark background */
+    .swal2-icon.swal2-success {
+      border-color: #10b981 !important;
+      .swal2-success-ring {
+        border-color: rgba(16, 185, 129, 0.3) !important;
+      }
+      .swal2-success-line-tip, .swal2-success-line-long {
+        background-color: #10b981 !important;
+      }
+      [class^='swal2-success-circular-line'] {
+        background-color: transparent !important;
+      }
+      .swal2-success-fix {
+        background-color: transparent !important;
+      }
+    }
+
+    .swal2-icon.swal2-warning {
+      border-color: #f59e0b !important;
+      color: #f59e0b !important;
+    }
+
+    .swal2-icon.swal2-error {
+      border-color: #ef4444 !important;
+      .swal2-x-mark-line-left, .swal2-x-mark-line-right {
+        background-color: #ef4444 !important;
+      }
     }
   }
 }
@@ -283,14 +357,11 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .custom-gz-swal-confirm-btn {
-  background-color: #ef4444 !important;
+  background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%) !important;
   border-radius: 8px !important;
   font-weight: 700 !important;
-  padding: 0.6rem 1.25rem !important;
-  box-shadow: 0 4px 14px rgba(239, 68, 68, 0.3) !important;
-  &:hover {
-    background-color: #dc2626 !important;
-  }
+  padding: 0.6rem 1.4rem !important;
+  box-shadow: 0 4px 14px rgba(99, 102, 241, 0.3) !important;
 }
 
 .custom-gz-swal-cancel-btn {
@@ -305,4 +376,6 @@ h1, h2, h3, h4, h5, h6 {
     color: #ffffff !important;
   }
 }
+
+
 

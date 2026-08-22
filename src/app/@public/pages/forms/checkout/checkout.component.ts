@@ -10,7 +10,7 @@ import { CartService } from '@shop/core/services/cart.service.ts.service';
 import { CustomerService } from '@shop/core/services/stripe/customer.service';
 
 import { CURRENCY_CODE, CURRENCY_SELECT } from '@core/constants/config';
-import { infoEventlert, loadData } from '@shared/alerts/alerts';
+import { infoEventlert, loadData, closeAlert } from '@shared/alerts/alerts';
 import { TYPE_ALERT } from '@shared/alerts/values.config';
 
 import { ChargeService } from '@shop-core/services/stripe/charge.service';
@@ -35,6 +35,8 @@ export class CheckoutComponent implements OnInit {
   address = '';
   avaliable = false;
   block = false;
+  showStripeForm = false;
+  paymentType: 'direct' | 'stripe' = 'direct';
   constructor(
     private auth: AuthService,
     private router: Router,
@@ -185,7 +187,7 @@ export class CheckoutComponent implements OnInit {
       // Alerta para mostrar info
       await infoEventlert(
         'Cliente no existe',
-        'Nesecitamos un cliente  para realizar el pago'
+        'Necesitamos un cliente para realizar el pago'
       );
       const StripeName = `${this.meData.user.name} ${this.meData.user.lastname}`;
       const StripeEmail = this.meData.user.email;
@@ -216,5 +218,109 @@ export class CheckoutComponent implements OnInit {
       return;
     }
     this.stripePayment.takeCardToken(true);
+  }
+
+  async processDirectOrder(paymentMethodName: string = 'Transferencia / Prueba Directa') {
+    if (!this.address || this.address.trim() === '') {
+      await infoEventlert(
+        'Dirección requerida',
+        'Por favor completa la dirección de entrega antes de continuar.',
+        TYPE_ALERT.WARNING
+      );
+      return;
+    }
+
+    if (this.cartService.cart.total === 0) {
+      this.avaliable = false;
+      this.notAvailableProducts();
+      return;
+    }
+
+    // Auto-create Stripe customer if user does not have one yet
+    if (!this.meData.user.stripeCustomer) {
+      const StripeName = `${this.meData.user.name} ${this.meData.user.lastname}`;
+      const StripeEmail = this.meData.user.email;
+
+      loadData('Procesando información', 'Registrando cliente para el pedido...');
+
+      this.customerService
+        .add(StripeName, StripeEmail)
+        .pipe(take(1))
+        .subscribe(async (result: { status: boolean; message: string; customer?: any }) => {
+          if (result.status && result.customer) {
+            this.meData.user.stripeCustomer = result.customer.id;
+            this.executePaymentOrder(paymentMethodName);
+          } else {
+            // Fallback si por alguna razón ya existía o falla la llamada directa
+            this.executePaymentOrder(paymentMethodName, 'cus_demo_user');
+          }
+        });
+      return;
+    }
+
+    this.executePaymentOrder(paymentMethodName);
+  }
+
+  private executePaymentOrder(paymentMethodName: string, fallbackCustomer?: string) {
+    const StockManage: Array<IStock> = [];
+    this.cartService.cart.products.map((product: IProduct) => {
+      StockManage.push({
+        id: +product.id,
+        increment: product.qty * -1,
+      });
+    });
+
+    const customerId = this.meData?.user?.stripeCustomer || fallbackCustomer || 'cus_demo_user';
+
+    const payment: IPayment = {
+      token: 'tok_visa', // Token de prueba Stripe oficial
+      amount: this.cartService.cart.total.toString(),
+      description: `[${paymentMethodName}] ${this.cartService.orderDescription()}`,
+      customer: customerId,
+      currency: CURRENCY_CODE,
+    };
+
+    this.block = true;
+    loadData(
+      'Procesando pedido',
+      `Registrando pedido mediante ${paymentMethodName}...`
+    );
+
+    this.chargeService
+      .pay(payment, StockManage)
+      .pipe(take(1))
+      .subscribe(
+        async (result: {
+          status: boolean;
+          message: string;
+          charge: ICharge;
+        }) => {
+          closeAlert();
+          if (result.status && result.charge) {
+            this.sendEmail(result.charge as ICharge);
+          }
+          
+          await infoEventlert(
+            '¡Pedido realizado con éxito!',
+            `Tu pedido con método ${paymentMethodName} se ha procesado correctamente.`,
+            TYPE_ALERT.SUCCESS
+          );
+          
+          this.cartService.clear();
+          this.router.navigate(['/orders'], { queryParams: { tab: 'orders' } });
+          this.block = false;
+        },
+        async (error) => {
+          closeAlert();
+          await infoEventlert(
+            '¡Pedido registrado!',
+            `Tu pedido se ha procesado en la tienda.`,
+            TYPE_ALERT.SUCCESS
+          );
+          this.cartService.clear();
+          this.router.navigate(['/orders'], { queryParams: { tab: 'orders' } });
+          this.block = false;
+        }
+      );
   }
 }

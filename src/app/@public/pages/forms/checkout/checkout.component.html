@@ -30,7 +30,7 @@
         </div>
 
         <!-- Address Section -->
-        <form class="needs-validation mb-4" (ngSubmit)="sendData()" #forma="ngForm">
+        <form class="needs-validation mb-4" #forma="ngForm">
           <div class="d-flex align-items-center mb-3">
             <div class="section-badge mr-3">
               <i class="fas fa-truck"></i>
@@ -60,31 +60,97 @@
             </div>
           </div>
 
-          <!-- Payment Section -->
+          <!-- Payment Method Selector -->
           <div class="d-flex align-items-center mb-3">
             <div class="section-badge mr-3">
-              <i class="fas fa-credit-card"></i>
+              <i class="fas fa-wallet"></i>
             </div>
-            <h4 class="m-0 font-weight-bold text-white">3. Método de Pago</h4>
+            <h4 class="m-0 font-weight-bold text-white">3. Selecciona Método de Pago</h4>
           </div>
 
-          <div class="stripe-card-wrapper p-3 mb-4 rounded-lg">
-            <ng-stripe-pay-form
-              [key]="this.key"
-              [hidePostalCode]="true"
-            ></ng-stripe-pay-form>
+          <!-- Tabs for Payment Methods -->
+          <div class="payment-tabs-container mb-4">
+            <div class="btn-group w-100 p-1 payment-tab-selector rounded-lg mb-3">
+              <button 
+                type="button" 
+                class="btn py-2 font-weight-bold"
+                [ngClass]="paymentType === 'direct' ? 'btn-primary active-tab' : 'btn-ghost text-muted'"
+                (click)="paymentType = 'direct'"
+              >
+                <i class="fas fa-bolt mr-2"></i> Pago Rápido / Bizum
+              </button>
+              <button 
+                type="button" 
+                class="btn py-2 font-weight-bold"
+                [ngClass]="paymentType === 'stripe' ? 'btn-primary active-tab' : 'btn-ghost text-muted'"
+                (click)="paymentType = 'stripe'"
+              >
+                <i class="far fa-credit-card mr-2"></i> Tarjeta de Crédito
+              </button>
+            </div>
+
+            <!-- TAB 1: DIRECT / QUICK PAY -->
+            <div *ngIf="paymentType === 'direct'" class="tab-content-box p-3 rounded-lg border-dark-card">
+              <div class="row">
+                <div class="col-md-6 mb-3 mb-md-0">
+                  <div class="pay-method-card p-3 h-100 rounded-lg text-center">
+                    <div class="method-icon mb-2 text-info">
+                      <i class="fas fa-university fa-2x"></i>
+                    </div>
+                    <h6 class="font-weight-bold text-white mb-1">Transferencia / Bizum</h6>
+                    <small class="text-muted d-block mb-3">Confirmación inmediata sin requerir tarjeta.</small>
+                    <button 
+                      type="button" 
+                      class="btn btn-sm btn-info w-100 font-weight-bold py-2"
+                      (click)="processDirectOrder('Transferencia / Bizum')"
+                      [disabled]="!address || address.trim() === '' || block"
+                    >
+                      <i class="fas fa-check-circle mr-1"></i> Confirmar Pedido
+                    </button>
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="pay-method-card p-3 h-100 rounded-lg text-center">
+                    <div class="method-icon mb-2 text-warning">
+                      <i class="fas fa-vial fa-2x"></i>
+                    </div>
+                    <h6 class="font-weight-bold text-white mb-1">Modo Simulación</h6>
+                    <small class="text-muted d-block mb-3">Prueba el flujo rápido de pedido completo.</small>
+                    <button 
+                      type="button" 
+                      class="btn btn-sm btn-warning w-100 font-weight-bold py-2 text-dark"
+                      (click)="processDirectOrder('Modo Simulación')"
+                      [disabled]="!address || address.trim() === '' || block"
+                    >
+                      <i class="fas fa-bolt mr-1"></i> Simular Compra
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- TAB 2: STRIPE CARD -->
+            <div *ngIf="paymentType === 'stripe'" class="tab-content-box p-3 rounded-lg border-dark-card">
+              <p class="text-muted small mb-3">Introduce tus datos de tarjeta bancaria a continuación:</p>
+              <div class="stripe-card-wrapper p-3 rounded-lg mb-3">
+                <ng-stripe-pay-form
+                  [key]="this.key"
+                  [hidePostalCode]="true"
+                ></ng-stripe-pay-form>
+              </div>
+
+              <button
+                [disabled]="!forma.valid || block"
+                class="btn btn-pay-now btn-block py-3 font-weight-bold text-uppercase"
+                (click)="sendData()"
+                type="submit"
+              >
+                <i class="fas fa-lock mr-2"></i> Pagar con Tarjeta Stripe
+              </button>
+            </div>
           </div>
         </form>
-
-        <!-- Submit Button -->
-        <button
-          [disabled]="!forma.valid || block"
-          class="btn btn-pay-now btn-block py-3 font-weight-bold text-uppercase"
-          (click)="sendData()"
-          type="submit"
-        >
-          <i class="fas fa-lock mr-2"></i> Pagar {{ meData ? 'Pedido' : '' }}
-        </button>
       </div>
     </div>
   </div>
