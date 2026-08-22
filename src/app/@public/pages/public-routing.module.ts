@@ -36,7 +36,13 @@ const routes: Routes = [
           ),
         canActivate: [ShopGuard],
       },
-      // @public --> pages --> contact
+      // @public --> pages --> profile & orders
+      {
+        path: 'profile',
+        loadChildren: () =>
+          import('./orders/orders.module').then((m) => m.OrdersModule),
+        canActivate: [ShopGuard],
+      },
       {
         path: 'orders',
         loadChildren: () =>

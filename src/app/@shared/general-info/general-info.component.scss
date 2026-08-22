@@ -1,19 +1,50 @@
+.kpi-card {
+  background-color: #181b24;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  padding: 1.5rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
-.card {
-  text-align: center;
-  border: none;
-  font-size: 35px;
-  margin-bottom: 26px;
-}
+  &:hover {
+    transform: translateY(-5px);
+    border-color: rgba(99, 102, 241, 0.4);
+    box-shadow: 0 10px 25px rgba(99, 102, 241, 0.2) !important;
 
+    .kpi-icon-wrapper {
+      background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+      color: #ffffff;
+      transform: scale(1.08);
+    }
+  }
 
-.text-info {
-  color: #181f2c !important;
-  font-size: 16px;
-}
+  .kpi-icon-wrapper {
+    width: 56px;
+    height: 56px;
+    border-radius: 12px;
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    color: #818cf8;
+    transition: all 0.3s ease;
+  }
 
-h3 {
-    font-size: 1.2rem ;
-    font-weight: bold;
-    color: #181f2c;
+  .kpi-value {
+    font-size: 1.85rem;
+    letter-spacing: -0.02em;
+    margin-bottom: 2px;
+  }
+
+  .kpi-title {
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    color: #9ca3af;
+  }
 }

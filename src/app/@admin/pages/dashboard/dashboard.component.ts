@@ -16,7 +16,7 @@ export class DashboardComponent implements OnInit {
   items: Array<IGeneralInfo> = [
     {
       icon: 'fas fa-users',
-      title: 'Usuarioss',
+      title: 'Usuarios',
       value: 'users',
     },
     {
@@ -30,7 +30,7 @@ export class DashboardComponent implements OnInit {
       value: 'tags',
     },
     {
-      icon: 'fas fa-atlas',
+      icon: 'fas fa-layer-group',
       title: 'Géneros',
       value: 'genres',
     },
@@ -40,7 +40,7 @@ export class DashboardComponent implements OnInit {
       value: 'games',
     },
     {
-      icon: 'fab fa-chromecast',
+      icon: 'fas fa-desktop',
       title: 'Plataformas',
       value: 'platforms',
     },
@@ -54,7 +54,6 @@ export class DashboardComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    loadData('Cargando datos', 'Espera mientras se carga las estadisticas');
     this.titleService.updateTitle(LABEL.DASHBOARD);
     this.loading = true;
     this.adminService.getStats().subscribe((data) => {
@@ -62,8 +61,9 @@ export class DashboardComponent implements OnInit {
 
       this.items.map((item) => {
         item.value = data[item.value];
-        closeAlert();
       });
+    }, () => {
+      this.loading = false;
     });
   }
 }

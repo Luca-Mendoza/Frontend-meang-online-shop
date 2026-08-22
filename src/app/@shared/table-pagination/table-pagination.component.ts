@@ -62,7 +62,6 @@ export class TablePaginationComponent implements OnInit {
   // tslint:disable-next-line: typedef
   loadData() {
     this.loading = true;
-    loadData('Cargando datos', 'Espera mientra carga la información');
     const variable = {
       page: this.infoPage.page,
       itemsPage: this.infoPage.itemsPage,
@@ -71,13 +70,13 @@ export class TablePaginationComponent implements OnInit {
     };
     this.data$ = this.service.getCollectionData(this.query, variable, {}).pipe(
       map((result: any) => {
-        const data = result[this.resultData.definitionKey];
-        this.infoPage.pages = data.info.pages;
-        this.infoPage.total = data.info.total;
-
         this.loading = false;
-        closeAlert();
-        return data[this.resultData.listKey];
+        const data = result[this.resultData.definitionKey];
+        if (data && data.info) {
+          this.infoPage.pages = data.info.pages;
+          this.infoPage.total = data.info.total;
+        }
+        return data ? data[this.resultData.listKey] : [];
       })
     );
   }

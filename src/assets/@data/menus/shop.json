@@ -2,36 +2,16 @@
   {
     "url": "/home",
     "label": "Inicio",
-    "icon": ""
-  },
-  {
-    "url": "/games/platforms/sony",
-    "label": "Juegos Sony",
-    "icon": ""
-  },
-  {
-    "url": "/games/platforms/microsoft",
-    "label": "Juegos Microsoft",
-    "icon": ""
-  },
-  {
-    "url": "/games/platforms/nintendo",
-    "label": "Juegos Nintendo",
-    "icon": ""
+    "icon": "fas fa-home"
   },
   {
     "url": "/games/promotions/last-units",
-    "label": "Últimas Novedades",
-    "icon": ""
+    "label": "Novedades",
+    "icon": "fas fa-fire"
   },
   {
     "url": "/games/promotions/offers",
-    "label": "En Liquidación",
-    "icon": ""
-  },
-  {
-    "url": "/contact",
-    "label": "Contacto",
-    "icon": ""
+    "label": "Ofertas",
+    "icon": "fas fa-tags"
   }
 ]

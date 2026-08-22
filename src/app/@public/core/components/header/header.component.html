@@ -1,34 +1,169 @@
-<div class="top-bar">
-  <div class="container-fluid px-4 d-flex justify-content-between align-items-center py-2">
-    <!-- Brand / Tagline -->
-    <div class="d-flex align-items-center">
-      <a [routerLink]="['/']" class="d-inline-flex align-items-center logo-link">
-        <img
-          class="logo__type mr-3"
-          src="../../../../../assets/img/logos/gamezonia.png"
-          alt="Gamezonia Store Logo"
+<!-- Single Unified Top Header -->
+<header class="unified-header sticky-top">
+  <div class="container-fluid px-4">
+    <div class="d-flex align-items-center justify-content-between header-row py-2">
+
+      <!-- LOGO -->
+      <div class="header-brand mr-3">
+        <a [routerLink]="['/']" class="d-inline-flex align-items-center logo-link">
+          <img
+            class="logo-img"
+            src="../../../../../assets/img/logos/gamezonia.png"
+            alt="Gamezonia Store Logo"
+          />
+        </a>
+      </div>
+
+      <!-- COMBINED SEARCH + PLATFORM SELECTOR BAR -->
+      <div class="header-search-container flex-grow-1 mx-3 d-none d-md-flex align-items-center">
+        <div class="search-input-group w-100 position-relative d-flex align-items-center">
+          
+          <!-- Category Select Pill -->
+          <select 
+            class="platform-select-pill"
+            #platformSelect
+            (change)="onPlatformSelect(platformSelect.value)"
+          >
+            <option value="ALL">🎮 Todo</option>
+            <option value="/games/platforms/sony">Sony PlayStation</option>
+            <option value="/games/platforms/microsoft">Microsoft Xbox</option>
+            <option value="/games/platforms/nintendo">Nintendo Switch</option>
+          </select>
+
+          <!-- Divider -->
+          <span class="search-pill-divider"></span>
+
+          <!-- Search Input -->
+          <div class="position-relative flex-grow-1">
+            <i class="fas fa-search search-icon"></i>
+            <input
+              type="text"
+              class="form-control search-input"
+              placeholder="Buscar juegos, licencias, consolas o accesorios..."
+              (keyup.enter)="onSearch(searchInput.value)"
+              #searchInput
+            />
+          </div>
+
+          <!-- Submit Button -->
+          <button class="btn btn-search-action" (click)="onSearch(searchInput.value)">
+            Buscar
+          </button>
+        </div>
+      </div>
+
+      <!-- NAVIGATION LINKS & UTILITIES -->
+      <div class="header-actions d-flex align-items-center">
+        <!-- Main Category Links (Desktop) -->
+        <nav class="d-none d-xl-flex align-items-center mr-3">
+          <a
+            class="nav-link custom-nav-item"
+            *ngFor="let item of menuItems"
+            [routerLink]="item.url"
+            routerLinkActive="active-nav-link"
+          >
+            <i class="{{ item.icon }} mr-1"></i> {{ item.label }}
+          </a>
+        </nav>
+
+        <!-- Admin link -->
+        <div class="mr-2" *ngIf="access && role === 'ADMIN'">
+          <a
+            class="btn nav-action-btn btn-outline-warning"
+            [routerLink]="['/admin']"
+            routerLinkActive="active"
+          >
+            <i class="fas fa-user-shield mr-1"></i> Admin
+          </a>
+        </div>
+
+        <!-- Guest Links -->
+        <div *ngIf="!access" class="d-flex align-items-center">
+          <a
+            class="btn nav-action-btn btn-ghost mr-2"
+            [routerLink]="['/login']"
+            routerLinkActive="active-nav-link"
+          >
+            <i class="fas fa-sign-in-alt mr-1"></i> Entrar
+          </a>
+          <a
+            class="btn nav-action-btn btn-accent mr-3"
+            [routerLink]="['/register']"
+            routerLinkActive="active"
+          >
+            Registro
+          </a>
+        </div>
+
+        <!-- Logged-in User Dropdown -->
+        <div class="dropdown mr-3" *ngIf="access">
+          <a
+            class="nav-link dropdown-toggle user-pill nav-action-btn"
+            href="#"
+            id="navbarDropdown"
+            role="button"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            <i class="far fa-user-circle mr-1 text-accent"></i> {{ userLabel }}
+          </a>
+          <div
+            class="dropdown-menu dropdown-menu-right custom-dropdown"
+            aria-labelledby="navbarDropdown"
+          >
+            <a
+              class="dropdown-item"
+              [routerLink]="'/profile'"
+              [queryParams]="{ tab: 'data' }"
+              routerLinkActive="active"
+            >
+              <i class="fas fa-id-card mr-2 text-muted"></i> Mi Perfil
+            </a>
+            <a
+              class="dropdown-item"
+              [routerLink]="'/profile'"
+              [queryParams]="{ tab: 'orders' }"
+              routerLinkActive="active"
+            >
+              <i class="fas fa-box-open mr-2 text-muted"></i> Mis Pedidos
+            </a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item text-danger" (click)="logout()">
+              <i class="fas fa-sign-out-alt mr-2"></i> Cerrar Sesión
+            </a>
+          </div>
+        </div>
+
+        <!-- Cart Button -->
+        <button
+          class="btn nav-action-btn cart-btn d-flex align-items-center justify-content-center"
+          (click)="openCart()"
+          title="Ver mi carrito"
+        >
+          <div class="cart-icon-wrapper">
+            <i class="fas fa-shopping-bag"></i>
+            <span class="cart-badge">{{ cartItemsTotal }}</span>
+          </div>
+          <span class="cart-label d-none d-lg-inline-block ml-2">Carrito</span>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- Mobile Search Bar -->
+    <div class="pb-2 d-md-none">
+      <div class="search-input-group w-100 position-relative">
+        <i class="fas fa-search search-icon"></i>
+        <input
+          type="text"
+          class="form-control search-input"
+          placeholder="Buscar juegos..."
+          (keyup.enter)="onSearch(mobileSearchInput.value)"
+          #mobileSearchInput
         />
-      </a>
-      <span class="brand-badge d-none d-md-inline-block">
-        <i class="fas fa-bolt text-warning mr-1"></i> TIENDA OFICIAL
-      </span>
+      </div>
     </div>
 
-    <!-- Free Delivery Highlight Banner -->
-    <div class="delivery-banner text-center d-none d-lg-flex align-items-center">
-      <i class="fas fa-shipping-fast banner-icon mr-2"></i>
-      <span>Envío <b>GRATIS</b> en digital y físico a partir de 25€</span>
-    </div>
-
-    <!-- Quick Utilities -->
-    <div class="d-flex align-items-center">
-      <a class="top-link mr-3" [routerLink]="'/faq'" routerLinkActive="active">
-        <i class="far fa-question-circle mr-1"></i> Ayuda
-      </a>
-      <span class="top-divider d-none d-sm-inline-block">|</span>
-      <span class="top-support ml-3 d-none d-sm-inline-block">
-        <i class="fas fa-headset text-indigo mr-1"></i> Soporte 24/7
-      </span>
-    </div>
   </div>
-</div>
+</header>

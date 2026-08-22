@@ -1,22 +1,25 @@
-<!-- Sidebar -->
-<div class="sidebar__wrapper border-right" id="sidebar-wrapper">
-  <div class="sidebar-heading sidebar__title__container">
+<div class="sidebar__wrapper" id="sidebar-wrapper">
+  <div class="sidebar-heading sidebar__title__container px-4 py-3">
     <a
-      class="sidebar__title"
-      [routerLink]="['/home']"
-      routerLinkActive="router-link-active"
+      class="sidebar__title d-flex align-items-center"
+      [routerLink]="['/']"
     >
-      Gamezonia
+      <i class="fas fa-gamepad mr-2 text-accent"></i>
+      <span class="brand-name">GAMEZONIA</span>
+      <span class="admin-badge ml-2">ADMIN</span>
     </a>
   </div>
-  <div class="list-group list-group-flush">
+
+  <div class="list-group list-group-flush px-2 py-3">
     <a
       [routerLink]="item.url"
-      routerLinkActive="router-link-active"
-      class="list-group-item list-group-item-action bg-light"
+      [routerLinkActiveOptions]="{ exact: item.url === '/admin' }"
+      routerLinkActive="active-admin-link"
+      class="list-group-item admin-nav-item"
       *ngFor="let item of menuItems"
-      ><i class="{{ item.icon }}"></i> {{ item.label }}</a
     >
+      <i class="{{ item.icon }} nav-icon mr-3"></i>
+      <span class="nav-text">{{ item.label }}</span>
+    </a>
   </div>
 </div>
-<!-- /#sidebar-wrapper -->

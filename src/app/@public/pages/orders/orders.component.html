@@ -1,34 +1,161 @@
-<div class="container" *ngIf="!loading">
-  <p>En este apartado encontraremos nuestro pedido desde el más reciente</p>
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th scope="col">Descripción</th>
-        <th scope="col">Precio ({{ currencySymbol }})</th>
-        <th scope="col">Fecha</th>
-        <th scope="col">Más detalles</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let data of charges">
-        <td>{{ data.description }}</td>
-        <td>{{ data.amount }}</td>
-        <td>{{ data.created | date: "yyyy-MM-dd hh:mm:ss" }}</td>
-        <td>
-          <a href="{{ data.receiptUrl }}" target="_black"> Factura</a>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-  <div class="row">
-    <div class="col-lg text-center">
-      <button
-        class="btn btn-dark"
-        *ngIf="loadMoreBtn"
-        (click)="loadChargeData()"
-      >
-        Cargar mas datos
+<div class="profile-page-wrapper py-4">
+  <div class="container">
+
+    <!-- USER HERO HEADER CARD -->
+    <div class="profile-hero-card mb-4" *ngIf="meDeta?.user">
+      <div class="hero-left">
+        <div class="avatar-badge">
+          <span>{{ meDeta.user.name ? meDeta.user.name.charAt(0).toUpperCase() : 'U' }}</span>
+        </div>
+        <div class="hero-info">
+          <div class="greeting">Hola,</div>
+          <h2 class="user-name">{{ meDeta.user.name }} {{ meDeta.user.lastname }}</h2>
+          <div class="meta-row">
+            <span class="member-since">
+              <i class="far fa-calendar-alt mr-1"></i> Miembro desde {{ meDeta.user.registerDate | date:'MMM yyyy' }}
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="hero-right">
+        <button class="btn btn-edit-profile" (click)="setTab('data')">
+          <i class="fas fa-pen mr-2"></i> Editar mis datos
+        </button>
+      </div>
+    </div>
+
+    <!-- TAB NAVIGATION BAR -->
+    <div class="tabs-nav-bar mb-4">
+      <button 
+        class="tab-item" 
+        [class.active]="activeTab === 'data'" 
+        (click)="setTab('data')">
+        <i class="fas fa-user-circle mr-2"></i> Mis Datos
+      </button>
+      <button 
+        class="tab-item" 
+        [class.active]="activeTab === 'orders'" 
+        (click)="setTab('orders')">
+        <i class="fas fa-shopping-bag mr-2"></i> Mis Compras
       </button>
     </div>
+
+    <!-- TAB 1: MIS DATOS PERSONALES -->
+    <div class="tab-content-panel" *ngIf="activeTab === 'data'">
+      <div class="panel-card mb-4">
+        <div class="panel-header">
+          <div>
+            <h3 class="panel-title">Mis Datos Personales</h3>
+            <p class="panel-subtitle">Mantén tus datos completos para agilizar tus pedidos y recibir ofertas exclusivas.</p>
+          </div>
+          <button class="btn btn-outline-light btn-sm rounded-pill px-3">
+            <i class="fas fa-pencil-alt mr-1"></i> Editar
+          </button>
+        </div>
+
+        <div class="data-grid">
+          <div class="data-item">
+            <label class="data-label">Nombre y Apellidos</label>
+            <div class="data-value">{{ meDeta?.user?.name }} {{ meDeta?.user?.lastname }}</div>
+          </div>
+          <div class="data-item">
+            <label class="data-label">Correo Electrónico</label>
+            <div class="data-value text-muted-val">
+              {{ meDeta?.user?.email }}
+              <span class="badge badge-subtle ml-2">No editable</span>
+            </div>
+          </div>
+          <div class="data-item">
+            <label class="data-label">Fecha de Nacimiento</label>
+            <div class="data-value">
+              {{ meDeta?.user?.birthday ? (meDeta.user.birthday | date:'longDate') : 'No especificado' }}
+            </div>
+          </div>
+          <div class="data-item">
+            <label class="data-label">Rol de Cuenta</label>
+            <div class="data-value text-accent font-weight-bold">
+              {{ meDeta?.user?.role || 'CLIENT' }}
+            </div>
+          </div>
+        </div>
+
+        <!-- COMPLETION PROGRESS BAR -->
+        <div class="profile-progress-section mt-4 pt-3 border-top-custom">
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <span class="progress-title font-weight-bold text-white">Completá tu perfil</span>
+            <span class="progress-status text-muted">3 de 4 campos completos</span>
+          </div>
+          <div class="progress custom-progress">
+            <div class="progress-bar custom-bar" role="progressbar" [style.width.%]="profileCompletion"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 2: MIS COMPRAS / PEDIDOS -->
+    <div class="tab-content-panel" *ngIf="activeTab === 'orders'">
+      <div class="panel-card">
+        <div class="panel-header">
+          <div>
+            <h3 class="panel-title">Mis Compras</h3>
+            <p class="panel-subtitle">Seguimiento de tus pedidos y recibos de pago.</p>
+          </div>
+          <span class="badge badge-dark-count" *ngIf="charges.length > 0">{{ charges.length }} compras</span>
+        </div>
+
+        <!-- Skeleton loader -->
+        <div *ngIf="loading" class="orders-skeleton-table">
+          <div class="skeleton-row mb-3" *ngFor="let item of [1,2,3,4]">
+            <div class="skeleton-box" style="width: 100%; height: 60px; border-radius: 8px;"></div>
+          </div>
+        </div>
+
+        <!-- Real Charges List -->
+        <div *ngIf="!loading">
+          <div *ngIf="charges.length === 0" class="empty-orders text-center py-5">
+            <div class="empty-icon mb-3">🎮</div>
+            <h4 class="text-white font-weight-bold">Aún no tienes pedidos registrados</h4>
+            <p class="text-muted">Explora la tienda y realiza tu primera compra para ver tus licencias y recibos aquí.</p>
+            <a routerLink="/games" class="btn btn-primary mt-2">Explorar Tienda</a>
+          </div>
+
+          <div *ngIf="charges.length > 0" class="table-responsive">
+            <table class="table table-dark-custom">
+              <thead>
+                <tr>
+                  <th scope="col">Descripción</th>
+                  <th scope="col">Monto ({{ currencySymbol }})</th>
+                  <th scope="col">Fecha</th>
+                  <th scope="col" class="text-right">Comprobante</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let data of charges">
+                  <td class="font-weight-medium text-white">
+                    <i class="fas fa-gamepad mr-2 text-accent"></i> {{ data.description }}
+                  </td>
+                  <td class="text-accent font-weight-bold">{{ data.amount | currency: 'EUR' }}</td>
+                  <td class="text-muted">{{ data.created | date: "yyyy-MM-dd HH:mm:ss" }}</td>
+                  <td class="text-right">
+                    <a [href]="data.receiptUrl" target="_blank" rel="noopener noreferrer" class="btn-receipt">
+                      <span>📄 Ver Factura</span>
+                    </a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="row mt-4" *ngIf="loadMoreBtn">
+            <div class="col-lg text-center">
+              <button class="btn btn-load-more" (click)="loadChargeData()">
+                Cargar más historial
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </div>

@@ -92,12 +92,12 @@ export class AuthService extends ApiService {
   // tslint:disable-next-line: typedef
   async resetSession(routerUrl: string = '') {
     const result = await optionsWithDetails(
-      'Cerrar sesión',
-      '¿Estás seguro de cerrar sesión?',
+      'Cerrar Sesión',
+      '¿Estás seguro de que deseas salir de tu cuenta?',
       430,
-      'Si, cerrar', // true
-      'No, cerrar'
-    ); // false
+      'Sí, cerrar sesión', // confirm button -> true
+      'Cancelar' // cancel button -> false
+    );
     if (!result) {
       return;
     }

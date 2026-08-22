@@ -1,11 +1,9 @@
-<div class="card mx-sm-1 p-3 shadow">
-  <div class="card p-3">
-    <span class="{{ item.icon }}"></span>
+<div class="kpi-card shadow-sm mb-4">
+  <div class="kpi-icon-wrapper mb-3">
+    <i class="{{ item.icon }}"></i>
   </div>
-  <div class="text-info text-center p-3">
-    <h4>{{ item.title }}</h4>
-  </div>
-  <div class="text-info text-center p-3">
-    <h3 >{{ item.value }}</h3>
+  <div class="kpi-info text-center">
+    <h3 class="kpi-value font-weight-bold text-white">{{ item.value || 0 }}</h3>
+    <span class="kpi-title text-muted text-uppercase">{{ item.title }}</span>
   </div>
 </div>

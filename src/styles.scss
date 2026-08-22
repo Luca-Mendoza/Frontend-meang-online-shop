@@ -241,3 +241,68 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
+/* Custom Gamer Dark SweetAlert2 Dialog */
+.swal2-popup.custom-gz-swal-popup {
+  background-color: #181b24 !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  border-radius: 16px !important;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6) !important;
+  color: #f3f4f6 !important;
+  padding: 1.75rem !important;
+
+  .swal2-input, .swal2-select, select, input {
+    background-color: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    color: #ffffff !important;
+    border-radius: 8px !important;
+    padding: 0.65rem 1rem !important;
+
+    &:focus {
+      border-color: #6366f1 !important;
+      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.25) !important;
+    }
+  }
+}
+
+.custom-gz-swal-title {
+  color: #ffffff !important;
+  font-weight: 800 !important;
+  font-size: 1.4rem !important;
+}
+
+.custom-gz-swal-html {
+  color: #9ca3af !important;
+  font-size: 0.95rem !important;
+}
+
+.swal2-close {
+  color: #9ca3af !important;
+  &:hover {
+    color: #ffffff !important;
+  }
+}
+
+.custom-gz-swal-confirm-btn {
+  background-color: #ef4444 !important;
+  border-radius: 8px !important;
+  font-weight: 700 !important;
+  padding: 0.6rem 1.25rem !important;
+  box-shadow: 0 4px 14px rgba(239, 68, 68, 0.3) !important;
+  &:hover {
+    background-color: #dc2626 !important;
+  }
+}
+
+.custom-gz-swal-cancel-btn {
+  background-color: rgba(255, 255, 255, 0.08) !important;
+  color: #d1d5db !important;
+  border-radius: 8px !important;
+  font-weight: 600 !important;
+  padding: 0.6rem 1.25rem !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.15) !important;
+    color: #ffffff !important;
+  }
+}
+

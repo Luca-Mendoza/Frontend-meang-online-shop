@@ -1,3 +1,6 @@
-/* Bootstrap CSS */
-
 @import "./../../../assets/styles/admin.scss";
+
+#page-content-wrapper {
+  background-color: var(--gz-bg-dark, #0f1117);
+  min-height: 100vh;
+}

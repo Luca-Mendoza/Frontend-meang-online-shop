@@ -1,7 +1,13 @@
-@import "./../../../pages/admin.component.scss";
-
 .title__admin {
-    padding-left: 1rem;
-    color: $admin-primary-color;
-    font-size: larger !important;
+  padding-left: 0.5rem;
+  color: #ffffff !important;
+  font-size: 1.75rem !important;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+hr {
+  border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+  margin-top: 0.75rem;
+  margin-bottom: 1.5rem;
 }

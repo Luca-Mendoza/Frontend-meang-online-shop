@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { CURRENCY_SELECT } from '@core/constants/config';
 import { IMeData } from '@core/interfaces/session.interface';
 import { ICharge } from '@core/interfaces/stripe/charge.interface';
 import { AuthService } from '@core/services/auth.service';
-import { closeAlert, loadData } from '@shared/alerts/alerts';
 import { ChargeService } from '@shop/core/services/stripe/charge.service';
 import { take } from 'rxjs/internal/operators/take';
 
@@ -13,6 +13,7 @@ import { take } from 'rxjs/internal/operators/take';
   styleUrls: ['./orders.component.scss'],
 })
 export class OrdersComponent implements OnInit {
+  activeTab: 'data' | 'orders' = 'data';
   currencySymbol = CURRENCY_SELECT;
   meDeta: IMeData;
   startingAfter: string = '';
@@ -21,22 +22,41 @@ export class OrdersComponent implements OnInit {
   loading = true;
   loadMoreBtn = false;
 
-  constructor(private auth: AuthService, private chargeService: ChargeService) {
+  // Profile data completion calculation
+  profileCompletion = 75;
+
+  constructor(
+    private auth: AuthService,
+    private chargeService: ChargeService,
+    private route: ActivatedRoute
+  ) {
     this.auth.accessVar$.pipe(take(1)).subscribe((meDeta: IMeData) => {
       this.meDeta = meDeta;
-      // Si tenemos información cargamos con el cliente
-      if (this.meDeta.user.stripeCustomer !== '') {
+      if (this.meDeta?.user?.stripeCustomer) {
         this.loadChargeData();
+      } else {
+        this.loading = false;
       }
     });
   }
 
   ngOnInit(): void {
     this.auth.start();
+    this.route.queryParams.subscribe((params) => {
+      if (params.tab === 'orders') {
+        this.activeTab = 'orders';
+      } else {
+        this.activeTab = 'data';
+      }
+    });
+  }
+
+  setTab(tab: 'data' | 'orders') {
+    this.activeTab = tab;
   }
 
   loadChargeData() {
-    loadData('Cargando...', 'Espera mientra cargan los pedidos');
+    this.loading = true;
     this.chargeService
       .listByCustomer(
         this.meDeta.user.stripeCustomer,
@@ -45,24 +65,23 @@ export class OrdersComponent implements OnInit {
         ''
       )
       .pipe(take(1))
-      .subscribe((data: { hasMore: boolean; charges: Array<ICharge> }) => {
-        // console.log(data);
+      .subscribe(
+        (data: { hasMore: boolean; charges: Array<ICharge> }) => {
+          data.charges.map((item: ICharge) => this.charges.push(item));
+          this.hasMore = data.hasMore;
 
-        // this.charges = data.charges;
-
-        data.charges.map((item: ICharge) => this.charges.push(item));
-
-        this.hasMore = data.hasMore;
-
-        if (this.hasMore) {
-          this.startingAfter = data.charges[data.charges.length - 1].id;
-          this.loadMoreBtn = true;
-        } else {
-          this.loadMoreBtn = false;
-          this.startingAfter = '';
+          if (this.hasMore) {
+            this.startingAfter = data.charges[data.charges.length - 1].id;
+            this.loadMoreBtn = true;
+          } else {
+            this.loadMoreBtn = false;
+            this.startingAfter = '';
+          }
+          this.loading = false;
+        },
+        () => {
+          this.loading = false;
         }
-        closeAlert();
-        this.loading = false;
-      });
+      );
   }
 }

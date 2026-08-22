@@ -11,6 +11,13 @@ const swalWithBasicOptions = (title: string, html: string) =>
     focusConfirm: false,
     cancelButtonText: 'Cancelar',
     showCancelButton: true,
+    customClass: {
+      popup: 'custom-gz-swal-popup',
+      title: 'custom-gz-swal-title',
+      htmlContainer: 'custom-gz-swal-html',
+      confirmButton: 'custom-gz-swal-confirm-btn',
+      cancelButton: 'custom-gz-swal-cancel-btn',
+    },
   });
 
 // tslint:disable-next-line:typedef
@@ -85,10 +92,17 @@ export async function optionsWithDetails(
     width: `${width}px`,
     showCloseButton: true,
     showCancelButton: true,
-    confirmButtonColor: '#6C757D',
-    cancelButtonColor: '#dc3545',
+    confirmButtonColor: '#ef4444',
+    cancelButtonColor: '#4b5563',
     confirmButtonText,
     cancelButtonText,
+    customClass: {
+      popup: 'custom-gz-swal-popup',
+      title: 'custom-gz-swal-title',
+      htmlContainer: 'custom-gz-swal-html',
+      confirmButton: 'custom-gz-swal-confirm-btn',
+      cancelButton: 'custom-gz-swal-cancel-btn',
+    },
   }).then((result) => {
     // console.log(result);
     if (result.value) {

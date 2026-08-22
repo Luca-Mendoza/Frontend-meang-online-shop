@@ -1,6 +1,14 @@
-<div class="container-fluid" *ngIf="!loading">
-  <div class="row">
-    <div class="col-lg-4" *ngFor="let item of items">
+<div class="container-fluid py-3">
+  <!-- Skeleton Loading State -->
+  <div class="row" *ngIf="loading">
+    <div class="col-lg-4 col-md-6 mb-4" *ngFor="let item of [1,2,3,4,5,6]">
+      <div class="skeleton-box" style="width: 100%; height: 140px; border-radius: 14px;"></div>
+    </div>
+  </div>
+
+  <!-- Real Content -->
+  <div class="row" *ngIf="!loading">
+    <div class="col-lg-4 col-md-6 mb-4" *ngFor="let item of items">
       <app-general-info [item]="item"></app-general-info>
     </div>
   </div>
