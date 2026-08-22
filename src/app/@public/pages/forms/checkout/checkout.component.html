@@ -1,72 +1,91 @@
-<div class="form-container container mt-4" *ngIf="meData && avaliable">
-  <div class="row">
-    <div class="col-md-4 order-md-2 mb-4">
+<div class="checkout-wrapper container py-4" *ngIf="meData && avaliable">
+  <div class="row g-4">
+    <!-- RIGHT SIDEBAR: ORDER SUMMARY -->
+    <div class="col-lg-5 order-lg-2 mb-4">
       <app-checkout-resume></app-checkout-resume>
     </div>
-    <div class="col-md-8 order-md-1">
-      <h4 class="mb-3">Información de pago</h4>
-      <hr />
-      <form class="needs-validation" (ngSubmit)="sendData()" #forma="ngForm">
-        <div class="row">
-          <div class="col-md-6 mb-3">
-            <label>Nombre/s:</label><br />
-            <span>{{ meData.user.name }}</span>
+
+    <!-- LEFT SIDEBAR: PAYMENT FORM -->
+    <div class="col-lg-7 order-lg-1">
+      <div class="checkout-card p-4 mb-4">
+        <!-- User Info Section -->
+        <div class="d-flex align-items-center mb-3">
+          <div class="section-badge mr-3">
+            <i class="fas fa-user"></i>
           </div>
-          <div class="col-md-6 mb-3">
-            <label>Apellido/s:</label><br />
-            <span>{{ meData.user.lastname }}</span>
-          </div>
+          <h4 class="m-0 font-weight-bold text-white">1. Datos del Cliente</h4>
         </div>
 
-        <div class="mb-3">
-          <label>Email:</label><br />
-          <span>{{ meData.user.email }}</span>
-        </div>
-
-        <div class="mb-3">
-          <label for="address">Dirección de entrega</label>
-          <textarea
-            cols="10"
-            rows="2"
-            class="form-control"
-            id="address"
-            #addressData="ngModel"
-            [(ngModel)]="address"
-            name="address"
-            [ngClass]="{
-              'is-valid': !addressData.invalid,
-              'is-invalid': addressData.invalid
-            }"
-            required=""
-          ></textarea>
-          <div class="invalid-feedback">
-            Por favor introduzca su direccion de envio.
+        <div class="user-info-box p-3 mb-4 rounded-lg">
+          <div class="row">
+            <div class="col-md-6 mb-2">
+              <span class="info-label text-muted d-block">Nombre completo</span>
+              <strong class="info-value text-white">{{ meData.user.name }} {{ meData.user.lastname }}</strong>
+            </div>
+            <div class="col-md-6 mb-2">
+              <span class="info-label text-muted d-block">Correo Electrónico</span>
+              <strong class="info-value text-white">{{ meData.user.email }}</strong>
+            </div>
           </div>
         </div>
 
-        <hr class="mb-4" />
+        <!-- Address Section -->
+        <form class="needs-validation mb-4" (ngSubmit)="sendData()" #forma="ngForm">
+          <div class="d-flex align-items-center mb-3">
+            <div class="section-badge mr-3">
+              <i class="fas fa-truck"></i>
+            </div>
+            <h4 class="m-0 font-weight-bold text-white">2. Dirección de Envío</h4>
+          </div>
 
-        <h4 class="mb-3">Información de la tarjeta</h4>
-        <div class="row">
-          <div class="col-lg">
+          <div class="form-group mb-4">
+            <label for="address" class="form-label text-muted font-weight-bold">Dirección completa de entrega *</label>
+            <textarea
+              cols="10"
+              rows="3"
+              class="form-control custom-dark-textarea"
+              id="address"
+              placeholder="Escribe tu calle, número, portal, código postal y ciudad..."
+              #addressData="ngModel"
+              [(ngModel)]="address"
+              name="address"
+              [ngClass]="{
+                'is-valid': !addressData.invalid && addressData.touched,
+                'is-invalid': addressData.invalid && addressData.touched
+              }"
+              required=""
+            ></textarea>
+            <div class="invalid-feedback">
+              Por favor introduce tu dirección completa de envío.
+            </div>
+          </div>
+
+          <!-- Payment Section -->
+          <div class="d-flex align-items-center mb-3">
+            <div class="section-badge mr-3">
+              <i class="fas fa-credit-card"></i>
+            </div>
+            <h4 class="m-0 font-weight-bold text-white">3. Método de Pago</h4>
+          </div>
+
+          <div class="stripe-card-wrapper p-3 mb-4 rounded-lg">
             <ng-stripe-pay-form
               [key]="this.key"
               [hidePostalCode]="true"
             ></ng-stripe-pay-form>
           </div>
-        </div>
-        <hr class="mb-4" />
-      </form>
-      <button
-        [disabled]="!forma.valid || block "
-        class="signup-btn btn btn-lg btn-block"
-        (click)="sendData()"
-        type="submit"
-      >
-        Pagar pedido
-      </button>
+        </form>
+
+        <!-- Submit Button -->
+        <button
+          [disabled]="!forma.valid || block"
+          class="btn btn-pay-now btn-block py-3 font-weight-bold text-uppercase"
+          (click)="sendData()"
+          type="submit"
+        >
+          <i class="fas fa-lock mr-2"></i> Pagar {{ meData ? 'Pedido' : '' }}
+        </button>
+      </div>
     </div>
   </div>
 </div>
-
-<!-- 4242 4242 4242 4242 -->

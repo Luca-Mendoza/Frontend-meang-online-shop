@@ -1,0 +1,48 @@
+.resume-card {
+  background-color: #181b24;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+.border-bottom-dark {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.border-top-dark {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.badge-accent-pill {
+  background: rgba(99, 102, 241, 0.2);
+  color: #818cf8;
+  border: 1px solid rgba(99, 102, 241, 0.4);
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.cart-items-list {
+  max-height: 280px;
+  overflow-y: auto;
+
+  &::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 4px;
+  }
+}
+
+.discount-row {
+  background-color: rgba(16, 185, 129, 0.1);
+  border: 1px dashed rgba(16, 185, 129, 0.3);
+}
+
+.total-price {
+  font-size: 1.6rem;
+  color: #10b981 !important;
+}

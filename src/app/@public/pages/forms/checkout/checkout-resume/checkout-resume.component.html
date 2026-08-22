@@ -1,32 +1,45 @@
-<h4 class="d-flex justify-content-between align-items-center mb-3">
-  <span class="text-muted">Carrito de compra</span>
-  <span class="badge badge-secondary badge-pill">{{ cart.subtotal }}</span>
-</h4>
-<ul class="list-group mb-3">
-  <li
-    class="list-group-item d-flex justify-content-between lh-condensed"
-    *ngFor="let product of cart.products"
-  >
-    <div>
-      <h6 class="my-0">{{ product.name }}</h6>
-      <small class="text-muted"
-        >{{ product.description }} - {{ product.qty }} uds.</small
-      >
-    </div>
-    <span class="text-muted"
-      >{{ currencySelect }} {{ product.price  * product.qty | number }}</span
-    >
-  </li>
+<div class="resume-card p-4">
+  <div class="d-flex justify-content-between align-items-center mb-3 pb-2 border-bottom-dark">
+    <h5 class="m-0 font-weight-bold text-white">Resumen del Pedido</h5>
+    <span class="badge badge-accent-pill">{{ cart.products.length }} Ítems</span>
+  </div>
 
-  <li class="list-group-item d-flex justify-content-between bg-light">
-    <div class="text-success">
-      <h6 class="my-0">Promo code</h6>
-      <small>EXAMPLECODE</small>
+  <div class="cart-items-list mb-3">
+    <div
+      class="cart-item-row d-flex justify-content-between align-items-center py-2 border-bottom-dark"
+      *ngFor="let product of cart.products"
+    >
+      <div class="pr-2">
+        <h6 class="item-name m-0 text-white font-weight-semibold">{{ product.name }}</h6>
+        <small class="text-muted">{{ product.qty }} unidad(es)</small>
+      </div>
+      <span class="item-price text-white font-weight-bold">
+        {{ currencySelect }} {{ product.price * product.qty | number:'1.2-2' }}
+      </span>
     </div>
-    <span class="text-success">-{{ currencySelect }} 5</span>
-  </li>
-  <li class="list-group-item d-flex justify-content-between">
-    <span>Total ({{ currencyCode }})</span>
-    <strong>{{ currencySelect }} {{ cart.total | number }}</strong>
-  </li>
-</ul>
+  </div>
+
+  <!-- Coupon / Discount line if applicable -->
+  <div class="discount-row d-flex justify-content-between align-items-center py-2 px-3 mb-3 rounded-lg" *ngIf="cart.discount">
+    <div class="text-success">
+      <i class="fas fa-ticket-alt mr-1"></i>
+      <span class="font-weight-bold">Cupón aplicado</span>
+    </div>
+    <span class="text-success font-weight-bold">-{{ currencySelect }} 5.00</span>
+  </div>
+
+  <!-- Total Summary -->
+  <div class="total-row d-flex justify-content-between align-items-center pt-3 border-top-dark">
+    <div>
+      <span class="text-muted d-block text-uppercase font-weight-bold" style="font-size: 0.75rem; letter-spacing: 1px;">Total a pagar</span>
+      <small class="text-muted">Impuestos incluidos</small>
+    </div>
+    <div class="total-price font-weight-bold text-white">
+      {{ currencySelect }} {{ cart.total | number:'1.2-2' }}
+    </div>
+  </div>
+
+  <div class="security-guarantee text-center mt-4 pt-3 border-top-dark text-muted" style="font-size: 0.8rem;">
+    <i class="fas fa-shield-alt text-success mr-1"></i> Pago 100% Seguro por Stripe SSL
+  </div>
+</div>
