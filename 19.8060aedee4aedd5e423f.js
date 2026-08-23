@@ -1,4 +1,4 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[8],{h9nd:function(e,t,a){"use strict";a.r(t),a.d(t,"TagsModule",(function(){return w}));var s=a("OwPx"),i=a("ofXK"),n=a("tyNb"),r=a("mrSG"),c=a("UYTu");const o=c.a`
+(window.webpackJsonp=window.webpackJsonp||[]).push([[19],{h9nd:function(e,t,a){"use strict";a.r(t),a.d(t,"TagsModule",(function(){return w}));var s=a("OwPx"),i=a("ofXK"),n=a("tyNb"),r=a("mrSG"),c=a("UYTu");const o=c.a`
   fragment tagObject on Tag {
     id
     name

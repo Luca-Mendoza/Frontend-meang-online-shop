@@ -1,4 +1,4 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[7],{JXV5:function(e,t,a){"use strict";a.r(t),a.d(t,"GenresModule",(function(){return w}));var s=a("OwPx"),n=a("ofXK"),r=a("tyNb"),i=a("mrSG"),o=a("0iDv"),c=a("I6Jw"),u=a("UYTu");const d=u.a`
+(window.webpackJsonp=window.webpackJsonp||[]).push([[18],{JXV5:function(e,t,a){"use strict";a.r(t),a.d(t,"GenresModule",(function(){return w}));var s=a("OwPx"),n=a("ofXK"),r=a("tyNb"),i=a("mrSG"),o=a("0iDv"),c=a("I6Jw"),u=a("UYTu");const d=u.a`
   fragment GenresObject on Genre {
     id
     name
