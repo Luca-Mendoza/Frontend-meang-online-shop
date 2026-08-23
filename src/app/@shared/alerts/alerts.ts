@@ -183,8 +183,21 @@ export async function profileEditDialog(user: any) {
     </div>
   `;
 
-  return await swalWithBasicOptions('Editar Datos Personales', html).fire({
+  return await Swal.fire({
+    title: 'Editar Datos Personales',
+    html,
+    width: '550px',
+    showCloseButton: true,
+    showCancelButton: true,
     confirmButtonText: 'Guardar Cambios',
+    cancelButtonText: 'Cancelar',
+    customClass: {
+      popup: 'custom-gz-swal-popup',
+      title: 'custom-gz-swal-title',
+      htmlContainer: 'custom-gz-swal-html',
+      confirmButton: 'custom-gz-swal-confirm-btn',
+      cancelButton: 'custom-gz-swal-cancel-btn',
+    },
     preConfirm: () => {
       const name = (document.getElementById('gz-edit-name') as HTMLInputElement)?.value?.trim();
       const lastname = (document.getElementById('gz-edit-lastname') as HTMLInputElement)?.value?.trim();
