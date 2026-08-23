@@ -18,7 +18,7 @@
         </div>
       </div>
       <div class="hero-right">
-        <button class="btn btn-edit-profile" (click)="setTab('data')">
+        <button class="btn btn-edit-profile" (click)="editProfile()">
           <i class="fas fa-pen mr-2"></i> Editar mis datos
         </button>
       </div>
@@ -48,7 +48,7 @@
             <h3 class="panel-title">Mis Datos Personales</h3>
             <p class="panel-subtitle">Mantén tus datos completos para agilizar tus pedidos y recibir ofertas exclusivas.</p>
           </div>
-          <button class="btn btn-outline-light btn-sm rounded-pill px-3">
+          <button class="btn btn-outline-light btn-sm rounded-pill px-3" (click)="editProfile()">
             <i class="fas fa-pencil-alt mr-1"></i> Editar
           </button>
         </div>

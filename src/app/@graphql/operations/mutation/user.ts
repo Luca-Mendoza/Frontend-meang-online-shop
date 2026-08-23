@@ -2,7 +2,7 @@ import { USER_FRAGMENT } from '@graphql/operations/fragment/user';
 import gql from 'graphql-tag';
 
 export const REGISTER_USER = gql`
-  mutation addUser($user: UserInput!, $include: Boolean!) {
+  mutation addUser($user: UserInput!) {
     register(user: $user) {
       status
       message
@@ -15,7 +15,7 @@ export const REGISTER_USER = gql`
 `;
 
 export const UPDATE_USER = gql`
-  mutation updateUser($user: UserInput!, $include: Boolean!) {
+  mutation updateUser($user: UserInput!) {
     updateUser(user: $user) {
       status
       message

@@ -268,10 +268,29 @@ h1, h2, h3, h4, h5, h6 {
       color: #ffffff !important;
       border-radius: 8px !important;
       padding: 0.65rem 1rem !important;
+      box-sizing: border-box !important;
 
       &:focus {
         border-color: #6366f1 !important;
         box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.25) !important;
+      }
+    }
+
+    .swal2-select, select.swal2-input {
+      appearance: none !important;
+      -webkit-appearance: none !important;
+      -moz-appearance: none !important;
+      padding-right: 40px !important;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23a5b4fc' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'></polyline></svg>") !important;
+      background-repeat: no-repeat !important;
+      background-position: right 14px center !important;
+      background-size: 16px !important;
+      cursor: pointer !important;
+
+      option {
+        background-color: #181b24 !important;
+        color: #ffffff !important;
+        padding: 8px !important;
       }
     }
 

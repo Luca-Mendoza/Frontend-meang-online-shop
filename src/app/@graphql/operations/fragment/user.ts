@@ -9,9 +9,8 @@ export const USER_FRAGMENT = gql`
     lastname
     email
     role
-    registerDate @include(if: $include)
-    birthday @include(if: $include)
-    role
+    registerDate
+    birthday
     active
     stripeCustomer
   }

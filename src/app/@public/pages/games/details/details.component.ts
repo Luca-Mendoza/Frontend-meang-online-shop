@@ -38,11 +38,15 @@ export class DetailsComponent implements OnInit {
       this.updateListener(+params.id);
     });
     this.cartService.itemsVar$.subscribe((data: ICart) => {
+      if (!this.product) return;
       if (data.subtotal === 0) {
         this.product.qty = 1;
         return;
       }
-      this.product.qty = this.findProduct(+this.product.id).qty;
+      const itemInCart = this.findProduct(+this.product.id);
+      if (itemInCart) {
+        this.product.qty = itemInCart.qty;
+      }
     });
   }
   // escuchando los cambios en el carrito
@@ -68,20 +72,28 @@ export class DetailsComponent implements OnInit {
   }
 
   loadDataValue(id: number) {
-    this.productService.getDetailsProduct(id).subscribe((result) => {
-      this.product = result.product;
-      const saveProductInCart = this.findProduct(+this.product.id);
-      this.product.qty =
-        saveProductInCart !== undefined
-          ? saveProductInCart.qty
-          : this.product.qty;
-      this.selectImage = this.product.img;
-      this.screens = result.screens;
-      this.relationalProducts = result.relational;
-      this.randomItems = result.random;
+    this.productService.getDetailsProduct(id).subscribe(
+      (result) => {
+        this.product = result.product;
+        if (this.product) {
+          const saveProductInCart = this.findProduct(+this.product.id);
+          this.product.qty =
+            saveProductInCart !== undefined
+              ? saveProductInCart.qty
+              : this.product.qty;
+          this.selectImage = this.product.img;
+        }
+        this.screens = result.screens || [];
+        this.relationalProducts = result.relational || [];
+        this.randomItems = result.random || [];
 
-      this.loading = false;
-    });
+        this.loading = false;
+      },
+      (error) => {
+        console.error('Error cargando detalles del producto:', error);
+        this.loading = false;
+      }
+    );
   }
 
   //  qty = 1;

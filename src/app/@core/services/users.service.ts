@@ -4,7 +4,7 @@ import { USERS_LIST_QUERY } from '@graphql/operations/query/user';
 import { ApiService } from '@graphql/services/api.service';
 import { map } from 'rxjs/operators';
 import { IRegisterForm } from '@core/interfaces/register.interface';
-import { REGISTER_USER, ACTIVE_USER } from '@graphql/operations/mutation/user';
+import { REGISTER_USER, ACTIVE_USER, UPDATE_USER } from '@graphql/operations/mutation/user';
 import { HttpHeaders } from '@angular/common/http';
 
 @Injectable({
@@ -18,13 +18,22 @@ export class UsersService extends ApiService {
   // tslint:disable-next-line:typedef
   getUsers(page: number = 1, itemsPage: number = 20) {
     return this.get(USERS_LIST_QUERY, {
-      include: true,
       itemsPage,
       page,
     }).pipe(
       map((result: any) => {
         // console.log(result);  { "users": {status message users: []} }
         return result.users;
+      })
+    );
+  }
+
+  update(user: any) {
+    return this.set(UPDATE_USER, {
+      user,
+    }).pipe(
+      map((result: any) => {
+        return result.updateUser;
       })
     );
   }

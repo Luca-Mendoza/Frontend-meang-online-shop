@@ -11,6 +11,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent {
+  showPassword = false;
+
   login: ILoginForm = {
     email: '',
     password: '',
@@ -18,28 +20,38 @@ export class LoginComponent {
 
   constructor(private auth: AuthService, private router: Router) {}
 
+  togglePasswordVisibility() {
+    this.showPassword = !this.showPassword;
+  }
+
   // tslint:disable-next-line:typedef
   init() {
     this.auth
       .login(this.login.email, this.login.password)
-      .subscribe((result: IResultLogin) => {
-        if (result.status) {
-          if (result.token !== null) {
-            // Guardamos la sesión
-            this.auth.setSession(result.token);
-            this.auth.updateSession(result);
-            if (localStorage.getItem('route_after_login')) {
-              this.router.navigate([localStorage.getItem('route_after_login')]);
-              localStorage.removeItem('route_after_login');
+      .subscribe(
+        (result: IResultLogin) => {
+          if (result.status) {
+            if (result.token !== null) {
+              // Guardamos la sesión
+              this.auth.setSession(result.token);
+              this.auth.updateSession(result);
+              if (localStorage.getItem('route_after_login')) {
+                const target = localStorage.getItem('route_after_login');
+                localStorage.removeItem('route_after_login');
+                this.router.navigate([target]);
+                return;
+              }
+              this.router.navigate(['/']);
               return;
             }
-            this.router.navigate(['/home']);
+            basicAlert(TYPE_ALERT.WARNING, result.message);
             return;
           }
-          basicAlert(TYPE_ALERT.WARNING, result.message);
-          return;
+          basicAlert(TYPE_ALERT.INFO, result.message);
+        },
+        (error: any) => {
+          basicAlert(TYPE_ALERT.ERROR, 'Error de inicio de sesión. Por favor verifica que el backend esté en ejecución.');
         }
-        basicAlert(TYPE_ALERT.INFO, result.message);
-      });
+      );
   }
 }

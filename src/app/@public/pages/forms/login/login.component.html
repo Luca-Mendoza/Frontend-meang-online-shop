@@ -35,16 +35,25 @@
           </div>
 
           <label for="password"><b>Contraseña</b></label>
-          <input
-            type="password"
-            placeholder="Introduzca la contraseña"
-            name="password"
-            #password="ngModel"
-            [(ngModel)]="login.password"
-            required
-            class="form-control"
-            [ngClass]="{'is-valid': !password.invalid, 'is-invalid': password.invalid}"
-          />
+          <div class="password-input-group mb-2">
+            <input
+              [type]="showPassword ? 'text' : 'password'"
+              placeholder="Introduzca la contraseña"
+              name="password"
+              #password="ngModel"
+              [(ngModel)]="login.password"
+              required
+              class="form-control"
+              [ngClass]="{'is-valid': !password.invalid, 'is-invalid': password.invalid}"
+            />
+            <button
+              type="button"
+              class="toggle-password-btn"
+              (click)="togglePasswordVisibility()"
+              [title]="showPassword ? 'Ocultar contraseña' : 'Mostrar contraseña'">
+              <i class="fas" [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'"></i>
+            </button>
+          </div>
           <div class="alert alert-danger" *ngIf="password.invalid && (password.dirty || password.touched)">
             <div class="" *ngIf= password.errors.required>
               Introdusca una contraseña válida por favor

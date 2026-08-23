@@ -3,7 +3,7 @@ import { USER_FRAGMENT } from '@graphql/operations/fragment/user';
 import gql from 'graphql-tag';
 
 export const LOGIN_QUERY = gql`
-    query getLogin($email: String!, $password: String!, $include: Boolean! ){
+    query getLogin($email: String!, $password: String!){
         login(email: $email, password: $password){
             status
             message
@@ -17,7 +17,7 @@ export const LOGIN_QUERY = gql`
 `;
 
 export const USERS_LIST_QUERY = gql`
-    query usersList ($include: Boolean!, $page: Int, $itemsPage: Int, $active : ActiveFilterEnum){
+    query usersList ($page: Int, $itemsPage: Int, $active : ActiveFilterEnum){
         users(page: $page, itemsPage: $itemsPage, active: $active) {
             info {
                 ...ResultInfoObject
@@ -36,7 +36,7 @@ export const USERS_LIST_QUERY = gql`
 `;
 
 export const ME_DATA_QUERY = gql`
-query meData($include: Boolean!){
+query meData{
     me {
         status
         message

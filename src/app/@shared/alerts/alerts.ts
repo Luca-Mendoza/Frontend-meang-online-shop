@@ -149,3 +149,71 @@ export const infoEventlert = async (
     },
   });
 };
+
+export async function profileEditDialog(user: any) {
+  const nameVal = user?.name || '';
+  const lastnameVal = user?.lastname || '';
+  let birthdayVal = '';
+  if (user?.birthday) {
+    try {
+      birthdayVal = new Date(user.birthday).toISOString().substring(0, 10);
+    } catch (e) {
+      birthdayVal = user.birthday;
+    }
+  }
+
+  const html = `
+    <div class="text-left py-2">
+      <div class="form-group mb-3">
+        <label class="small text-muted font-weight-bold mb-1">Nombre</label>
+        <input id="gz-edit-name" value="${nameVal}" placeholder="Tu nombre" class="form-control bg-dark text-white border-secondary" style="border-radius: 8px;">
+      </div>
+      <div class="form-group mb-3">
+        <label class="small text-muted font-weight-bold mb-1">Apellidos</label>
+        <input id="gz-edit-lastname" value="${lastnameVal}" placeholder="Tus apellidos" class="form-control bg-dark text-white border-secondary" style="border-radius: 8px;">
+      </div>
+      <div class="form-group mb-3">
+        <label class="small text-muted font-weight-bold mb-1">Fecha de Nacimiento</label>
+        <input id="gz-edit-birthday" type="date" value="${birthdayVal}" class="form-control bg-dark text-white border-secondary" style="border-radius: 8px;">
+      </div>
+      <div class="form-group mb-0">
+        <label class="small text-muted font-weight-bold mb-1">Correo Electrónico (No editable)</label>
+        <input value="${user?.email || ''}" disabled class="form-control bg-dark text-muted border-secondary opacity-75" style="border-radius: 8px;">
+      </div>
+    </div>
+  `;
+
+  return await swalWithBasicOptions('Editar Datos Personales', html).fire({
+    confirmButtonText: 'Guardar Cambios',
+    preConfirm: () => {
+      const name = (document.getElementById('gz-edit-name') as HTMLInputElement)?.value?.trim();
+      const lastname = (document.getElementById('gz-edit-lastname') as HTMLInputElement)?.value?.trim();
+      const birthday = (document.getElementById('gz-edit-birthday') as HTMLInputElement)?.value;
+
+      if (!name) {
+        Swal.showValidationMessage('El nombre no puede estar vacío');
+        return false;
+      }
+      if (!lastname) {
+        Swal.showValidationMessage('El apellido no puede estar vacío');
+        return false;
+      }
+
+      let formattedBirthday = '';
+      if (birthday) {
+        formattedBirthday = birthday;
+      } else if (user?.birthday) {
+        formattedBirthday = user.birthday.substring(0, 10);
+      } else {
+        formattedBirthday = '2000-01-01';
+      }
+
+      return {
+        name,
+        lastname,
+        birthday: formattedBirthday,
+      };
+    },
+  });
+}
+

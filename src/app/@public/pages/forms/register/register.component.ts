@@ -14,6 +14,7 @@ import { TYPE_ALERT } from '@shared/alerts/values.config';
 })
 export class RegisterComponent implements OnInit {
   emailPattern = EMAIL_PATTERN;
+  showPassword = false;
   register: IRegisterForm = {
     name: '',
     lastname: '',
@@ -28,6 +29,10 @@ export class RegisterComponent implements OnInit {
     const data = new Date();
     data.setFullYear(data.getFullYear() - 18);
     this.register.birthday = data.toISOString().substring(0, 10);
+  }
+
+  togglePasswordVisibility() {
+    this.showPassword = !this.showPassword;
   }
 
   private formatNumbers(num: number | string) {

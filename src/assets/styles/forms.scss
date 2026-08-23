@@ -97,6 +97,50 @@ select,
   }
 }
 
+/* Password Input Group with Eye Icon Toggle */
+.password-input-group {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+
+  .form-control {
+    padding-right: 2.75rem !important;
+    margin-bottom: 0 !important;
+    background-image: none !important;
+  }
+
+  .toggle-password-btn {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    color: #9ca3af;
+    cursor: pointer;
+    font-size: 1rem;
+    padding: 4px 8px;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.2s ease, transform 0.15s ease;
+
+    &:hover {
+      color: #818cf8;
+    }
+
+    &:active {
+      transform: translateY(-50%) scale(0.92);
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+}
+
 select.form-control,
 select {
   padding-right: 2.75rem !important;

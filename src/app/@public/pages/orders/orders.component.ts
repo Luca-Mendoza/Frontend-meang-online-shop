@@ -4,7 +4,11 @@ import { CURRENCY_SELECT } from '@core/constants/config';
 import { IMeData } from '@core/interfaces/session.interface';
 import { ICharge } from '@core/interfaces/stripe/charge.interface';
 import { AuthService } from '@core/services/auth.service';
+import { UsersService } from '@core/services/users.service';
 import { ChargeService } from '@shop/core/services/stripe/charge.service';
+import { profileEditDialog } from '@shared/alerts/alerts';
+import { basicAlert } from '@shared/alerts/toasts';
+import { TYPE_ALERT } from '@shared/alerts/values.config';
 import { take } from 'rxjs/internal/operators/take';
 
 @Component({
@@ -27,6 +31,7 @@ export class OrdersComponent implements OnInit {
 
   constructor(
     private auth: AuthService,
+    private usersService: UsersService,
     private chargeService: ChargeService,
     private route: ActivatedRoute
   ) {
@@ -67,6 +72,53 @@ export class OrdersComponent implements OnInit {
 
   setTab(tab: 'data' | 'orders') {
     this.activeTab = tab;
+  }
+
+  async editProfile() {
+    if (!this.meDeta?.user) {
+      return;
+    }
+    const result = await profileEditDialog(this.meDeta.user);
+    if (result && result.value) {
+      const val = result.value as any;
+      const updatedUser = {
+        id: String(this.meDeta.user.id),
+        name: String(val.name || ''),
+        lastname: String(val.lastname || ''),
+        birthday: String(val.birthday || '2000-01-01'),
+        email: String(this.meDeta.user.email || ''),
+        role: String(this.meDeta.user.role || 'CLIENT'),
+      };
+
+      this.usersService.update(updatedUser).pipe(take(1)).subscribe(
+        (res: any) => {
+          if (res?.status) {
+            basicAlert(TYPE_ALERT.SUCCESS, 'Tus datos personales se han actualizado correctamente');
+            if (this.meDeta && this.meDeta.user) {
+              const updatedUserData = res?.user ? { ...this.meDeta.user, ...res.user } : {
+                ...this.meDeta.user,
+                name: val.name,
+                lastname: val.lastname,
+                birthday: val.birthday,
+              };
+              const updatedMeData: IMeData = {
+                ...this.meDeta,
+                status: true,
+                user: updatedUserData,
+              };
+              this.meDeta = updatedMeData;
+              this.auth.updateSession(updatedMeData);
+            }
+          } else {
+            basicAlert(TYPE_ALERT.WARNING, res?.message || 'No se pudieron actualizar los datos');
+          }
+        },
+        (err: any) => {
+          console.error('Error updating profile:', err);
+          basicAlert(TYPE_ALERT.WARNING, err?.message || 'Error al actualizar tus datos');
+        }
+      );
+    }
   }
 
   loadChargeData(reset: boolean = false) {

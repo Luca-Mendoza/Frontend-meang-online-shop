@@ -99,13 +99,22 @@ export class ProductsService extends ApiService {
   getDetailsProduct(id: number) {
     return this.get(DETAILS_PAGE, { id }, {}, false).pipe(
       map((result: any) => {
-        const details = result.details;
-        const randomItems = result.randomItems;
+        const details = result?.details;
+        const randomItems = result?.randomItems;
+        const shopProduct = details?.shopProduct;
+        if (!shopProduct) {
+          return {
+            product: null,
+            screens: [],
+            relational: [],
+            random: randomItems?.shopProducts ? this.manageInfo(randomItems.shopProducts, true) : [],
+          };
+        }
         return {
-          product: this.setInObject(details.shopProduct, true),
-          screens: details.shopProduct.product.screenshoot,
-          relational: details.shopProduct.relationalProducts,
-          random: this.manageInfo(randomItems.shopProducts, true),
+          product: this.setInObject(shopProduct, true),
+          screens: shopProduct?.product?.screenshoot || [],
+          relational: shopProduct?.relationalProducts || [],
+          random: randomItems?.shopProducts ? this.manageInfo(randomItems.shopProducts, true) : [],
         };
       })
     );

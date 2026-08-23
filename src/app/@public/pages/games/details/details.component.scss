@@ -1,26 +1,196 @@
-/** Estilos de los precios**/
 @import "./../../../../../assets/styles/prices.scss";
-.container {
-  margin-top: 30px;
+
+.glass-card {
+  background: rgba(18, 22, 34, 0.85);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
 }
-.mini {
-  margin-bottom: 10px;
+
+.mini-gallery {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
-//@
-@media (max-width: 600px) {
-  .screens-section {
-    display: none;
+
+.mini-thumb {
+  width: 100%;
+  height: 60px;
+  object-fit: cover;
+  cursor: pointer;
+  opacity: 0.6;
+  border: 2px solid transparent;
+  transition: all 0.2s ease-in-out;
+
+  &:hover,
+  &.active {
+    opacity: 1;
+    border-color: #6366f1;
+    transform: scale(1.05);
+    box-shadow: 0 0 10px rgba(99, 102, 241, 0.5);
   }
 }
-.main-img,
-.more-game {
-  object-fit: cover;
-  object-position: center;
-  display: block;
-  height: 100%;
-  width: 100%;
+
+.main-img-container {
+  max-height: 420px;
+  position: relative;
+  background: #0f131d;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  
+  .main-img {
+    width: 100%;
+    height: 420px;
+    object-fit: cover;
+    display: block;
+  }
 }
-// More games - Random Items
-.more-game {
-  max-height: 100px;
+
+.platform-badge {
+  background: rgba(99, 102, 241, 0.15);
+  color: #a5b4fc;
+  border: 1px solid rgba(99, 102, 241, 0.3);
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.stock-badge {
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.82rem;
+  font-weight: 600;
+
+  &.in-stock {
+    background: rgba(16, 185, 129, 0.15);
+    color: #34d399;
+    border: 1px solid rgba(16, 185, 129, 0.3);
+  }
+
+  &.out-stock {
+    background: rgba(239, 68, 68, 0.15);
+    color: #f87171;
+    border: 1px solid rgba(239, 68, 68, 0.3);
+  }
+}
+
+.game-title {
+  font-size: 2.2rem;
+  letter-spacing: -0.5px;
+  line-height: 1.2;
+}
+
+.price-container {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.text-gradient-purple {
+  background: linear-gradient(135deg, #a855f7, #6366f1);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-green {
+  background: linear-gradient(135deg, #34d399, #10b981);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.badge-discount {
+  background: #ef4444;
+  color: #fff;
+  font-size: 0.9rem;
+  padding: 6px 10px;
+  border-radius: 6px;
+}
+
+.custom-gamer-select {
+  background-color: #0f131d;
+  color: #e2e8f0;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 8px;
+  padding: 10px 40px 10px 16px;
+  outline: none;
+  transition: all 0.2s ease-in-out;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23a5b4fc' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'></polyline></svg>");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  background-size: 16px;
+  cursor: pointer;
+
+  &:focus {
+    border-color: #6366f1;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.25);
+  }
+
+  option {
+    background-color: #0f131d;
+    color: #ffffff;
+    padding: 10px;
+  }
+}
+
+.btn-gamer-buy {
+  background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 4px 14px rgba(79, 70, 229, 0.4);
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(79, 70, 229, 0.6);
+    color: #ffffff;
+  }
+}
+
+.btn-gamer-primary {
+  background: #6366f1;
+  color: #fff;
+  border-radius: 8px;
+  font-weight: 600;
+  border: none;
+  &:hover {
+    background: #4f46e5;
+    color: #fff;
+  }
+}
+
+.alert-gamer-danger {
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: #f87171;
+  border-radius: 8px;
+}
+
+.recommend-card {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.5);
+    border-color: rgba(99, 102, 241, 0.4);
+
+    .recommend-img {
+      transform: scale(1.08);
+    }
+  }
+
+  .recommend-img-box {
+    height: 120px;
+    background: #0f131d;
+
+    .recommend-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+  }
 }

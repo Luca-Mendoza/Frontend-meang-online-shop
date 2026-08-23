@@ -46,7 +46,7 @@ export class AuthService extends ApiService {
   // Añadimos métodos para consumir la info de la API
   // tslint:disable-next-line:typedef
   login(email: string, password: string) {
-    return this.get(LOGIN_QUERY, { email, password, include: false }).pipe(
+    return this.get(LOGIN_QUERY, { email, password }).pipe(
       map((result: any) => {
         return result.login;
       })
@@ -57,9 +57,7 @@ export class AuthService extends ApiService {
   getMe() {
     return this.get(
       ME_DATA_QUERY,
-      {
-        include: false,
-      },
+      {},
       {
         headers: new HttpHeaders({
           Authorization: (this.getSession() as ISession).token,

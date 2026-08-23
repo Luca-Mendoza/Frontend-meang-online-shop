@@ -85,10 +85,8 @@ export class UsersComponent implements OnInit {
     const defaultEmail =
       user.email !== undefined && user.email !== '' ? user.email : '';
     const roles = new Array(2);
-    roles[0] =
-      user.role !== undefined && user.role !== 'ADMIN' ? 'selected' : '';
-    roles[1] =
-      user.role !== undefined && user.role !== 'CLIENT' ? 'selected' : '';
+    roles[0] = user.role === 'ADMIN' ? 'selected' : '';
+    roles[1] = user.role === 'CLIENT' ? 'selected' : '';
 
     return `
     <input id="name" value="${defaultName}" placeholder="Nombre" class="swal2-input" required>
@@ -96,7 +94,7 @@ export class UsersComponent implements OnInit {
     <input id="email" value="${defaultEmail}" placeholder="Correo Electronico" class="swal2-input" required>
     <select id="role" class="swal2-input">
       <option value="ADMIN" ${roles[0]}>Administrador</option>
-      <option value="ADMIN" ${roles[0]}>Cliente</option>
+      <option value="CLIENT" ${roles[1]}>Cliente</option>
     </select>
 `;
   }

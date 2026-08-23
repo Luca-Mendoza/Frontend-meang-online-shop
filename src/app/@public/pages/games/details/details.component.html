@@ -1,95 +1,145 @@
-<!-- Page Content -->
-<div class="container" *ngIf="product && !loading">
-  <!-- Portfolio Item Row -->
-  <div class="row">
-    <div class="col-md-1 screens-section">
-      <img
-        class="img-fluid mini"
-        *ngFor="let miniImg of screens; let i = index"
-        [src]="miniImg"
-        alt="Screen {{ i }}"
-        (click)="selectImgMain(i)"
-      />
-    </div>
-    <div class="col-md-7">
-      <img class="img-fluid main-img" [src]="selectImage" alt="" />
-    </div>
+<!-- Loading state -->
+<div class="container py-5 text-center my-5" *ngIf="loading">
+  <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+    <span class="sr-only">Cargando detalles del juego...</span>
+  </div>
+  <p class="mt-3 text-muted font-weight-bold">Cargando experiencia Gamer...</p>
+</div>
 
-    <div class="col-md-4">
-      <h4 class="my-3">{{ product.name }} {{ product.description }}</h4>
-      <div class="row">
-        <div class="col-lg-12">
+<!-- No product found state -->
+<div class="container py-5 text-center my-5" *ngIf="!loading && !product">
+  <div class="glass-card d-inline-block p-5 text-center shadow-lg rounded-lg border-danger" style="max-width: 500px;">
+    <div class="icon-circle mb-3 mx-auto bg-danger-soft">
+      <i class="fas fa-exclamation-triangle text-danger fa-2x"></i>
+    </div>
+    <h3 class="font-weight-bold text-white mb-2">Juego No Encontrado</h3>
+    <p class="text-muted mb-4">El producto que buscas no existe o ha sido retirado del catálogo.</p>
+    <a routerLink="/" class="btn btn-gamer-primary px-4 py-2">
+      <i class="fas fa-arrow-left mr-2"></i> Volver a la Tienda
+    </a>
+  </div>
+</div>
+
+<!-- Page Content -->
+<div class="container py-4" *ngIf="product && !loading">
+  <!-- Main Product Glass Card -->
+  <div class="glass-card p-4 p-md-5 mb-5 rounded-lg shadow-lg">
+    <div class="row align-items-center">
+      <!-- Miniatures -->
+      <div class="col-lg-1 col-md-2 d-none d-md-block screens-section" *ngIf="screens && screens.length > 0">
+        <div class="d-flex flex-column gap-2 mini-gallery">
+          <img
+            class="mini-thumb rounded"
+            [class.active]="selectImage === miniImg"
+            *ngFor="let miniImg of screens; let i = index"
+            [src]="miniImg"
+            alt="Screen {{ i }}"
+            (click)="selectImgMain(i)"
+          />
+        </div>
+      </div>
+
+      <!-- Main Banner Image -->
+      <div [class]="screens && screens.length > 0 ? 'col-lg-6 col-md-5 mb-4 mb-md-0' : 'col-lg-7 col-md-7 mb-4 mb-md-0'">
+        <div class="main-img-container rounded-lg overflow-hidden shadow-lg border-gamer">
+          <img class="img-fluid main-img" [src]="selectImage || product.img" alt="{{ product.name }}" />
+        </div>
+      </div>
+
+      <!-- Details Column -->
+      <div class="col-lg-5 col-md-5 pl-lg-4">
+        <div class="d-flex align-items-center mb-2">
+          <span class="platform-badge mr-2" *ngIf="product.description">
+            <i class="fas fa-gamepad mr-1"></i> {{ product.description }}
+          </span>
+          <span class="stock-badge" [class.in-stock]="product.stock > 0" [class.out-stock]="product.stock === 0">
+            <i class="fas" [class.fa-check-circle]="product.stock > 0" [class.fa-times-circle]="product.stock === 0"></i>
+            {{ product.stock > 0 ? 'Stock Disponible (' + product.stock + ')' : 'Agotado' }}
+          </span>
+        </div>
+
+        <h1 class="game-title text-white font-weight-bold mb-3">{{ product.name }}</h1>
+
+        <div class="d-flex align-items-center mb-3">
           <shop-rating [rating]="product.rating"></shop-rating>
         </div>
-        <div class="col-lg-12">
+
+        <div class="price-container p-3 rounded mb-4">
           <ng-template #noDiscount>
-            <div class="price">{{ currencySelect }} {{ product.price }}</div>
+            <div class="price-main text-gradient-purple font-weight-bold display-4">
+              {{ currencySelect }}{{ product.price | number:'1.2-2' }}
+            </div>
           </ng-template>
-          <div class="price" *ngIf="product.discount; else noDiscount">
-            {{ currencySelect }} {{ product.priceDiscount | number }}
-            <span class="price_span">
-              {{ currencySelect }} {{ product.price | number }}
+
+          <div *ngIf="product.discount; else noDiscount" class="d-flex align-items-baseline gap-3">
+            <span class="price-main text-gradient-green font-weight-bold display-4">
+              {{ currencySelect }}{{ product.priceDiscount | number:'1.2-2' }}
             </span>
-            <span class="price_span discount-percentage">
-              ({{ product.discount }}%)
+            <span class="price-old text-muted h4 ml-2" style="text-decoration: line-through;">
+              {{ currencySelect }}{{ product.price | number:'1.2-2' }}
             </span>
+            <span class="badge badge-discount ml-2">-{{ product.discount }}% OFF</span>
           </div>
         </div>
 
-        <div class="col-lg-12">
-          Stock: {{ product.stock }}
-          <hr />
-          <span *ngIf="product.stock == 0"
-            >No hay stock. Producto no disponible en este momento</span
-          >
-          <shop-qty-selector
-            *ngIf="product.stock > 0"
-            [qty]="product.qty"
-            [stock]="product.stock"
-            (updateValue)="changeValue($event)"
-          ></shop-qty-selector>
+        <!-- Quantity & Add to Cart -->
+        <div *ngIf="product.stock > 0" class="mb-4">
+          <label class="text-muted text-uppercase small font-weight-bold d-block mb-2">Cantidad</label>
+          <div class="d-flex align-items-center gap-3">
+            <shop-qty-selector
+              [qty]="product.qty"
+              [stock]="product.stock"
+              (updateValue)="changeValue($event)"
+            ></shop-qty-selector>
+          </div>
+        </div>
+
+        <!-- Relational Platforms -->
+        <div *ngIf="relationalProducts && relationalProducts.length > 0" class="mb-4">
+          <label class="text-muted text-uppercase small font-weight-bold d-block mb-2">Otras Plataformas Disponibles</label>
+          <select class="custom-gamer-select w-100" (change)="selectOtherPlatform($event)">
+            <option [value]="product.id">{{ product.description }} (Actual)</option>
+            <option [value]="opt.id" *ngFor="let opt of relationalProducts">
+              {{ opt.platform.name }}
+            </option>
+          </select>
+        </div>
+
+        <button
+          (click)="addToCart()"
+          class="btn btn-gamer-buy btn-block btn-lg py-3 font-weight-bold text-uppercase mt-4"
+          *ngIf="product.stock > 0"
+        >
+          <i class="fas fa-shopping-cart mr-2"></i> Añadir al Carrito
+        </button>
+
+        <div *ngIf="product.stock === 0" class="alert alert-gamer-danger mt-3 text-center">
+          <i class="fas fa-bell mr-2"></i> Este producto se encuentra temporalmente sin stock.
         </div>
       </div>
-      <br />
-      <span class="h5">Platafotmas:</span>&nbsp;
-      <select name="" id="" (change)="selectOtherPlatform($event)">
-        <option [value]="product.id">{{ product.description }}</option>
-        <option [value]="opt.id" *ngFor="let opt of relationalProducts">
-          {{ opt.platform.name }}
-        </option>
-        </select
-      >
-      <br />
-      <button
-        (click)="addToCart()"
-        class="btn btn-dark mt-3"
-        *ngIf="product.stock > 0"
-      >
-        <i class="fas fa-cart-plus"></i>&nbsp;&nbsp; Añadir
-      </button>
     </div>
   </div>
-  <!-- /.row -->
-  <hr />
-  <!-- Random items shop products-->
-  <h3 class="my-4">Juegos que te puedan interesar</h3>
 
-  <div class="row">
-    <div class="col-md-2 col-sm-6 mb-4" *ngFor="let itemsInfo of randomItems">
-      <a
-        [routerLink]="['/games/details', itemsInfo.id]"
-        title="{{ itemsInfo.name }} {{ itemsInfo.description }}"
-      >
-        <img
-          class="img-fluid more-game"
-          [src]="itemsInfo.img"
-          alt="{{ itemsInfo.name }} {{ itemsInfo.description }}"
-        />
-      </a>
-      <h6 class="text-center">{{ itemsInfo.name }}</h6>
+  <!-- Random Recommended Games Section -->
+  <div *ngIf="randomItems && randomItems.length > 0" class="mt-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h3 class="section-title text-white font-weight-bold m-0">
+        <i class="fas fa-fire text-warning mr-2"></i> Recomendados para ti
+      </h3>
     </div>
 
-    <!-- /.row -->
+    <div class="row">
+      <div class="col-lg-2 col-md-4 col-6 mb-4" *ngFor="let item of randomItems">
+        <div class="recommend-card h-100 glass-card p-2 rounded-lg text-center">
+          <a [routerLink]="['/games/details', item.id]" class="d-block text-decoration-none">
+            <div class="recommend-img-box rounded overflow-hidden mb-2">
+              <img [src]="item.img" alt="{{ item.name }}" class="img-fluid recommend-img" />
+            </div>
+            <h6 class="text-white text-truncate font-weight-bold px-1 m-0" [title]="item.name">{{ item.name }}</h6>
+            <small class="text-muted d-block mt-1">{{ currencySelect }}{{ item.price | number:'1.2-2' }}</small>
+          </a>
+        </div>
+      </div>
+    </div>
   </div>
-  <!-- /.container -->
 </div>
