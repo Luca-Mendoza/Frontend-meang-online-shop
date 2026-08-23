@@ -30,7 +30,7 @@ export class LoginComponent {
       .login(this.login.email, this.login.password)
       .subscribe(
         (result: IResultLogin) => {
-          if (result.status) {
+          if (result && result.status) {
             if (result.token !== null) {
               // Guardamos la sesión
               this.auth.setSession(result.token);
@@ -44,13 +44,15 @@ export class LoginComponent {
               this.router.navigate(['/']);
               return;
             }
-            basicAlert(TYPE_ALERT.WARNING, result.message);
+            basicAlert(TYPE_ALERT.WARNING, result.message || 'Error en las credenciales');
             return;
           }
-          basicAlert(TYPE_ALERT.INFO, result.message);
+          basicAlert(TYPE_ALERT.INFO, result ? result.message : 'Credenciales no válidas');
         },
         (error: any) => {
-          basicAlert(TYPE_ALERT.ERROR, 'Error de inicio de sesión. Por favor verifica que el backend esté en ejecución.');
+          console.error('Login error:', error);
+          const msg = error?.message || 'Error de inicio de sesión. Por favor verifica las credenciales o la conexión con el servidor.';
+          basicAlert(TYPE_ALERT.ERROR, msg);
         }
       );
   }

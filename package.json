@@ -5,6 +5,8 @@
     "ng": "ng",
     "start": "NODE_OPTIONS=--openssl-legacy-provider ./node_modules/.bin/ng serve",
     "build": "ng build",
+    "build:gh-pages": "NODE_OPTIONS=--openssl-legacy-provider ng build --prod --base-href /Frontend-meang-online-shop/",
+    "deploy": "npm run build:gh-pages && npx gh-pages -d dist/meang-frontend",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
